@@ -24,8 +24,9 @@
     <fragment class="com.nextgen.bemore.HighlightsListFragment"
             android:id="@+id/highlights_fragment" android:layout_height="match_parent" android:layout_width="347dp"/>
     <LinearLayout android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout1" android:orientation="vertical">
-        <FrameLayout android:background="?android:attr/detailsElementBackground" android:id="@+id/details_fragment" android:layout_height="match_parent" android:layout_gravity="top" android:layout_width="match_parent" android:layout_weight="1"></FrameLayout>
+        <FrameLayout android:layout_height="match_parent" android:layout_gravity="top" android:background="?android:attr/detailsElementBackground" android:id="@+id/details_fragment" android:layout_width="486dp" android:layout_weight="1"></FrameLayout>
         <FrameLayout android:layout_height="match_parent" android:layout_gravity="top" android:background="?android:attr/detailsElementBackground" android:id="@+id/recommended" android:layout_width="486dp" android:layout_weight="1"></FrameLayout>
+        <FrameLayout android:layout_height="match_parent" android:layout_gravity="top" android:background="?android:attr/detailsElementBackground" android:id="@+id/buy_fragment" android:layout_width="486dp" android:layout_weight="1"></FrameLayout>
     </LinearLayout>
             <!--  
     <LinearLayout android:id="@+id/linearLayout1" android:layout_height="match_parent" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="0.92">
