@@ -103,16 +103,9 @@
       <font bold="false"/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="56" y="64" height="113" measuredWidth="393" measuredHeight="113">
-    <widgets xsi:type="model:Label" y="13" width="393" text="WhatsON" measuredWidth="393" measuredHeight="94" foreground="#6fa8dc">
-      <font size="48" bold="true"/>
-    </widgets>
-    <widgets xsi:type="model:Label" y="1" width="109" text=" Dstv" measuredWidth="109" measuredHeight="33" foreground="#f3f3f3" icon="filled-arrow-right (large)">
-      <font size="14" bold="true"/>
-    </widgets>
-  </widgets>
   <widgets xsi:type="model:Image" x="517" y="386" width="73" height="56" measuredWidth="73" measuredHeight="56" src="buy_omusic.jpg"/>
   <widgets xsi:type="model:Image" x="517" y="492" width="73" height="58" measuredWidth="73" measuredHeight="58" src="buy_box_office.jpeg"/>
+  <widgets xsi:type="model:Image" x="32" y="48" width="287" height="129" measuredWidth="287" measuredHeight="129" src="DStv_whatsON.jpg"/>
   <hRuler/>
   <vRuler/>
   <font/>

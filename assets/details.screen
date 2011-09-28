@@ -5,100 +5,99 @@
     <font/>
   </widgets>
   <widgets xsi:type="model:Image" x="350" y="238"/>
-  <widgets xsi:type="model:Label" x="496" y="222" text="Buy this" measuredWidth="100" measuredHeight="33" foreground="#ffffff" icon="shopping-cart (medium)">
-    <font size="14" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="496" y="357" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="503" y="365" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="509" y="376" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="517" y="384" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="496" y="254" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="503" y="262" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="509" y="273" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="517" y="281" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="496" y="465" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="503" y="473" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="509" y="484" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Rectangle" x="517" y="492" width="73" height="59" measuredWidth="73" measuredHeight="59">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Text" x="599" y="277" text="Desperate housewives &#xD;&#xA;Complete Season 7 on DVD" measuredWidth="144" measuredHeight="30" foreground="#f3f3f3">
-    <font bold="false"/>
-  </widgets>
-  <widgets xsi:type="model:Label" x="599" y="247" text="Kalahari.net" measuredWidth="110" measuredHeight="33" foreground="#b6d7a8">
-    <font size="14" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Text" x="608" y="381" text="Beyonce&#xD;&#xA;4" measuredWidth="45" measuredHeight="30" foreground="#f3f3f3">
-    <font bold="false"/>
-  </widgets>
-  <widgets xsi:type="model:Label" x="608" y="349" text="O Music" measuredWidth="76" measuredHeight="33" foreground="#b6d7a8">
-    <font size="14" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Text" x="608" y="492" text="Desperate housewives &#xD;&#xA;Season 7 Episode 2 " measuredWidth="119" measuredHeight="30" foreground="#f3f3f3">
-    <font bold="false"/>
-  </widgets>
-  <widgets xsi:type="model:Label" x="608" y="462" text="Box Office" measuredWidth="97" measuredHeight="33" foreground="#b6d7a8">
-    <font size="14" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Image" x="517" y="286" width="73" height="54" measuredWidth="73" measuredHeight="54" src="poster_dh.jpg"/>
-  <widgets xsi:type="model:Label" x="599" y="316" text="R429.99" measuredWidth="52" measuredHeight="25" foreground="#f1c232">
-    <font size="10" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Label" x="608" y="421" text="R79.99" measuredWidth="45" measuredHeight="25" foreground="#f1c232">
-    <font size="10" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Label" x="608" y="528" text="R25.00" measuredWidth="45" measuredHeight="25" foreground="#f1c232">
-    <font size="10" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:CoverFlow" x="56" y="88" width="377" height="81" measuredWidth="377" measuredHeight="81"/>
-  <widgets xsi:type="model:Label" x="56" y="48" width="277" text="You might like" measuredWidth="277" measuredHeight="33" foreground="#eeeeee" icon="thumbs-up (medium)">
-    <font size="14" bold="true"/>
-  </widgets>
-  <widgets xsi:type="model:Image" x="160" y="89" width="175" height="77" measuredWidth="175" measuredHeight="77" src="banner_himym.jpg"/>
-  <widgets xsi:type="model:Text" x="166" y="172" width="167" text="How I met you mother S04E12&#xD;&#xA;" measuredWidth="167" measuredHeight="15" foreground="#f3f3f3">
-    <font bold="false"/>
-  </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="480" y="64" measuredWidth="295" measuredHeight="102">
-    <widgets xsi:type="model:Label" y="8" text="WhatsON" measuredWidth="295" measuredHeight="94" foreground="#6fa8dc">
-      <font size="48" bold="true"/>
-    </widgets>
-    <widgets xsi:type="model:Label" text=" Dstv" measuredWidth="82" measuredHeight="33" foreground="#f3f3f3" icon="filled-arrow-right (large)">
+  <widgets xsi:type="model:WidgetGroup" x="56" y="48" measuredWidth="377" measuredHeight="139">
+    <widgets xsi:type="model:CoverFlow" y="40" width="377" height="81" measuredWidth="377" measuredHeight="81"/>
+    <widgets xsi:type="model:Label" width="277" text="You might like" measuredWidth="277" measuredHeight="33" foreground="#eeeeee" icon="thumbs-up (medium)">
       <font size="14" bold="true"/>
     </widgets>
+    <widgets xsi:type="model:Image" x="104" y="41" width="175" height="77" measuredWidth="175" measuredHeight="77" src="banner_himym.jpg"/>
+    <widgets xsi:type="model:Text" x="110" y="124" width="167" text="How I met you mother S04E12&#xD;&#xA;" measuredWidth="167" measuredHeight="15" foreground="#f3f3f3">
+      <font bold="false"/>
+    </widgets>
   </widgets>
-  <widgets xsi:type="model:Image" x="517" y="386" width="73" height="56" measuredWidth="73" measuredHeight="56" src="buy_omusic.jpg"/>
-  <widgets xsi:type="model:Image" x="517" y="492" width="73" height="58" measuredWidth="73" measuredHeight="58" src="buy_box_office.jpeg"/>
-  <widgets xsi:type="model:VideoPlayer" x="32" y="331" width="425" height="219" measuredWidth="425" measuredHeight="219"/>
-  <widgets xsi:type="model:Image" x="39" y="222" width="74" height="99" measuredWidth="74" measuredHeight="99" src="poster_dh.jpg"/>
-  <widgets xsi:type="model:Label" x="123" y="222" text="Desperate Housewives S07E01" measuredWidth="274" measuredHeight="33" foreground="#ffffff">
-    <font size="14" bold="true"/>
+  <widgets xsi:type="model:WidgetGroup" x="496" y="222" measuredWidth="247" measuredHeight="331">
+    <widgets xsi:type="model:Label" text="Buy this" measuredWidth="100" measuredHeight="33" foreground="#ffffff" icon="shopping-cart (medium)">
+      <font size="14" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" y="135" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="7" y="143" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="13" y="154" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="21" y="162" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" y="32" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="7" y="40" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="13" y="51" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="21" y="59" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" y="243" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="7" y="251" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="13" y="262" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Rectangle" x="21" y="270" width="73" height="59" measuredWidth="73" measuredHeight="59">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="103" y="55" text="Desperate housewives &#xD;&#xA;Complete Season 7 on DVD" measuredWidth="144" measuredHeight="30" foreground="#f3f3f3">
+      <font bold="false"/>
+    </widgets>
+    <widgets xsi:type="model:Label" x="103" y="25" text="Kalahari.net" measuredWidth="110" measuredHeight="33" foreground="#b6d7a8">
+      <font size="14" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="112" y="159" text="Beyonce&#xD;&#xA;4" measuredWidth="45" measuredHeight="30" foreground="#f3f3f3">
+      <font bold="false"/>
+    </widgets>
+    <widgets xsi:type="model:Label" x="112" y="127" text="O Music" measuredWidth="76" measuredHeight="33" foreground="#b6d7a8">
+      <font size="14" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="112" y="270" text="Desperate housewives &#xD;&#xA;Season 7 Episode 2 " measuredWidth="119" measuredHeight="30" foreground="#f3f3f3">
+      <font bold="false"/>
+    </widgets>
+    <widgets xsi:type="model:Label" x="112" y="240" text="Box Office" measuredWidth="97" measuredHeight="33" foreground="#b6d7a8">
+      <font size="14" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Image" x="21" y="64" width="73" height="54" measuredWidth="73" measuredHeight="54" src="poster_dh.jpg"/>
+    <widgets xsi:type="model:Label" x="103" y="94" text="R429.99" measuredWidth="52" measuredHeight="25" foreground="#f1c232">
+      <font size="10" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" x="112" y="199" text="R79.99" measuredWidth="45" measuredHeight="25" foreground="#f1c232">
+      <font size="10" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Label" x="112" y="306" text="R25.00" measuredWidth="45" measuredHeight="25" foreground="#f1c232">
+      <font size="10" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Image" x="21" y="164" width="73" height="56" measuredWidth="73" measuredHeight="56" src="buy_omusic.jpg"/>
+    <widgets xsi:type="model:Image" x="21" y="270" width="73" height="58" measuredWidth="73" measuredHeight="58" src="buy_box_office.jpeg"/>
   </widgets>
-  <widgets xsi:type="model:Text" x="124" y="254" text="Episode synopsis here&#xD;&#xA;Date time etc" measuredWidth="115" measuredHeight="30" foreground="#f3f3f3">
-    <font bold="false"/>
+  <widgets xsi:type="model:WidgetGroup" x="32" y="222" measuredWidth="425" measuredHeight="328">
+    <widgets xsi:type="model:VideoPlayer" y="109" width="425" height="219" measuredWidth="425" measuredHeight="219"/>
+    <widgets xsi:type="model:Image" x="7" width="74" height="99" measuredWidth="74" measuredHeight="99" src="poster_dh.jpg"/>
+    <widgets xsi:type="model:Label" x="91" text="Desperate Housewives S07E01" measuredWidth="274" measuredHeight="33" foreground="#ffffff">
+      <font size="14" bold="true"/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="92" y="32" text="Episode synopsis here&#xD;&#xA;Date time etc" measuredWidth="115" measuredHeight="30" foreground="#f3f3f3">
+      <font bold="false"/>
+    </widgets>
+    <widgets xsi:type="model:Image" x="7" y="118" width="410" height="182" measuredWidth="410" measuredHeight="182" src="trailer_dh.jpg" grayscale="true"/>
   </widgets>
-  <widgets xsi:type="model:Image" x="39" y="340" width="410" height="182" measuredWidth="410" measuredHeight="182" src="trailer_dh.jpg" grayscale="true"/>
+  <widgets xsi:type="model:Image" x="472" y="56" width="304" height="160" measuredWidth="304" measuredHeight="160" src="DStv_whatsON.jpg"/>
   <hRuler/>
   <vRuler/>
   <font/>
