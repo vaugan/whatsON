@@ -17,7 +17,7 @@
 package com.nextgen.bemore;
 
 //import com.nextgen.bemore.apis.R;
-import com.nextgen.bemore.Shakespeare;
+import com.nextgen.bemore.EventData;
 
 import android.app.Activity;
 import android.support.v4.app.*;

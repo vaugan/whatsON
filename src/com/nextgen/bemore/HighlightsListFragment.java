@@ -28,7 +28,7 @@ import android.widget.TextView;
 
             // Populate list with our static array of titles.
             setListAdapter(new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, Shakespeare.TITLES));
+                    android.R.layout.simple_list_item_1, EventData.TITLES));
 
             // Check to see if we have a frame in which to embed the details
             // fragment directly in the containing UI.

@@ -50,7 +50,7 @@ import android.widget.TextView;
                     4, getActivity().getResources().getDisplayMetrics());
             text.setPadding(padding, padding, padding, padding);
             scroller.addView(text);
-            text.setText(Shakespeare.DIALOGUE[getArguments().getInt("index", 0)]);
+            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
             return scroller;
         }
     }

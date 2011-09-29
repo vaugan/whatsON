@@ -1,19 +1,20 @@
 package com.nextgen.bemore;
 
-public final class Shakespeare {
+public final class EventData {
     /**
      * Our data, part 1.
      */
     public static final String[] TITLES = 
     {
-            "Henry IV (1)",   
-            "Henry V",
-            "Henry VIII",       
-            "Richard II",
-            "Richard III",
-            "Merchant of Venice",  
-            "Othello",
-            "King Lear"
+            "Dexter",   
+            "American Dad",
+            "Boardwalk Empire",       
+            "Chuck",
+            "CSI: New York",
+            "Fringe",  
+            "True Blood",
+            "How I met you mother",
+            "American Dad"
     };
     
     /**
