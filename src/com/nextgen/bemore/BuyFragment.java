@@ -1,6 +1,5 @@
 package com.nextgen.bemore;
-
-import android.app.Fragment;
+import android.support.v4.app.*;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;

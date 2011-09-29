@@ -5,9 +5,7 @@ package com.nextgen.bemore;
      * user can pick.  Upon picking an item, it takes care of displaying the
      * data to the user as appropriate based on the currrent UI layout.
      */
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
+import android.support.v4.app.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -30,7 +28,7 @@ import android.widget.TextView;
 
             // Populate list with our static array of titles.
             setListAdapter(new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_activated_1, Shakespeare.TITLES));
+                    android.R.layout.simple_list_item_1, Shakespeare.TITLES));
 
             // Check to see if we have a frame in which to embed the details
             // fragment directly in the containing UI.

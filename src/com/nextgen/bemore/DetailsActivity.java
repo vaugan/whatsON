@@ -3,6 +3,7 @@ package com.nextgen.bemore;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.*;
 
 
     /**
@@ -10,7 +11,7 @@ import android.os.Bundle;
      * when the screen is not large enough to show it all in one activity.
      */
 
-    public class DetailsActivity extends Activity {
+    public class DetailsActivity extends FragmentActivity  {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ import android.os.Bundle;
                 // During initial setup, plug in the details fragment.
                 DetailsFragment details = new DetailsFragment();
                 details.setArguments(getIntent().getExtras());
-                getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+              getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
             }
         }
     }

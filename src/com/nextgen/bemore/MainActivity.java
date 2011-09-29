@@ -20,9 +20,7 @@ package com.nextgen.bemore;
 import com.nextgen.bemore.Shakespeare;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
+import android.support.v4.app.*;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -40,7 +38,7 @@ import android.widget.TextView;
  * This sample provides a different layout (and activity flow) when run in
  * landscape.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity  {
 
 
     @Override
