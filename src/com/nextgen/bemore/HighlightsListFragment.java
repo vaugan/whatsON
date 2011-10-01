@@ -5,8 +5,19 @@ package com.nextgen.bemore;
      * user can pick.  Upon picking an item, it takes care of displaying the
      * data to the user as appropriate based on the currrent UI layout.
      */
+import java.io.IOException;
+
+
+import com.android.demo.notepad3.R;
+import com.nextgen.database.DataBaseHelper;
+import com.vaugan.poolstat.MatchDbAdapter;
+
+
 import android.support.v4.app.*;
+import android.support.v4.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,20 +26,41 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
     public class HighlightsListFragment extends ListFragment {
         boolean mDualPane;
         int mCurCheckPosition = 0;
         int mShownCheckPosition = -1;
+        private DataBaseHelper myDbHelper;         
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
+            //Open Database
+            myDbHelper = new DataBaseHelper(this.getActivity().getApplicationContext());
+            try {
+                myDbHelper.createDataBase();
+            } catch (IOException ioe) {
+                throw new Error("Unable to create database");
+            }
+
+        try {
+            myDbHelper.openDataBase();
+        }catch(SQLException sqle){
+            throw sqle;
+
+        }
             // Populate list with our static array of titles.
-            setListAdapter(new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, EventData.TITLES));
+        // Perform a managed query. The Activity will handle closing and requerying the cursor
+        // when needed.
+        setContentView(R.layout.highlights_fragment);
+
+        fillData();
+//            setListAdapter(new ArrayAdapter<String>(getActivity(),
+//                    android.R.layout.simple_list_item_1, EventData.TITLES));
 
             // Check to see if we have a frame in which to embed the details
             // fragment directly in the containing UI.
@@ -108,4 +140,20 @@ import android.widget.TextView;
                 startActivity(intent);
             }
         }
+        
+        private void fillData() {
+            Cursor notesCursor = myDbHelper.fetchAllEvents();
+
+
+            // Create an array to specify the fields we want to display in the list (only TITLE)
+            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME};
+
+            // and an array of the fields we want to bind those fields to (in this case just text1)
+            int[] to = new int[]{android.R.layout.simple_list_item_1};
+
+            // Now create a simple cursor adapter and set it to display
+            SimpleCursorAdapter notes = 
+                new SimpleCursorAdapter(this, R.layout.highlights_fragment, notesCursor, from, to);
+            setListAdapter(notes);
+        }        
     }

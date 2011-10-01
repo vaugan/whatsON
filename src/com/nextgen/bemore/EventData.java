@@ -4,18 +4,18 @@ public final class EventData {
     /**
      * Our data, part 1.
      */
-    public static final String[] TITLES = 
-    {
-            "Dexter",   
-            "American Dad",
-            "Boardwalk Empire",       
-            "Chuck",
-            "CSI: New York",
-            "Fringe",  
-            "True Blood",
-            "How I met you mother",
-            "American Dad"
-    };
+//    public static final int TITLES = 
+//    {
+//            "Dexter",   
+//            "American Dad",
+//            "Boardwalk Empire",       
+//            "Chuck",
+//            "CSI: New York",
+//            "Fringe",  
+//            "True Blood",
+//            "How I met you mother",
+//            "American Dad"
+//    };
     
     /**
      * Our data, part 2.
