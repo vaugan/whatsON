@@ -9,6 +9,7 @@ import java.io.IOException;
 
 
 import com.nextgen.database.DataBaseHelper;
+
 import android.support.v4.app.*;
 import android.support.v4.content.CursorLoader;
 import android.content.Intent;
@@ -28,6 +29,8 @@ import android.widget.TextView;
     public class HighlightsListFragment extends ListFragment {
         boolean mDualPane;
         int mCurCheckPosition = 0;
+        long mCurId = 0;
+        
         int mShownCheckPosition = -1;
         private DataBaseHelper myDbHelper;         
 
@@ -51,6 +54,7 @@ import android.widget.TextView;
             if (savedInstanceState != null) {
                 // Restore last state for checked position.
                 mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
+                mCurId = savedInstanceState.getLong("curId", 1);
                 mShownCheckPosition = savedInstanceState.getInt("shownChoice", -1);
             }
 
@@ -58,30 +62,43 @@ import android.widget.TextView;
                 // In dual-pane mode, the list view highlights the selected item.
                 getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 // Make sure our UI is in the correct state.
-                showDetails(mCurCheckPosition);
+                showDetails(mCurCheckPosition, mCurId);
+                
+                //TODO: Implement for portrait mode as well...
             }
+      
         }
 
         @Override
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putInt("curChoice", mCurCheckPosition);
+            outState.putLong("curId", mCurId);
             outState.putInt("shownChoice", mShownCheckPosition);
         }
 
         @Override
         public void onListItemClick(ListView l, View v, int position, long id) {
-            showDetails(position);
+            showDetails(position, id);
         }
+        
+//        @Override
+//        protected void onListItemClick(ListView l, View v, int position, long id) {
+//            super.onListItemClick(l, v, position, id);
+//            Intent i = new Intent(this, MatchDisplay.class);
+//            i.putExtra(MatchDbAdapter.KEY_ROWID, id);
+//            startActivityForResult(i, ACTIVITY_EDIT);
+//        }
 
         /**
          * Helper function to show the details of a selected item, either by
          * displaying a fragment in-place in the current UI, or starting a
          * whole new activity in which it is displayed.
          */
-        void showDetails(int index) {
+        void showDetails(int index, long id) {
             mCurCheckPosition = index;
-
+            mCurId = id;
+            
             if (mDualPane) {
                 // We can display everything in-place with fragments, so update
                 // the list to highlight the selected item and show the data.
@@ -90,7 +107,7 @@ import android.widget.TextView;
                 if (mShownCheckPosition != mCurCheckPosition) {
                     // If we are not currently showing a fragment for the new
                     // position, we need to create and install a new one.
-                    DetailsFragment df = DetailsFragment.newInstance(index);
+                    DetailsFragment df = DetailsFragment.newInstance(id);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -102,7 +119,7 @@ import android.widget.TextView;
                     ft.replace(R.id.recommended, rf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    BuyFragment bf = BuyFragment.newInstance(index);
+                    BuyFragment bf = BuyFragment.newInstance(id);
                     ft.replace(R.id.buy_fragment, bf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
               

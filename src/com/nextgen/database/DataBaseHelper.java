@@ -162,5 +162,24 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
                 KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC}, null, null, null, null, null);
     }
+    
+    /**
+     * Return a Cursor positioned at the event that matches the given rowId
+     * 
+     * @param rowId id of event to retrieve
+     * @return Cursor positioned to matching note, if found
+     * @throws SQLException if event could not be found/retrieved
+     */
+    public Cursor fetchEvent(long rowId) throws SQLException {
+
+        Cursor mCursor =
+            myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    null, null, null, null);
+        
+        mCursor.moveToFirst();
+        return mCursor;
+
+    }
 }
 
