@@ -6,22 +6,22 @@
     <TextView android:id="@+id/buy_page_title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingBottom="4dip" android:text="You might like to buy this" android:textSize="14dp"/>
+        android:paddingBottom="4dip" android:text="You might like to buy this" android:textSize="14dp" android:textColor="@color/SteelBlue"/>
         
     <TextView android:id="@+id/buy_title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingBottom="4dip" />
+        android:paddingBottom="4dip" android:textSize="10dp"/>
 
     <TextView android:id="@+id/buy_desc"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingBottom="4dip" />
+        android:paddingBottom="4dip" android:textSize="10dp"/>
         
      <TextView android:id="@+id/buy_price"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingBottom="4dip" />
+        android:paddingBottom="4dip" android:textSize="10dp"/>
 
 </LinearLayout>
 
