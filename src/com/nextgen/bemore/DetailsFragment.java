@@ -45,13 +45,24 @@ import android.widget.TextView;
                 return null;
             }
 
-            ScrollView scroller = new ScrollView(getActivity());
-            TextView text = new TextView(getActivity());
-            int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    4, getActivity().getResources().getDisplayMetrics());
-            text.setPadding(padding, padding, padding, padding);
-            scroller.addView(text);
-            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
-            return scroller;
+//            ScrollView scroller = new ScrollView(getActivity());
+//            TextView text = new TextView(getActivity());
+//            int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+//                    4, getActivity().getResources().getDisplayMetrics());
+//            text.setPadding(padding, padding, padding, padding);
+//            scroller.addView(text);
+//            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
+//            return scroller;
+            View v = inflater.inflate(R.layout.event_details, container, false);
+            View tv = v.findViewById(R.id.details_event_date);
+            ((TextView)tv).setText("Test Date");
+
+            tv = v.findViewById(R.id.details_event_name);
+            ((TextView)tv).setText("Test Name");
+
+            tv = v.findViewById(R.id.details_event_short_desc);
+            ((TextView)tv).setText("Test Short Desc");
+
+            return v;            
         }
     }
