@@ -124,14 +124,14 @@ import android.widget.TextView;
             Cursor eventsCursor = myDbHelper.fetchAllEvents();
 
             // Create an array to specify the fields we want to display in the list (only TITLE)
-            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME};
+            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE};
 
             // and an array of the fields we want to bind those fields to (in this case just text1)
-            int[] to = new int[]{android.R.id.text1};
+            int[] to = new int[]{R.id.event_name, R.id.date};
 
             // Now create a simple cursor adapter and set it to display
             SimpleCursorAdapter events = 
-                new SimpleCursorAdapter(this.getActivity(), android.R.layout.simple_list_item_1, eventsCursor, from, to);
+                new SimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
             setListAdapter(events);
         }        
 
