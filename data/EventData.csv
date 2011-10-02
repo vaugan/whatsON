@@ -1,19 +1,19 @@
-_id,ev_rec_id,buy_rec_id,genre,name,channel,date,time,series_info,short_desc,long_desc,video_url,image_banner,image_poster,actors,director,year_produced
-1,1,1,Movies,"
+_id,ev_rec_id,buy_rec_id,is_highlight,genre,name,channel,date,time,series_info,short_desc,long_desc,video_url,image_banner,image_poster,actors,director,year_produced
+1,1,1,TRUE,Movies,"
 Lone Wolf McQuade",M-Net Action,21-Sep-2011,20:30,,A Texas Ranger works with a State Trooper to take down a dangerous arms dealer.,"JJ McQuade is a Texas Ranger with a reputation for doing things his own way. But after his ""lone wolf"" ways get too much for his superiors, he is forced to work with Texas State Trooper Kayo Ramos.
 
 Their first assignment together gets personal quickly when McQuade's daughter is injured after witnessing a hijacking. The trail eventually leads to a dangerous arms dealer named Rawley Wilkes, who has been hijacking shipments of US weapons and selling them on the black market.
 
 When McQuade, Ramos and FBI Special Agent Jackson succeed in tracking Wilkes to his New Mexico hideout, the stage is set for a deadly confrontation.",http://www.youtube.com/watch?v=TkudKzFo7zs&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-2,1,1,Movies,Liar Liar,SONY,25-Sep-2011,20:35,,A fast-talking lawyer finds himself unable to tell a lie for 24 hours.,"Lawyers tend to get a bad rap for their perceived (or actual) tendency to bend the truth, but in this laugh-a-minute comedy Jim Carrey’s character gets a taste of his own medicine. 
+2,2,2,TRUE,Movies,Liar Liar,SONY,25-Sep-2011,20:35,,A fast-talking lawyer finds himself unable to tell a lie for 24 hours.,"Lawyers tend to get a bad rap for their perceived (or actual) tendency to bend the truth, but in this laugh-a-minute comedy Jim Carrey’s character gets a taste of his own medicine. 
 
 He plays slick, fast-talking attorney Fletcher Reede, whose five-year-old son is so fed up with his fibs that he makes a birthday wish – that his dad can stop lying for just one day.
 
 As luck would have it, his wish comes true – but Fletcher finds himself unable to tell even the tiniest white lie, leading to much hilarity as he fumbles his way through the next 24 hours.",http://www.youtube.com/watch?v=k0DA75eOltA&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-3,1,1,Movies,Chloe, 13 eme Rue,26-Sep-2011,22:30,,A woman hires an escort in order to test her husband's fidelity.,"When Catherine, a successful doctor, begins to question her husband David's fidelity, she sets out to resolve her suspicions with the help of an alluring young woman, Chloe.
+3,3,3,TRUE,Movies,Chloe, 13 eme Rue,26-Sep-2011,22:30,,A woman hires an escort in order to test her husband's fidelity.,"When Catherine, a successful doctor, begins to question her husband David's fidelity, she sets out to resolve her suspicions with the help of an alluring young woman, Chloe.
 
 Soon caught in a web of sexual desire, Catherine finds herself on a journey that places her family in great danger.",http://www.youtube.com/watch?v=JWLEz-1VzSk&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-4,1,1,Series,Game Of Thrones, M-Net,26-Sep-2011,21:30,"Episode 1, S1 ",Winter is coming. Let the Game of Thrones begin.,"Summers span decades.Winters can last a lifetime. And the struggle fo the Iron Throne has begun.
+4,4,4,TRUE,Series,Game Of Thrones, M-Net,26-Sep-2011,21:30,"Episode 1, S1 ",Winter is coming. Let the Game of Thrones begin.,"Summers span decades.Winters can last a lifetime. And the struggle fo the Iron Throne has begun.
 
 It will stretch from the south, where heat breeds plots, lusts and intrigues; to the vast and savage eastern lands; all the way to frozen north, where an 800-foot wall of ice protects the kingdom from the dark forces that lie beyond. 
 
@@ -26,7 +26,7 @@ Kings and queens, knights and renegades, liars, lords and honest men... all will
 A new original series based on George R.R. Martin's best-selling A Song of Ice and Fire series. Winter is coming to M-Net.
 
 Want to read the book? Get Game of Thrones, the first volume in the hugely popular and highly acclaimed epic fantasy series, A Song of Ice and Fire.",http://www.youtube.com/watch?v=J7JYw5kQg_Y&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-5,1,1,Series,Modern Family S2 Finale, M-Net,21-Sep-2011,19:30,"Episode 24, S2 
+5,5,5,TRUE,Series,Modern Family S2 Finale, M-Net,21-Sep-2011,19:30,"Episode 24, S2 
 ",It's time to bid farewell to the Emmy Award-winning family in the season finale.,"After cleaning up at the Emmys on Sunday night and countless belly laughs, it's obvious we're not the only ones who fell in love with this hilarious Modern Family.
 
 In the season two finale, The One That Got Away, it's Jay's birthday. Woo hoo! The family scrambles to plan a big celebration; Phil runs into his college nemesis; Cameron gets into hot water at a bakery. 
@@ -34,19 +34,19 @@ In the season two finale, The One That Got Away, it's Jay's birthday. Woo hoo! T
 Claire and Mitchell's gift to their dad is going to be a recreation of a picture they took when they were kids. Haley and Alex interviewed members of their family for a video tribute to Grandpa Pritchett. And Cameron is in charge of the cake. As for Jay, he just wants relax while fishing his b-day away. Think he'll get his wish? Nah.
 
 Modern Family won five Emmy Awards for its first season (own it now), including one for Outstanding Comedy Series. It also brought home a Peabody Award, Writers Guild Award, Directors Guilds Award and Television Critics Award. They also collected more gongs at this year's Emmy Awards on Sunday for the second season, including Outstanding Comedy Series, Best Supporting Actress (Julie Bowen) and Best Supporting Actor (Ty Burrell). Not too shabby for a modern family.",http://www.youtube.com/watch?v=GF17_NEqFPk&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-6,1,1,Series,Fashion Police: 2011 Emmy Awards, E! Entertainment Television,21-Sep-2011,20:00,Special,The final word on the Emmys red carpet fashion with E! fashion experts.,"This Wednesday the Fashion Police foursome will be looking at all the hottest trends on the carpet at TV’s biggest night with Fashion Police: The 2011 Emmy Awards. 
+6,6,6,TRUE,Series,Fashion Police: 2011 Emmy Awards, E! Entertainment Television,21-Sep-2011,20:00,Special,The final word on the Emmys red carpet fashion with E! fashion experts.,"This Wednesday the Fashion Police foursome will be looking at all the hottest trends on the carpet at TV’s biggest night with Fashion Police: The 2011 Emmy Awards. 
 
 Joan Rivers hosts a special hour of E!’s Fashion Police highlighting the best and worst looks from the previous night’s Emmy awards with Kelly Osbourne, Giuliana Rancic, George Kotsiopoulos and special guest Project Runway and Marie Claire editor Nina Garcia. 
 
 This special will dissect all your favorite Hollywood stars red carpet looks as they arrive amid a sea of flashbulbs, get honored at the big show and let loose at the after-parties. Joan will “face off” against the fashions from some of the biggest names in television including the casts of Mad Men, The Good Wife, Glee, Modern Family, Boardwalk Empire, 30 Rock, Dexter and more. 
 
 Find out who got the look right from the fashion police and who missed the mark.",,banner_30rock.jpg,buy_box_office.jpeg,,,
-7,1,1,Series,90210 S3,Vuzu,21-Sep-2011,20:30,"Episode 1, S3 ",It's senior year! The gang from 90210 return for a third season of more drama.,"It's senior year and gang from 90210 return for a third season of more drama.
+7,7,7,TRUE,Series,90210 S3,Vuzu,21-Sep-2011,20:30,"Episode 1, S3 ",It's senior year! The gang from 90210 return for a third season of more drama.,"It's senior year and gang from 90210 return for a third season of more drama.
 
 In the season three premiere, Beverly Hills is rocked by an earthquake. Naomi has spent the summer dealing with the aftermath of her rape by Mr. Cannon, Annie and Dixon are dealing with the absence of their father while Debbie tries to hold the family together. 
 
 Teddy and Silver find themselves happier than ever until he suffers an injury that could end his tennis career. Navid welcomes Adrianna back from her summer tour with Javier, but their arrival brings an unexpected death. Ivy and Dixon return from their summer vacation in Australia, while Annie and Liam discover their friendship may be best if it ends. ",http://www.youtube.com/watch?v=rAOMZDXJkDI&feature=player_embedded,banner_30rock.jpg,buy_box_office.jpeg,,,
-8,1,1,Sport,South Africa vs Namibia, SuperSport 1,22-Sep-2011,9:00,,Namibia faces a tough task as they take on the defending champions at North Harbour.,"Springbok coach Peter de Villiers has stuck to the policy of treating every match as a final but he has still found space to keep fringe players sharp in his selection for the third World Cup match against Namibia in North Harbour. 
+8,8,8,TRUE,Sport,South Africa vs Namibia, SuperSport 1,22-Sep-2011,9:00,,Namibia faces a tough task as they take on the defending champions at North Harbour.,"Springbok coach Peter de Villiers has stuck to the policy of treating every match as a final but he has still found space to keep fringe players sharp in his selection for the third World Cup match against Namibia in North Harbour. 
 
 De Villiers has made five changes to the side that smashed Fiji 49-3 last Saturday, with two new wings being given an opportunity to build confidence against South Africa’s immediate neighbours. Bryan Habana returns from injury on the left wing and Gio Aplon gets his first start of the tournament ahead of JP Pietersen. 
 
@@ -81,7 +81,7 @@ Springbok team:
 
 Replacements - 16-Chiliboy Ralepelle, 17-Tendai Mtawarira, 18-Francois Louw, 19-Heinrich Brussow, 20-Fourie du Preez, 21-Ruan Pienaar, 22-Juan de Jongh.
 ",,banner_30rock.jpg,buy_box_office.jpeg,,,
-9,1,1,Sport,Liverpool vs Brighton, SuperSport 3,21-Sep-2011,20:30,,Liverpool gears up for Carling Cup third round encounter with Brighton.,"Steven Gerrard is poised to make his long-awaited comeback as Liverpool look to forget their Premier League problems by beating Brighton in their third round League Cup clash on Wednesday (21 September).
+9,9,9,TRUE,Sport,Liverpool vs Brighton, SuperSport 3,21-Sep-2011,20:30,,Liverpool gears up for Carling Cup third round encounter with Brighton.,"Steven Gerrard is poised to make his long-awaited comeback as Liverpool look to forget their Premier League problems by beating Brighton in their third round League Cup clash on Wednesday (21 September).
 
 Gerrard has not played since suffering a groin problem in March which required surgery, but manager Kenny Dalglish is set to use the game to ease his influential captain back into action after six months on the sidelines. 
 
@@ -108,14 +108,14 @@ Brighton are currently third in the Championship after being promoted from the t
 ""I need to manage the squad and the team the right way, to have a decent team against Liverpool and a very, very good team against Leeds on Friday but it's going to be tough,"" said Poyet. 
 
 Full-back Marcos Painter will miss the tie through suspension following his sending off for two bookable offences during the 1-0 defeat to Leicester last Saturday.",,banner_30rock.jpg,buy_box_office.jpeg,,,
-10,1,1,Sport,Royal Challengers Bangalore vs Warriors, SuperSport 2,23-Sep-2011,16:00,,The Champions League Twenty20 blasts off with a cracking game between two talented sides.,"Eastern Cape based Chevrolet Warriors will be flying the South African flag in the third edition of the Champions League Twenty20. Their task will not be an easy one as they will be against the Royal Challengers Bangalore who finished behind Chennai Super Kings in the Indian Premier League.
+10,1,1,TRUE,Sport,Royal Challengers Bangalore vs Warriors, SuperSport 2,23-Sep-2011,16:00,,The Champions League Twenty20 blasts off with a cracking game between two talented sides.,"Eastern Cape based Chevrolet Warriors will be flying the South African flag in the third edition of the Champions League Twenty20. Their task will not be an easy one as they will be against the Royal Challengers Bangalore who finished behind Chennai Super Kings in the Indian Premier League.
 
 The Warriors who reached the final of last year’s competition will be looking to their captain Davey Jacobs for leadership and the skipper  who played for the Mumbai Indians in IPL will want to use the experience of opening the batting with Indian great Sachin Tendulkar to pile on the runs for his franchise. With a strong squad mixed with experience and youth the Warriors will fancy their chances against a well-balanced Royal Challengers Bangalore side.
 
 The talented Royal Challengers Bangalore squad consists an array of superstars like All-rounder Tillakaratne Dilshan, batsman AB de Villiers and  Zaheer Khan who had the privilege of being named in ICC’s ODI team of the year at the ICC Awards ceremony held in London. Also in the squad is exiled Western Indian opening batsmen Chris Gayle who was instrumental in the Challengers success in the IPL. Making the opening game of the Champions League Twenty20 a must see for all cricket fans.
 
 Don’t miss our live broadcast of the intriguing tournament on SS2/SSHD2 at 16:00 on your World of Champions.",,banner_30rock.jpg,buy_box_office.jpeg,,,
-11,1,1,Sport,New Zealand vs France, SuperSport 1,24-Sep-2011,10:15,,The ballparks are on fire in September…,"New Zealand media blasted France's team as an ""insult"" and a ""farce"" on Wednesday (21 September) claiming they had chosen an experimental line-up to face the mighty All Blacks. 
+11,1,1,TRUE,Sport,New Zealand vs France, SuperSport 1,24-Sep-2011,10:15,,The ballparks are on fire in September…,"New Zealand media blasted France's team as an ""insult"" and a ""farce"" on Wednesday (21 September) claiming they had chosen an experimental line-up to face the mighty All Blacks. 
 
 Rugby writers accused France of picking a weaker team because the loser of Saturday's (24 September) game in Auckland is likely to face an easier route through the knock-out stages. 
 
@@ -131,3 +131,14 @@ French coach Marc Lievremont named scrumhalf Morgan Parra at flyhalf, left usual
 The French camp have hotly denied any suggestions that they are sending out an understrength team and insist they are bent on once again defeating the All Blacks. 
 
 The top team in Pool A will face likely knock-out games against Argentina and either South Africa or Australia to reach the final, while the runner-up looks set to play England and then Ireland or Wales. ",,banner_30rock.jpg,buy_box_office.jpeg,,,
+12,9,9,FALSE,RecommendedGenre,Rec Event 1,Rec Channel 1,25-Sep-2011,11:15,,Rec Short Desc 1,Recommended Events Long Description 1,,,,,,
+13,9,9,FALSE,RecommendedGenre,Rec Event 2,Rec Channel 2,26-Sep-2011,12:15,,Rec Short Desc 2,Recommended Events Long Description 2,,,,,,
+14,9,9,FALSE,RecommendedGenre,Rec Event 3,Rec Channel 3,27-Sep-2011,13:15,,Rec Short Desc 3,Recommended Events Long Description 3,,,,,,
+15,9,9,FALSE,RecommendedGenre,Rec Event 4,Rec Channel 4,28-Sep-2011,14:15,,Rec Short Desc 4,Recommended Events Long Description 4,,,,,,
+16,9,9,FALSE,RecommendedGenre,Rec Event 5,Rec Channel 5,29-Sep-2011,15:15,,Rec Short Desc 5,Recommended Events Long Description 5,,,,,,
+17,9,9,FALSE,RecommendedGenre,Rec Event 6,Rec Channel 6,30-Sep-2011,16:15,,Rec Short Desc 6,Recommended Events Long Description 6,,,,,,
+18,9,9,FALSE,RecommendedGenre,Rec Event 7,Rec Channel 7,1-Oct-2011,17:15,,Rec Short Desc 7,Recommended Events Long Description 7,,,,,,
+19,9,9,FALSE,RecommendedGenre,Rec Event 8,Rec Channel 8,2-Oct-2011,18:15,,Rec Short Desc 8,Recommended Events Long Description 8,,,,,,
+20,9,9,FALSE,RecommendedGenre,Rec Event 9,Rec Channel 9,3-Oct-2011,19:15,,Rec Short Desc 9,Recommended Events Long Description 9,,,,,,
+21,9,9,FALSE,RecommendedGenre,Rec Event 10,Rec Channel 10,4-Oct-2011,20:15,,Rec Short Desc 10,Recommended Events Long Description 10,,,,,,
+22,9,9,FALSE,RecommendedGenre,Rec Event 11,Rec Channel 11,5-Oct-2011,21:15,,Rec Short Desc 11,Recommended Events Long Description 11,,,,,,
