@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.nextgen.bemore.R;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.TextView;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
 
@@ -19,12 +23,26 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     private static String DB_NAME = "EventData";
     private static String EVENTS_TABLE = "events";
+    private static String BUY_TABLE = "buy";
+    private static String BUY_REC_TABLE = "buy_recommendations";
+    private static String VIEW_REC_TABLE = "view_recommendations";
+    //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
     public static final String KEY_SHORT_DESC = "short_desc";   
+    public static final String KEY_BUY_REC_ID = "buy_rec_id";   
+    public static final String KEY_VIEW_REC_ID = "ev_rec_id";   
+    //Keys for buy recommendations table
+    public static final String KEY_BUY_REC_1 = "buy_rec_1";   
+    //keys for buy table
+    public static final String KEY_BUY_TITLE = "title";   
+    public static final String KEY_BUY_DESC = "desc";   
+    public static final String KEY_BUY_PRICE = "price";   
+    //keys for the view recommendations table
+    public static final String KEY_VIEW_REC_1 = "view_rec_1";   
 
     private SQLiteDatabase myDataBase; 
 
@@ -48,9 +66,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         boolean dbExist = checkDataBase();
 
-        if(dbExist){
-            //do nothing - database already exist
-        }else{
+//        if(dbExist){
+//        //do nothing - database already exist
+//        }else
+        {
 
             //By calling this method and empty database will be created into the default system path
                //of your application so we are gonna be able to overwrite that database with our database.
@@ -131,7 +150,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
     }
 
     @Override
@@ -181,5 +199,104 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return mCursor;
 
     }
+
+    /**
+     * Return a Cursor positioned at the event that matches the given rowId
+     * 
+     * @param rowId id of event to retrieve
+     * @return Cursor positioned to matching note, if found
+     * @throws SQLException if event could not be found/retrieved
+     */
+    public Cursor fetchBuyRecommendation(long rowId) throws SQLException {
+        Integer buyRecRowId=0;
+        Integer buyRowId=0;
+        
+        /*get cursor to the event in the event table*/
+        Cursor mCursor =
+            myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                    KEY_BUY_REC_ID}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    null, null, null, null);
+        
+        mCursor.moveToFirst();
+        
+
+            //make sure the cursor is not empty, then get the buy rec id. Then get cursor to the buy recommendations for the event.
+            if (mCursor.getCount() > 0) {
+                buyRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
+                
+                mCursor =
+                    myDataBase.query(true, BUY_REC_TABLE, new String[] {KEY_ROWID,
+                            KEY_BUY_REC_1}, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
+                            null, null, null, null);              
+            }
+
+            mCursor.moveToFirst();
+            
+            //make sure the cursor to the buy recommendations is not empty, then get the 1st buy recommendation
+            if (mCursor.getCount() > 0) {
+                buyRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
+                
+               mCursor =
+                    myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
+                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE}, KEY_ROWID + "='"+Integer.toString(buyRowId)+"'", null,
+                            null, null, null, null);              
+            }            
+
+            mCursor.moveToFirst();
+     
+       //return cursor to the buy table corresponding to the 1st recommendation for this event
+        return mCursor;
+
+    }
+
+    /**
+     * Return a Cursor positioned at the event that matches the given rowId
+     * 
+     * @param rowId id of event to retrieve
+     * @return Cursor positioned to matching note, if found
+     * @throws SQLException if event could not be found/retrieved
+     */
+    public Cursor fetchViewRecommendation(long rowId) throws SQLException {
+        Integer viewRecRowId=0;
+        Integer eventRowId=0;
+        
+        /*get cursor to the event in the event table along with the view rec column*/
+        Cursor mCursor =
+            myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                    KEY_VIEW_REC_ID}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    null, null, null, null);
+        
+        mCursor.moveToFirst();
+        
+
+            //make sure the cursor is not empty, then get the view rec id. Then get cursor to the view recommendations for the event.
+            if (mCursor.getCount() > 0) {
+                viewRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_ID));
+                
+                mCursor =
+                    myDataBase.query(true, VIEW_REC_TABLE, new String[] {KEY_ROWID,
+                            KEY_VIEW_REC_1}, KEY_ROWID + "='"+Integer.toString(viewRecRowId)+"'", null,
+                            null, null, null, null);              
+            }
+
+            mCursor.moveToFirst();
+            
+            //make sure the cursor to the view recommendations is not empty, then get the 1st view recommendation
+            if (mCursor.getCount() > 0) {
+                eventRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
+                
+               mCursor =
+                    myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC}, KEY_ROWID + "='"+Integer.toString(eventRowId)+"'", null,
+                            null, null, null, null);              
+            }            
+
+            mCursor.moveToFirst();
+     
+       //return cursor to the event table corresponding to the 1st recommendation for this event
+        return mCursor;
+
+    }
+
 }
 

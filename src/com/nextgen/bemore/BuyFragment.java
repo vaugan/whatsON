@@ -41,7 +41,7 @@ import android.widget.TextView;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
 
-            Cursor event = null;
+           
             
             if (container == null) {
                 // We have different layouts, and in one of them this
@@ -62,7 +62,8 @@ import android.widget.TextView;
 //            scroller.addView(text);
 //            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
 //            return scroller;
-
+            
+            Cursor event = null;
             View v = inflater.inflate(R.layout.buy_layout, container, false);
 
             //Get cursor to db using id
@@ -72,22 +73,24 @@ import android.widget.TextView;
             mRowId = getArguments().getLong("id", 0);
             
             if (mRowId != null) {
-                event = mEventDbHelper.fetchEvent(mRowId);
+                //get cursor to 1st recommendation for this event
+                event = mEventDbHelper.fetchBuyRecommendation(mRowId);
+                
 //                startManagingCursor(event);
                 
                 //make sure the cursor is not empty
                 if (event.getCount() > 0) {
-                View tv = v.findViewById(R.id.buy_event_date);
+                View tv = v.findViewById(R.id.buy_title);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_TITLE)));
 
-                tv = v.findViewById(R.id.buy_event_name);
+                tv = v.findViewById(R.id.buy_desc);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_DESC)));
 
-                tv = v.findViewById(R.id.buy_event_short_desc);
+                tv = v.findViewById(R.id.buy_price);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_PRICE)));    
                 }
                 else
                 {
@@ -96,14 +99,14 @@ import android.widget.TextView;
             }
             else
             {
-                View tv = v.findViewById(R.id.buy_event_date);
-                ((TextView)tv).setText("Test Date");
+                View tv = v.findViewById(R.id.buy_title);
+                ((TextView)tv).setText("Test buy title");
     
-                tv = v.findViewById(R.id.buy_event_name);
-                ((TextView)tv).setText("Test Name");
+                tv = v.findViewById(R.id.buy_desc);
+                ((TextView)tv).setText("Test buy desc");
     
-                tv = v.findViewById(R.id.buy_event_short_desc);
-                ((TextView)tv).setText("Test Short Desc");
+                tv = v.findViewById(R.id.buy_price);
+                ((TextView)tv).setText("Test buy price");
             }
 
             event.close();
