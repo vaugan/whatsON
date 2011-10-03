@@ -218,7 +218,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
             //make sure the cursor is not empty, then get the buy rec id. Then get cursor to the buy recommendations for the event.
             if (mCursor.getCount() > 0) {
-                buyRecRowId = mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID);
+                buyRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
                 
                 mCursor =
                     myDataBase.query(true, BUY_REC_TABLE, new String[] {KEY_ROWID,
@@ -230,7 +230,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             
             //make sure the cursor to the buy recommendations is not empty, then get the 1st buy recommendation
             if (mCursor.getCount() > 0) {
-                buyRowId = mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1);
+                buyRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
                 
                mCursor =
                     myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
