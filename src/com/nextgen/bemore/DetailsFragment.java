@@ -4,12 +4,15 @@ import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -91,22 +94,18 @@ import android.widget.TextView;
                 tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                
+                ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
+                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                jpgView.setImageDrawable(d);                
+                
                 }
                 else
                 {
                     Log.w(TAG, "event Cursor is empty!!!!");
                 }
-            }
-            else
-            {
-                View tv = v.findViewById(R.id.details_event_date);
-                ((TextView)tv).setText("Test Date");
-    
-                tv = v.findViewById(R.id.details_event_name);
-                ((TextView)tv).setText("Test Name");
-    
-                tv = v.findViewById(R.id.details_event_short_desc);
-                ((TextView)tv).setText("Test Short Desc");
             }
             
             event.close();
