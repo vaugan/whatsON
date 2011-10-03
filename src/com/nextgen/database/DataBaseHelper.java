@@ -25,6 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     private static String EVENTS_TABLE = "events";
     private static String BUY_TABLE = "buy";
     private static String BUY_REC_TABLE = "buy_recommendations";
+    private static String VIEW_REC_TABLE = "view_recommendations";
     //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
@@ -33,12 +34,15 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_TIME = "time";
     public static final String KEY_SHORT_DESC = "short_desc";   
     public static final String KEY_BUY_REC_ID = "buy_rec_id";   
+    public static final String KEY_VIEW_REC_ID = "ev_rec_id";   
     //Keys for buy recommendations table
     public static final String KEY_BUY_REC_1 = "buy_rec_1";   
     //keys for buy table
     public static final String KEY_BUY_TITLE = "title";   
     public static final String KEY_BUY_DESC = "desc";   
     public static final String KEY_BUY_PRICE = "price";   
+    //keys for the view recommendations table
+    public static final String KEY_VIEW_REC_1 = "view_rec_1";   
 
     private SQLiteDatabase myDataBase; 
 
@@ -241,6 +245,55 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             mCursor.moveToFirst();
      
        //return cursor to the buy table corresponding to the 1st recommendation for this event
+        return mCursor;
+
+    }
+
+    /**
+     * Return a Cursor positioned at the event that matches the given rowId
+     * 
+     * @param rowId id of event to retrieve
+     * @return Cursor positioned to matching note, if found
+     * @throws SQLException if event could not be found/retrieved
+     */
+    public Cursor fetchViewRecommendation(long rowId) throws SQLException {
+        Integer viewRecRowId=0;
+        Integer eventRowId=0;
+        
+        /*get cursor to the event in the event table along with the view rec column*/
+        Cursor mCursor =
+            myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                    KEY_VIEW_REC_ID}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    null, null, null, null);
+        
+        mCursor.moveToFirst();
+        
+
+            //make sure the cursor is not empty, then get the view rec id. Then get cursor to the view recommendations for the event.
+            if (mCursor.getCount() > 0) {
+                viewRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_ID));
+                
+                mCursor =
+                    myDataBase.query(true, VIEW_REC_TABLE, new String[] {KEY_ROWID,
+                            KEY_VIEW_REC_1}, KEY_ROWID + "='"+Integer.toString(viewRecRowId)+"'", null,
+                            null, null, null, null);              
+            }
+
+            mCursor.moveToFirst();
+            
+            //make sure the cursor to the view recommendations is not empty, then get the 1st view recommendation
+            if (mCursor.getCount() > 0) {
+                eventRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
+                
+               mCursor =
+                    myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
+                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC}, KEY_ROWID + "='"+Integer.toString(eventRowId)+"'", null,
+                            null, null, null, null);              
+            }            
+
+            mCursor.moveToFirst();
+     
+       //return cursor to the event table corresponding to the 1st recommendation for this event
         return mCursor;
 
     }

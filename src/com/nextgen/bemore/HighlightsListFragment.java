@@ -115,7 +115,7 @@ import android.widget.TextView;
                     ft.replace(R.id.details_fragment, df);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    RecommendedFragment rf = RecommendedFragment.newInstance(index);
+                    RecommendedFragment rf = RecommendedFragment.newInstance(id);
                     ft.replace(R.id.recommended, rf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 

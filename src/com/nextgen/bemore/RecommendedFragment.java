@@ -3,9 +3,11 @@ package com.nextgen.bemore;
 import java.io.FileInputStream;
 
 import com.nextgen.coverflow.CoverFlow;
+import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,6 +20,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,16 +38,19 @@ import android.widget.ImageView.ScaleType;
      */
 
     public class RecommendedFragment extends Fragment {
+        private Long mRowId;
+        private DataBaseHelper mEventDbHelper;       
+        private static final String TAG = "RecommendedFragment";
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        public static RecommendedFragment newInstance(int index) {
+        public static RecommendedFragment newInstance(long id) {
             RecommendedFragment f = new RecommendedFragment();
 
             // Supply index input as an argument.
             Bundle args = new Bundle();
-            args.putInt("index", index);
+            args.putLong("id", id);
             f.setArguments(args);
 
             return f;
@@ -64,21 +70,61 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
 
-            CoverFlow coverFlow;
-            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
-            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
+//            CoverFlow coverFlow;
+//            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
+//            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
+//
+//            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
+//            
+//            //coverImageAdapter.createReflectedImages();
+//            
+//            coverFlow.setAdapter(coverImageAdapter);
+//            
+//            coverFlow.setSpacing(-25);
+//            coverFlow.setSelection(4, true);
+//            coverFlow.setAnimationDuration(1000);
+//            
+//            return coverFlow;
+            
+            Cursor event = null;
+            View v = inflater.inflate(R.layout.recommended_layout, container, false);
 
-            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
+            //Get cursor to db using id
+            mEventDbHelper = new DataBaseHelper(this.getActivity());
+            mEventDbHelper.openDataBase();
+
+            mRowId = getArguments().getLong("id", 0);
             
-            //coverImageAdapter.createReflectedImages();
+            if (mRowId != null) {
+                //get cursor to 1st recommendation for this event
+                event = mEventDbHelper.fetchViewRecommendation(mRowId);
+                
+//                startManagingCursor(event);
+                
+                //make sure the cursor is not empty, then display the 1st recommended event
+                if (event.getCount() > 0) {
+                View tv = v.findViewById(R.id.view_rec_date);
+                ((TextView)tv).setText(event.getString(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
+
+                tv = v.findViewById(R.id.view_rec_event_name);
+                ((TextView)tv).setText(event.getString(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+
+                tv = v.findViewById(R.id.view_rec_short_desc);
+                ((TextView)tv).setText(event.getString(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                }
+                else
+                {
+                    Log.w(TAG, "event Cursor is empty!!!!");
+                }
+            }
+
+            event.close();
+            mEventDbHelper.close();
             
-            coverFlow.setAdapter(coverImageAdapter);
-            
-            coverFlow.setSpacing(-25);
-            coverFlow.setSelection(4, true);
-            coverFlow.setAnimationDuration(1000);
-            
-            return coverFlow;
+            return v;                
         }
     
     

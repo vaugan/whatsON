@@ -41,7 +41,7 @@ import android.widget.TextView;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
 
-            Cursor event = null;
+           
             
             if (container == null) {
                 // We have different layouts, and in one of them this
@@ -62,7 +62,8 @@ import android.widget.TextView;
 //            scroller.addView(text);
 //            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
 //            return scroller;
-
+            
+            Cursor event = null;
             View v = inflater.inflate(R.layout.buy_layout, container, false);
 
             //Get cursor to db using id
