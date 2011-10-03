@@ -32,6 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_IMAGE_POSTER = "image_poster";
     public static final String KEY_SHORT_DESC = "short_desc";   
     public static final String KEY_BUY_REC_ID = "buy_rec_id";   
     public static final String KEY_VIEW_REC_ID = "ev_rec_id";   
@@ -287,7 +288,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 
                mCursor =
                     myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC}, KEY_ROWID + "='"+Integer.toString(eventRowId)+"'", null,
+                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Integer.toString(eventRowId)+"'", null,
                             null, null, null, null);              
             }            
 
