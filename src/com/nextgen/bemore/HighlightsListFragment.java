@@ -6,6 +6,7 @@ package com.nextgen.bemore;
      * data to the user as appropriate based on the currrent UI layout.
      */
 import java.io.IOException;
+import java.net.URI;
 
 
 import com.nextgen.database.DataBaseHelper;
@@ -15,6 +16,7 @@ import android.support.v4.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -79,7 +81,7 @@ import android.widget.TextView;
 
         @Override
         public void onListItemClick(ListView l, View v, int position, long id) {
-            showDetails(position, id);
+            showDetails(position, id);   
         }
         
 //        @Override

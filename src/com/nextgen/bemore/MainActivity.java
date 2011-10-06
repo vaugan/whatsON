@@ -18,9 +18,16 @@ package com.nextgen.bemore;
 
 //import com.nextgen.bemore.apis.R;
 import com.nextgen.bemore.EventData;
+import com.nextgen.viewpager.TestFragmentAdapter;
+import com.nextgen.viewpager.TestTitleFragmentAdapter;
+import com.viewpagerindicator.R;
+import com.viewpagerindicator.TitlePageIndicator;
+import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
+
 
 import android.app.Activity;
 import android.support.v4.app.*;
+import android.support.v4.view.ViewPager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -40,11 +47,23 @@ import android.widget.TextView;
  */
 public class MainActivity extends FragmentActivity  {
 
+    TestFragmentAdapter mAdapter;
+    ViewPager mPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      setContentView(R.layout.highlights_fragment);
         
-        setContentView(R.layout.highlights_fragment);
+        mAdapter = new TestTitleFragmentAdapter(getSupportFragmentManager());
+        
+        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
+        
+        TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+        indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
+        
+        
     }
 }

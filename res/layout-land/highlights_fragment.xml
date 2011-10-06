@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:weightSum="1" android:orientation="horizontal">
-    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_width="wrap_content">
-        <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Whats on today" android:textSize="14dp" android:textColor="@color/SteelBlue"></TextView>
-        <fragment class="com.nextgen.bemore.HighlightsListFragment" android:layout_width="182dp" android:layout_height="match_parent"></fragment>
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout3" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.3">
+	    <com.viewpagerindicator.TitlePageIndicator android:layout_height="wrap_content" android:id="@+id/indicator" android:layout_width="wrap_content"></com.viewpagerindicator.TitlePageIndicator>
+        <android.support.v4.view.ViewPager android:layout_weight="1" android:layout_height="0dp" android:id="@+id/pager" android:layout_width="fill_parent"></android.support.v4.view.ViewPager>
     </LinearLayout>
-    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:weightSum="5">
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4">
+        <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Whats on today" android:textSize="14dp" android:textColor="@color/SteelBlue"></TextView>
+        <fragment class="com.nextgen.bemore.HighlightsListFragment" android:layout_height="match_parent" android:layout_width="96dp"></fragment>
+    </LinearLayout>
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:weightSum="5" android:layout_weight="0.3" android:layout_width="match_parent">
         <FrameLayout android:id="@+id/recommended" android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:layout_weight="1"></FrameLayout>
         <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
         <FrameLayout android:layout_gravity="top" android:id="@+id/buy_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
@@ -16,5 +20,6 @@
         <fragment android:layout_weight="1" android:layout_height="match_parent" android:id="@+id/details_fragment" class="com.nextgen.bemore.DetailsFragment" android:layout_gravity="bottom|top" android:layout_width="match_parent"></fragment>
     </LinearLayout>
     -->
+
 </LinearLayout>
 

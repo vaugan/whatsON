@@ -4,5 +4,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="C:/Dev/Android/Archive/Android-ViewPagerIndicator/library/libs/android-directionalviewpager-1.2.0.jar"/>
+	<classpathentry kind="src" path="viewpagerindicator_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
