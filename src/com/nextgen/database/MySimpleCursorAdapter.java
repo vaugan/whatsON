@@ -1,4 +1,4 @@
-package com.nextgen.bemore;
+package com.nextgen.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -18,10 +18,6 @@ public class MySimpleCursorAdapter extends SimpleCursorAdapter {
             super(context, layout, c, from, to);
         }
 
-    @Override
-    public void setViewText(TextView v, String text) {
-        v.setText(text);
-    }
 
     @Override
     public void setViewImage(ImageView v, String id) {
