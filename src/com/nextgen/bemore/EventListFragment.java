@@ -17,13 +17,16 @@ import android.support.v4.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
@@ -150,14 +153,16 @@ import android.widget.TextView;
             Cursor eventsCursor = myDbHelper.fetchAllEvents();
 
             // Create an array to specify the fields we want to display in the list (only TITLE)
-            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE};
+            
+            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE, DataBaseHelper.KEY_IMAGE_BANNER};
 
-            // and an array of the fields we want to bind those fields to (in this case just text1)
-            int[] to = new int[]{R.id.event_name, R.id.date};
+            
+            // and an array of the fields we want to bind those fields to
+            int[] to = new int[]{R.id.event_name, R.id.date, R.id.event_row_image_banner};
 
             // Now create a simple cursor adapter and set it to display
-            SimpleCursorAdapter events = 
-                new SimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
+            MySimpleCursorAdapter events = 
+                new MySimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
             setListAdapter(events);
         }        
 
