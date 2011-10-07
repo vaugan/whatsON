@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      setContentView(R.layout.highlights_fragment);
+      setContentView(R.layout.main_layout);
         
         mAdapter = new EventListFragmentAdapterTitleProvider(getSupportFragmentManager());
         
