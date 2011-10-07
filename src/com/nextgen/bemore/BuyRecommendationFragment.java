@@ -20,7 +20,7 @@ import android.widget.TextView;
      * item.
      */
 
-    public class BuyFragment extends Fragment implements android.view.View.OnClickListener{
+    public class BuyRecommendationFragment extends Fragment implements android.view.View.OnClickListener{
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "BuyFragment";
@@ -28,8 +28,8 @@ import android.widget.TextView;
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        public static BuyFragment newInstance(Long id) {
-            BuyFragment f = new BuyFragment();
+        public static BuyRecommendationFragment newInstance(Long id) {
+            BuyRecommendationFragment f = new BuyRecommendationFragment();
 
             // Supply index input as an argument.
             Bundle args = new Bundle();

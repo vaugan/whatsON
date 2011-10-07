@@ -38,7 +38,7 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class RecommendedFragment extends Fragment {
+    public class EventRecommendationFragment extends Fragment {
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
@@ -46,8 +46,8 @@ import android.widget.ImageView.ScaleType;
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        public static RecommendedFragment newInstance(long id) {
-            RecommendedFragment f = new RecommendedFragment();
+        public static EventRecommendationFragment newInstance(long id) {
+            EventRecommendationFragment f = new EventRecommendationFragment();
 
             // Supply index input as an argument.
             Bundle args = new Bundle();

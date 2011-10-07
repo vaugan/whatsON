@@ -11,7 +11,7 @@ import android.support.v4.app.*;
      * when the screen is not large enough to show it all in one activity.
      */
 
-    public class DetailsActivity extends FragmentActivity  {
+    public class EventDetailsActivity extends FragmentActivity  {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ import android.support.v4.app.*;
 
             if (savedInstanceState == null) {
                 // During initial setup, plug in the details fragment.
-                DetailsFragment details = new DetailsFragment();
+                EventDetailsFragment details = new EventDetailsFragment();
                 details.setArguments(getIntent().getExtras());
               getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
             }

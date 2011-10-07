@@ -28,7 +28,7 @@ import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-    public class HighlightsListFragment extends ListFragment {
+    public class EventListFragment extends ListFragment {
         boolean mDualPane;
         int mCurCheckPosition = 0;
         long mCurId = 0;
@@ -109,7 +109,7 @@ import android.widget.TextView;
                 if (mShownCheckPosition != mCurCheckPosition) {
                     // If we are not currently showing a fragment for the new
                     // position, we need to create and install a new one.
-                    DetailsFragment df = DetailsFragment.newInstance(id);
+                    EventDetailsFragment df = EventDetailsFragment.newInstance(id);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -117,11 +117,11 @@ import android.widget.TextView;
                     ft.replace(R.id.details_fragment, df);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    RecommendedFragment rf = RecommendedFragment.newInstance(id);
+                    EventRecommendationFragment rf = EventRecommendationFragment.newInstance(id);
                     ft.replace(R.id.recommended, rf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    BuyFragment bf = BuyFragment.newInstance(id);
+                    BuyRecommendationFragment bf = BuyRecommendationFragment.newInstance(id);
                     ft.replace(R.id.buy_fragment, bf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
               
@@ -133,7 +133,7 @@ import android.widget.TextView;
                 // Otherwise we need to launch a new activity to display
                 // the dialog fragment with selected text.
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), DetailsActivity.class);
+                intent.setClass(getActivity(), EventDetailsActivity.class);
                 intent.putExtra("index", index);
                 startActivity(intent);
             }

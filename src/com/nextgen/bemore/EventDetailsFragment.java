@@ -22,7 +22,7 @@ import android.widget.TextView;
      * item.
      */
 
-    public class DetailsFragment extends Fragment {
+    public class EventDetailsFragment extends Fragment {
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -32,8 +32,8 @@ import android.widget.TextView;
         private static final String TAG = "DetailsFragment";
         
         
-        public static DetailsFragment newInstance(Long id) {
-            DetailsFragment f = new DetailsFragment();
+        public static EventDetailsFragment newInstance(Long id) {
+            EventDetailsFragment f = new EventDetailsFragment();
 
             
             // Supply index input as an argument.
