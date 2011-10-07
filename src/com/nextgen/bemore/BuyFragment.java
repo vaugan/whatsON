@@ -1,8 +1,10 @@
 package com.nextgen.bemore;
 import com.nextgen.database.DataBaseHelper;
-
 import android.support.v4.app.*;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -18,7 +20,7 @@ import android.widget.TextView;
      * item.
      */
 
-    public class BuyFragment extends Fragment {
+    public class BuyFragment extends Fragment implements android.view.View.OnClickListener{
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "BuyFragment";
@@ -83,14 +85,17 @@ import android.widget.TextView;
                 View tv = v.findViewById(R.id.buy_title);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_TITLE)));
+                tv.setOnClickListener(this);
 
                 tv = v.findViewById(R.id.buy_desc);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_DESC)));
+                tv.setOnClickListener(this);
 
                 tv = v.findViewById(R.id.buy_price);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_PRICE)));    
+                tv.setOnClickListener(this);
                 }
                 else
                 {
@@ -113,5 +118,16 @@ import android.widget.TextView;
             mEventDbHelper.close();
             
             return v;            
+        }
+
+        public void onClick(View v) {
+            switch (v.getId()) {
+            case R.id.buy_title:
+            case R.id.buy_desc:
+            case R.id.buy_price:
+                Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+                startActivity(i);             
+                break;
+            }
         }
     }

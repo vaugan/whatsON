@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:weightSum="1" android:layout_width="wrap_content">
+<TextView  
+    android:layout_width="fill_parent" 
+    android:text="More 4 You" android:textStyle="bold" android:textSize="42sp" android:padding="20dp" android:gravity="center" android:layout_height="wrap_content"/>
+<LinearLayout android:layout_height="wrap_content" android:layout_weight="0.22" android:layout_width="1278dp" android:id="@+id/linearLayout1" android:gravity="center">
+    <Button android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/btnBoxOffice" android:layout_height="wrap_content" android:text="BoxOffice" android:textSize="42sp" android:soundEffectsEnabled="true"></Button>
+    <Button android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/btnOMusic" android:layout_height="wrap_content" android:text="OMusic" android:textSize="42sp"></Button>
+    <Button android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/btnKalhari" android:layout_height="wrap_content" android:textSize="42sp" android:text="Kalahari"></Button>
+</LinearLayout>
+<WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/webview"
+    android:layout_width="fill_parent" android:layout_height="502dp" android:overScrollMode="never" android:visibility="visible" android:descendantFocusability="blocksDescendants" android:isScrollContainer="true"/>
+</LinearLayout>
