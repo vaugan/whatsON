@@ -6,27 +6,32 @@ package com.nextgen.bemore;
      * data to the user as appropriate based on the currrent UI layout.
      */
 import java.io.IOException;
+import java.net.URI;
 
 
 import com.nextgen.database.DataBaseHelper;
-
+import com.nextgen.database.MySimpleCursorAdapter;
 import android.support.v4.app.*;
 import android.support.v4.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-    public class HighlightsListFragment extends ListFragment {
+    public class EventListFragment extends ListFragment {
         boolean mDualPane;
         int mCurCheckPosition = 0;
         long mCurId = 0;
@@ -34,6 +39,12 @@ import android.widget.TextView;
         int mShownCheckPosition = -1;
         private DataBaseHelper myDbHelper;         
 
+        public static EventListFragment newInstance(String content) {
+            EventListFragment fragment = new EventListFragment();
+            
+            return fragment;
+        }
+        
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
@@ -79,7 +90,7 @@ import android.widget.TextView;
 
         @Override
         public void onListItemClick(ListView l, View v, int position, long id) {
-            showDetails(position, id);
+            showDetails(position, id);   
         }
         
 //        @Override
@@ -107,7 +118,7 @@ import android.widget.TextView;
                 if (mShownCheckPosition != mCurCheckPosition) {
                     // If we are not currently showing a fragment for the new
                     // position, we need to create and install a new one.
-                    DetailsFragment df = DetailsFragment.newInstance(id);
+                    EventDetailsFragment df = EventDetailsFragment.newInstance(id);
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
@@ -115,11 +126,11 @@ import android.widget.TextView;
                     ft.replace(R.id.details_fragment, df);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    RecommendedFragment rf = RecommendedFragment.newInstance(id);
+                    EventRecommendationFragment rf = EventRecommendationFragment.newInstance(id);
                     ft.replace(R.id.recommended, rf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    BuyFragment bf = BuyFragment.newInstance(id);
+                    BuyRecommendationFragment bf = BuyRecommendationFragment.newInstance(id);
                     ft.replace(R.id.buy_fragment, bf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
               
@@ -131,7 +142,7 @@ import android.widget.TextView;
                 // Otherwise we need to launch a new activity to display
                 // the dialog fragment with selected text.
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), DetailsActivity.class);
+                intent.setClass(getActivity(), EventDetailsActivity.class);
                 intent.putExtra("index", index);
                 startActivity(intent);
             }
@@ -141,14 +152,16 @@ import android.widget.TextView;
             Cursor eventsCursor = myDbHelper.fetchAllEvents();
 
             // Create an array to specify the fields we want to display in the list (only TITLE)
-            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE};
+            
+            String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE, DataBaseHelper.KEY_IMAGE_BANNER};
 
-            // and an array of the fields we want to bind those fields to (in this case just text1)
-            int[] to = new int[]{R.id.event_name, R.id.date};
+            
+            // and an array of the fields we want to bind those fields to
+            int[] to = new int[]{R.id.event_row_name, R.id.event_row_date, R.id.event_row_image_banner};
 
             // Now create a simple cursor adapter and set it to display
-            SimpleCursorAdapter events = 
-                new SimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
+            MySimpleCursorAdapter events = 
+                new MySimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
             setListAdapter(events);
         }        
 

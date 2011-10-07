@@ -1,14 +1,18 @@
 package com.nextgen.bemore;
+
 import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -18,17 +22,20 @@ import android.widget.TextView;
      * item.
      */
 
-    public class BuyFragment extends Fragment {
-        private Long mRowId;
-        private DataBaseHelper mEventDbHelper;
-        private static final String TAG = "BuyFragment";
+    public class EventDetailsFragment extends Fragment {
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        public static BuyFragment newInstance(Long id) {
-            BuyFragment f = new BuyFragment();
+        private Long mRowId;
+        private DataBaseHelper mEventDbHelper;
+        private static final String TAG = "DetailsFragment";
+        
+        
+        public static EventDetailsFragment newInstance(Long id) {
+            EventDetailsFragment f = new EventDetailsFragment();
 
+            
             // Supply index input as an argument.
             Bundle args = new Bundle();
             args.putLong("id", id);
@@ -40,8 +47,7 @@ import android.widget.TextView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-
-           
+            Cursor event = null;
             
             if (container == null) {
                 // We have different layouts, and in one of them this
@@ -62,9 +68,8 @@ import android.widget.TextView;
 //            scroller.addView(text);
 //            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
 //            return scroller;
-            
-            Cursor event = null;
-            View v = inflater.inflate(R.layout.buy_layout, container, false);
+
+            View v = inflater.inflate(R.layout.event_details, container, false);
 
             //Get cursor to db using id
             mEventDbHelper = new DataBaseHelper(this.getActivity());
@@ -73,45 +78,38 @@ import android.widget.TextView;
             mRowId = getArguments().getLong("id", 0);
             
             if (mRowId != null) {
-                //get cursor to 1st recommendation for this event
-                event = mEventDbHelper.fetchBuyRecommendation(mRowId);
-                
+                 event = mEventDbHelper.fetchEvent(mRowId);
 //                startManagingCursor(event);
                 
                 //make sure the cursor is not empty
                 if (event.getCount() > 0) {
-                View tv = v.findViewById(R.id.buy_title);
+                View tv = v.findViewById(R.id.details_event_date);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_TITLE)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
 
-                tv = v.findViewById(R.id.buy_desc);
+                tv = v.findViewById(R.id.details_event_name);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_DESC)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
 
-                tv = v.findViewById(R.id.buy_price);
+                tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_PRICE)));    
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                
+                ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
+                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                jpgView.setImageDrawable(d);                
+                
                 }
                 else
                 {
                     Log.w(TAG, "event Cursor is empty!!!!");
                 }
             }
-            else
-            {
-                View tv = v.findViewById(R.id.buy_title);
-                ((TextView)tv).setText("Test buy title");
-    
-                tv = v.findViewById(R.id.buy_desc);
-                ((TextView)tv).setText("Test buy desc");
-    
-                tv = v.findViewById(R.id.buy_price);
-                ((TextView)tv).setText("Test buy price");
-            }
-
+            
             event.close();
             mEventDbHelper.close();
-            
             return v;            
         }
     }

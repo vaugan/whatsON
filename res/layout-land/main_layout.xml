@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:weightSum="1" android:orientation="horizontal">
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout3" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.5">
+	    <com.viewpagerindicator.TitlePageIndicator android:layout_height="wrap_content" android:id="@+id/indicator" android:layout_width="wrap_content"></com.viewpagerindicator.TitlePageIndicator>
+        <android.support.v4.view.ViewPager android:layout_weight="1" android:layout_height="0dp" android:id="@+id/pager" android:layout_width="fill_parent"></android.support.v4.view.ViewPager>
+    </LinearLayout>
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:weightSum="5" android:layout_width="match_parent" android:layout_weight="0.5">
+        <FrameLayout android:id="@+id/recommended" android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:layout_weight="1"></FrameLayout>
+        <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
+        <FrameLayout android:layout_gravity="top" android:id="@+id/buy_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
+    </LinearLayout>
+            <!--  
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="match_parent" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="0.92">
+        <fragment android:layout_height="104dp" android:id="@+id/recommended" class="com.nextgen.bemore.EventRecommendationFragment" android:layout_gravity="top" android:layout_width="match_parent"></fragment>
+        <fragment android:layout_weight="1" android:layout_height="match_parent" android:id="@+id/details_fragment" class="com.nextgen.bemore.EventDetailsFragment" android:layout_gravity="bottom|top" android:layout_width="match_parent"></fragment>
+    </LinearLayout>
+    -->
+
+</LinearLayout>
+

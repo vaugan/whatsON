@@ -1,9 +1,10 @@
 package com.nextgen.bemore;
-
 import com.nextgen.database.DataBaseHelper;
-
 import android.support.v4.app.*;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -19,20 +20,17 @@ import android.widget.TextView;
      * item.
      */
 
-    public class DetailsFragment extends Fragment {
+    public class BuyRecommendationFragment extends Fragment implements android.view.View.OnClickListener{
+        private Long mRowId;
+        private DataBaseHelper mEventDbHelper;
+        private static final String TAG = "BuyFragment";
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        private Long mRowId;
-        private DataBaseHelper mEventDbHelper;
-        private static final String TAG = "DetailsFragment";
-        
-        
-        public static DetailsFragment newInstance(Long id) {
-            DetailsFragment f = new DetailsFragment();
+        public static BuyRecommendationFragment newInstance(Long id) {
+            BuyRecommendationFragment f = new BuyRecommendationFragment();
 
-            
             // Supply index input as an argument.
             Bundle args = new Bundle();
             args.putLong("id", id);
@@ -44,7 +42,8 @@ import android.widget.TextView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            Cursor event = null;
+
+           
             
             if (container == null) {
                 // We have different layouts, and in one of them this
@@ -65,8 +64,9 @@ import android.widget.TextView;
 //            scroller.addView(text);
 //            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
 //            return scroller;
-
-            View v = inflater.inflate(R.layout.event_details, container, false);
+            
+            Cursor event = null;
+            View v = inflater.inflate(R.layout.buy_layout, container, false);
 
             //Get cursor to db using id
             mEventDbHelper = new DataBaseHelper(this.getActivity());
@@ -75,22 +75,27 @@ import android.widget.TextView;
             mRowId = getArguments().getLong("id", 0);
             
             if (mRowId != null) {
-                 event = mEventDbHelper.fetchEvent(mRowId);
+                //get cursor to 1st recommendation for this event
+                event = mEventDbHelper.fetchBuyRecommendation(mRowId);
+                
 //                startManagingCursor(event);
                 
                 //make sure the cursor is not empty
                 if (event.getCount() > 0) {
-                View tv = v.findViewById(R.id.details_event_date);
+                View tv = v.findViewById(R.id.buy_title);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_TITLE)));
+                tv.setOnClickListener(this);
 
-                tv = v.findViewById(R.id.details_event_name);
+                tv = v.findViewById(R.id.buy_desc);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_DESC)));
+                tv.setOnClickListener(this);
 
-                tv = v.findViewById(R.id.details_event_short_desc);
+                tv = v.findViewById(R.id.buy_price);
                 ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_PRICE)));    
+                tv.setOnClickListener(this);
                 }
                 else
                 {
@@ -99,18 +104,30 @@ import android.widget.TextView;
             }
             else
             {
-                View tv = v.findViewById(R.id.details_event_date);
-                ((TextView)tv).setText("Test Date");
+                View tv = v.findViewById(R.id.buy_title);
+                ((TextView)tv).setText("Test buy title");
     
-                tv = v.findViewById(R.id.details_event_name);
-                ((TextView)tv).setText("Test Name");
+                tv = v.findViewById(R.id.buy_desc);
+                ((TextView)tv).setText("Test buy desc");
     
-                tv = v.findViewById(R.id.details_event_short_desc);
-                ((TextView)tv).setText("Test Short Desc");
+                tv = v.findViewById(R.id.buy_price);
+                ((TextView)tv).setText("Test buy price");
             }
-            
+
             event.close();
             mEventDbHelper.close();
+            
             return v;            
+        }
+
+        public void onClick(View v) {
+            switch (v.getId()) {
+            case R.id.buy_title:
+            case R.id.buy_desc:
+            case R.id.buy_price:
+                Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+                startActivity(i);             
+                break;
+            }
         }
     }

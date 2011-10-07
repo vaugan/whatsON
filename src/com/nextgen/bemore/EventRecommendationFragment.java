@@ -20,6 +20,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class RecommendedFragment extends Fragment {
+    public class EventRecommendationFragment extends Fragment {
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
@@ -45,8 +46,8 @@ import android.widget.ImageView.ScaleType;
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
          */
-        public static RecommendedFragment newInstance(long id) {
-            RecommendedFragment f = new RecommendedFragment();
+        public static EventRecommendationFragment newInstance(long id) {
+            EventRecommendationFragment f = new EventRecommendationFragment();
 
             // Supply index input as an argument.
             Bundle args = new Bundle();
@@ -114,6 +115,12 @@ import android.widget.ImageView.ScaleType;
                 tv = v.findViewById(R.id.view_rec_short_desc);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                
+                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
+                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                jpgView.setImageDrawable(d);                
                 }
                 else
                 {
@@ -121,8 +128,14 @@ import android.widget.ImageView.ScaleType;
                 }
             }
 
+            
             event.close();
             mEventDbHelper.close();
+            
+
+            
+            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
+            
             
             return v;                
         }
