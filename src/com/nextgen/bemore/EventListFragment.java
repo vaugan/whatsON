@@ -10,6 +10,7 @@ import java.net.URI;
 
 
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.viewpager.TestFragment;
 
 import android.support.v4.app.*;
 import android.support.v4.content.CursorLoader;
@@ -36,6 +37,12 @@ import android.widget.TextView;
         int mShownCheckPosition = -1;
         private DataBaseHelper myDbHelper;         
 
+        public static EventListFragment newInstance(String content) {
+            EventListFragment fragment = new EventListFragment();
+            
+            return fragment;
+        }
+        
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);

@@ -46,7 +46,7 @@ import android.widget.TextView;
  */
 public class MainActivity extends FragmentActivity  {
 
-    TestFragmentAdapter mAdapter;
+    EventListFragmentPagerAdapter mAdapter;
     ViewPager mPager;
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity  {
         super.onCreate(savedInstanceState);
       setContentView(R.layout.highlights_fragment);
         
-        mAdapter = new TestTitleFragmentAdapter(getSupportFragmentManager());
+        mAdapter = new EventListFragmentAdapterTitleProvider(getSupportFragmentManager());
         
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
