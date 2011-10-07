@@ -10,6 +10,7 @@ import java.net.URI;
 
 
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.database.MySimpleCursorAdapter;
 import com.nextgen.viewpager.TestFragment;
 
 import android.support.v4.app.*;
@@ -158,7 +159,7 @@ import android.widget.TextView;
 
             
             // and an array of the fields we want to bind those fields to
-            int[] to = new int[]{R.id.event_name, R.id.date, R.id.event_row_image_banner};
+            int[] to = new int[]{R.id.event_row_name, R.id.event_row_date, R.id.event_row_image_banner};
 
             // Now create a simple cursor adapter and set it to display
             MySimpleCursorAdapter events = 
