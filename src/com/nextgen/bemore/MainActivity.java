@@ -17,8 +17,6 @@
 package com.nextgen.bemore;
 
 //import com.nextgen.bemore.apis.R;
-import com.nextgen.viewpager.TestFragmentAdapter;
-import com.nextgen.viewpager.TestTitleFragmentAdapter;
 import com.viewpagerindicator.R;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;

@@ -11,8 +11,6 @@ import java.net.URI;
 
 import com.nextgen.database.DataBaseHelper;
 import com.nextgen.database.MySimpleCursorAdapter;
-import com.nextgen.viewpager.TestFragment;
-
 import android.support.v4.app.*;
 import android.support.v4.content.CursorLoader;
 import android.content.Intent;
