@@ -33,6 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_YOUTUBE_VIDEO_ID = "video_url";
     public static final String KEY_IMAGE_POSTER = "image_poster";
     public static final String KEY_IMAGE_BANNER = "image_banner";
     
@@ -182,7 +183,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public Cursor fetchAllEvents() {
 
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
+                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
     }
 
     // Add your public helper methods to access and get content from the database.
@@ -191,7 +192,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
  public Cursor fetchEventsByCategory(String Category) {
 
      return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
+             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
  }
 
     /**
@@ -205,7 +206,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         Cursor mCursor =
             myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
                     null, null, null, null);
         
         mCursor.moveToFirst();

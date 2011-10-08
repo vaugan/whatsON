@@ -3,8 +3,10 @@ package com.nextgen.bemore;
 import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -22,7 +24,7 @@ import android.widget.TextView;
      * item.
      */
 
-    public class EventDetailsFragment extends Fragment {
+    public class EventDetailsFragment extends Fragment implements android.view.View.OnClickListener{
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -30,6 +32,7 @@ import android.widget.TextView;
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "DetailsFragment";
+        String mYouTubeVideoId = null;
         
         
         public static EventDetailsFragment newInstance(Long id) {
@@ -48,7 +51,7 @@ import android.widget.TextView;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             Cursor event = null;
-            
+           
             if (container == null) {
                 // We have different layouts, and in one of them this
                 // fragment's containing frame doesn't exist.  The fragment
@@ -90,6 +93,7 @@ import android.widget.TextView;
                 tv = v.findViewById(R.id.details_event_name);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+                tv.setOnClickListener(this);
 
                 tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
@@ -99,8 +103,10 @@ import android.widget.TextView;
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
                 String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
                 BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-                jpgView.setImageDrawable(d);                
-                
+                jpgView.setImageDrawable(d);            
+
+                 mYouTubeVideoId = event.getString(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_YOUTUBE_VIDEO_ID));
                 }
                 else
                 {
@@ -112,4 +118,17 @@ import android.widget.TextView;
             mEventDbHelper.close();
             return v;            
         }
+
+        public void onClick(View arg0) {
+            if (mYouTubeVideoId != null )
+            {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
+                intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
+                startActivity(intent); 
+            }
+            else
+            {
+                //display some dialog indicating there's no trailer
+            }
+        }          
     }
