@@ -35,13 +35,18 @@ import android.widget.TextView;
         boolean mDualPane;
         int mCurCheckPosition = 0;
         long mCurId = 0;
+        String mCurCategory=null;
         
         int mShownCheckPosition = -1;
         private DataBaseHelper myDbHelper;         
 
-        public static EventListFragment newInstance(String content) {
-            EventListFragment fragment = new EventListFragment();
-            
+        public EventListFragment(String category) {
+            super();
+            mCurCategory = category;
+        }
+
+        public static EventListFragment newInstance(String category) {
+            EventListFragment fragment = new EventListFragment(category);          
             return fragment;
         }
         
@@ -149,7 +154,7 @@ import android.widget.TextView;
         }
         
         private void fillData() {
-            Cursor eventsCursor = myDbHelper.fetchAllEvents();
+            Cursor eventsCursor = myDbHelper.fetchEventsByCategory(mCurCategory);
 
             // Create an array to specify the fields we want to display in the list (only TITLE)
             

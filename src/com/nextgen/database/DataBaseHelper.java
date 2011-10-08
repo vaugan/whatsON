@@ -29,6 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
+    public static final String KEY_CATEGORY = "category";
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
@@ -183,7 +184,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
                 KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
     }
-    
+
+    // Add your public helper methods to access and get content from the database.
+    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+    // to you to create adapters for your views.
+ public Cursor fetchEventsByCategory(String Category) {
+
+     return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
+             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
+ }
+
     /**
      * Return a Cursor positioned at the event that matches the given rowId
      * 

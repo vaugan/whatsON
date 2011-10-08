@@ -9,6 +9,6 @@ public class EventListFragmentAdapterTitleProvider extends EventListFragmentPage
 	}
 
 	public String getTitle(int position) {
-		return EventListFragmentPagerAdapter.CONTENT[position % CONTENT.length];
+		return EventListFragmentPagerAdapter.EVENT_CATEGORIES[position % EVENT_CATEGORIES.length];
 	}
 }
