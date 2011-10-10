@@ -93,7 +93,7 @@ import android.widget.TextView;
                 tv = v.findViewById(R.id.details_event_name);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
-                tv.setOnClickListener(this);
+//                tv.setOnClickListener(this);
 
                 tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
@@ -105,6 +105,9 @@ import android.widget.TextView;
                 BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
                 jpgView.setImageDrawable(d);            
 
+                ImageView trailer = (ImageView)v.findViewById(R.id.details_event_trailer);
+                trailer.setOnClickListener(this);
+                
                  mYouTubeVideoId = event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_YOUTUBE_VIDEO_ID));
                 }

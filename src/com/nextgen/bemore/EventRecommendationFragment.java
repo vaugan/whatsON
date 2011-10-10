@@ -116,11 +116,11 @@ import android.widget.ImageView.ScaleType;
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
                 
-                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
-                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-                jpgView.setImageDrawable(d);                
+//                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
+//                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+//                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+//                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+//                jpgView.setImageDrawable(d);                
                 }
                 else
                 {
