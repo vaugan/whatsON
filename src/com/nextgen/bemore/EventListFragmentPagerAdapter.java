@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class EventListFragmentPagerAdapter extends FragmentPagerAdapter {
-	protected static final String[] EVENT_CATEGORIES = new String[] { "Movies", "Series", "Sport", "Documentary", "Youth"};
+	protected static final String[] EVENT_CATEGORIES = new String[] { "Movies", "Series", "Sport", "Documentary", "Lifestyle"};
 	
 	private int mCount = EVENT_CATEGORIES.length;
 

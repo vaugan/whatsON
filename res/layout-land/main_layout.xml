@@ -7,7 +7,7 @@
     </LinearLayout>
     <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:weightSum="5" android:layout_width="match_parent" android:layout_weight="0.5">
         <FrameLayout android:id="@+id/recommended" android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:layout_weight="1"></FrameLayout>
-        <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
+        <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_weight="2" android:layout_height="wrap_content"></FrameLayout>
         <FrameLayout android:layout_gravity="top" android:id="@+id/buy_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2"></FrameLayout>
     </LinearLayout>
             <!--  
