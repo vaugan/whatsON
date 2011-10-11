@@ -42,6 +42,8 @@ import android.widget.ImageView.ScaleType;
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
+        Cursor event = null;          
+        
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -72,22 +74,63 @@ import android.widget.ImageView.ScaleType;
             }
 
           View v = inflater.inflate(R.layout.recommended_layout, container, false);
-
+          ImageView jpgView=null;
+//        //Get cursor to db using id
+              mEventDbHelper = new DataBaseHelper(this.getActivity());
+              mEventDbHelper.openDataBase();          
+              mRowId = getArguments().getLong("id", 0);
+              
+              if (mRowId != null) {
+                  //get cursor to 1st recommendation for this event
+                  event = mEventDbHelper.fetchViewRecommendation(mRowId);        
+                  
+                  if (event.getCount() > 0)
+                  {
+                      jpgView = (ImageView)v.findViewById(R.id.view_rec_image);
+                      String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                      String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                      BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                      jpgView.setImageDrawable(d);
+                  }
+                  else
+                  {
+                      Log.w(TAG, "event Cursor is empty!!!!");
+                  }  
+             }
+             else
+             {
+                 Log.w(TAG, "mRowId=null!!!!");
+             }         
+                      
             CoverFlow coverFlow;
 //            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
             coverFlow = (CoverFlow) v.findViewById(R.id.view_rec_coverflow);
             coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
 
             ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
-            
-            //coverImageAdapter.createReflectedImages();
+
+//            if (jpgView != null) {
+//            coverImageAdapter.mImages[0]=jpgView;
+//            coverImageAdapter.mImages[1]=jpgView;
+//            coverImageAdapter.mImages[2]=jpgView;
+//            coverImageAdapter.mImages[3]=jpgView;
+//            coverImageAdapter.mImages[4]=jpgView;
+//            coverImageAdapter.mImages[5]=jpgView;
+//            coverImageAdapter.mImages[6]=jpgView;
+//            coverImageAdapter.mImages[7]=jpgView;
+//            coverImageAdapter.mImages[8]=jpgView;
+//            coverImageAdapter.mImages[9]=jpgView;
+//            coverImageAdapter.mImages[10]=jpgView;
+//            //coverImageAdapter.createReflectedImages();
+//            }           
             
             coverFlow.setAdapter(coverImageAdapter);
             
             coverFlow.setSpacing(-25);
             coverFlow.setSelection(4, true);
             coverFlow.setAnimationDuration(1000);
-return v;            
+
+            return v;            
 //            return coverFlow;
             
 //            Cursor event = null;
@@ -242,18 +285,32 @@ return v;
 
         public View getView(int position, View convertView, ViewGroup parent) {
 
-         //Use this code if you want to load from resources
             ImageView i = new ImageView(mContext);
-            i.setImageResource(mImageIds[position]);
-            i.setLayoutParams(new CoverFlow.LayoutParams(130, 130));
-            i.setScaleType(ImageView.ScaleType.CENTER_INSIDE); 
-            
-            //Make sure we set anti-aliasing otherwise we get jaggies
-            BitmapDrawable drawable = (BitmapDrawable) i.getDrawable();
-            drawable.setAntiAlias(true);
+
+            if (event.getCount() > 0)
+            {
+                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                i.setImageDrawable(d);
+            }
+            else
+            {
+                Log.w(TAG, "event Cursor is empty!!!!");
+            }              
             return i;
+//         //Use this code if you want to load from resources
+//            ImageView i = new ImageView(mContext);
+//            i.setImageResource(mImageIds[position]);
+//            i.setLayoutParams(new CoverFlow.LayoutParams(130, 130));
+//            i.setScaleType(ImageView.ScaleType.CENTER_INSIDE); 
+//            
+//            //Make sure we set anti-aliasing otherwise we get jaggies
+//            BitmapDrawable drawable = (BitmapDrawable) i.getDrawable();
+//            drawable.setAntiAlias(true);
+//            return i;
          
-         //return mImages[position];
+//         return mImages[position];
         }
       /** Returns the size (0.0f to 1.0f) of the views 
          * depending on the 'offset' to the center. */ 
