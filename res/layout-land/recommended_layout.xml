@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="4dip"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="wrap_content" android:id="@+id/frameLayout1" android:layout_width="match_parent">
+        <com.nextgen.coverflow.CoverFlow android:id="@+id/view_rec_coverflow" android:layout_height="match_parent" android:layout_width="match_parent"></com.nextgen.coverflow.CoverFlow>
+        <TextView android:text="You might like to watch this" android:textColor="@color/SteelBlue" android:paddingBottom="4dip" android:textSize="14dp" android:layout_width="match_parent" android:id="@+id/recommended_page_title" android:layout_height="match_parent"></TextView>
+        <TextView android:paddingBottom="4dip" android:textSize="10dp" android:layout_width="match_parent" android:id="@+id/view_rec_event_name" android:layout_height="match_parent"></TextView>
+        <TextView android:paddingBottom="4dip" android:textSize="10dp" android:layout_width="match_parent" android:id="@+id/view_rec_date" android:layout_height="match_parent"></TextView>
+        <TextView android:paddingBottom="4dip" android:textSize="10dp" android:layout_width="match_parent" android:id="@+id/view_rec_short_desc" android:layout_height="match_parent"></TextView>
+        <ImageView android:id="@+id/view_rec_image" android:layout_width="wrap_content" android:layout_height="match_parent"></ImageView>
+    </FrameLayout>
 
-    <TextView android:id="@+id/recommended_page_title"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="14dp" android:text="You might like to watch this" android:textColor="@color/SteelBlue"/>
-
-    <TextView android:id="@+id/view_rec_event_name"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="10dp"/>
-
-    <TextView android:id="@+id/view_rec_date"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="10dp"/>
-        
-     <TextView android:id="@+id/view_rec_short_desc"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="10dp"/>
-        <!--  
-     <ImageView android:layout_height="wrap_content" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_weight="0"></ImageView>
--->
-</LinearLayout>
 

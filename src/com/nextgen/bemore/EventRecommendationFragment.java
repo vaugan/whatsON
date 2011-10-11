@@ -71,73 +71,76 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
 
-//            CoverFlow coverFlow;
+          View v = inflater.inflate(R.layout.recommended_layout, container, false);
+
+            CoverFlow coverFlow;
 //            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
-//            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
-//
-//            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
-//            
-//            //coverImageAdapter.createReflectedImages();
-//            
-//            coverFlow.setAdapter(coverImageAdapter);
-//            
-//            coverFlow.setSpacing(-25);
-//            coverFlow.setSelection(4, true);
-//            coverFlow.setAnimationDuration(1000);
-//            
+            coverFlow = (CoverFlow) v.findViewById(R.id.view_rec_coverflow);
+            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
+
+            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
+            
+            //coverImageAdapter.createReflectedImages();
+            
+            coverFlow.setAdapter(coverImageAdapter);
+            
+            coverFlow.setSpacing(-25);
+            coverFlow.setSelection(4, true);
+            coverFlow.setAnimationDuration(1000);
+return v;            
 //            return coverFlow;
             
-            Cursor event = null;
-            View v = inflater.inflate(R.layout.recommended_layout, container, false);
-
-            //Get cursor to db using id
-            mEventDbHelper = new DataBaseHelper(this.getActivity());
-            mEventDbHelper.openDataBase();
-
-            mRowId = getArguments().getLong("id", 0);
-            
-            if (mRowId != null) {
-                //get cursor to 1st recommendation for this event
-                event = mEventDbHelper.fetchViewRecommendation(mRowId);
-                
-//                startManagingCursor(event);
-                
-                //make sure the cursor is not empty, then display the 1st recommended event
-                if (event.getCount() > 0) {
-                View tv = v.findViewById(R.id.view_rec_date);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
-
-                tv = v.findViewById(R.id.view_rec_event_name);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
-
-                tv = v.findViewById(R.id.view_rec_short_desc);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
-                
-//                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
-//                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-//                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-//                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-//                jpgView.setImageDrawable(d);                
-                }
-                else
-                {
-                    Log.w(TAG, "event Cursor is empty!!!!");
-                }
-            }
-
-            
-            event.close();
-            mEventDbHelper.close();
-            
-
-            
-            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
-            
-            
-            return v;                
+//            Cursor event = null;
+//            View v = inflater.inflate(R.layout.recommended_layout, container, false);
+//
+//            //Get cursor to db using id
+//            mEventDbHelper = new DataBaseHelper(this.getActivity());
+//            mEventDbHelper.openDataBase();
+//
+//            mRowId = getArguments().getLong("id", 0);
+//            
+//            if (mRowId != null) {
+//                //get cursor to 1st recommendation for this event
+//                event = mEventDbHelper.fetchViewRecommendation(mRowId);
+//                
+////                startManagingCursor(event);
+//                
+//                //make sure the cursor is not empty, then display the 1st recommended event
+//                if (event.getCount() > 0) {
+//                View tv = v.findViewById(R.id.view_rec_date);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
+//
+//                tv = v.findViewById(R.id.view_rec_event_name);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+//
+//                tv = v.findViewById(R.id.view_rec_short_desc);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+//                
+////                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
+////                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+////                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+////                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+////                jpgView.setImageDrawable(d);                
+//                }
+//                else
+//                {
+//                    Log.w(TAG, "event Cursor is empty!!!!");
+//                }
+//            }
+//
+//            
+//            event.close();
+//            mEventDbHelper.close();
+//            
+//
+//            
+//            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
+//            
+//            
+//            return v;                
         }
     
     
