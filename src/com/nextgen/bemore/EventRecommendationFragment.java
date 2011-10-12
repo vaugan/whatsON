@@ -25,7 +25,11 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -38,7 +42,7 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class EventRecommendationFragment extends Fragment {
+    public class EventRecommendationFragment extends Fragment implements OnItemClickListener {
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
@@ -130,7 +134,13 @@ import android.widget.ImageView.ScaleType;
             int selection = event.getCount()/2;
             coverFlow.setSelection(/*4*/selection, true);
             coverFlow.setAnimationDuration(1000);
+            
 
+
+//            coverFlow.setOnItemSelectedListener(this);
+            coverFlow.setOnItemClickListener(this);
+
+            
             return v;            
 //            return coverFlow;
             
@@ -324,4 +334,32 @@ import android.widget.ImageView.ScaleType;
          } 
 
     }
+    
+    public void onItemClick(AdapterView parent, View v, int position, long id) {
+        
+        
+        //position is item having focus
+        // If we are not currently showing a fragment for the new
+        // position, we need to create and install a new one.
+        Long selectedRowId;
+        event.moveToPosition(position);
+        selectedRowId = event.getLong(event.getColumnIndexOrThrow(DataBaseHelper.KEY_ROWID));
+        
+        EventDetailsFragment df = EventDetailsFragment.newInstance(selectedRowId);
+
+        // Execute a transaction, replacing any existing fragment
+        // with this one inside the frame.
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.details_fragment, df);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+        BuyRecommendationFragment bf = BuyRecommendationFragment.newInstance(selectedRowId);
+        ft.replace(R.id.buy_fragment, bf);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+          
+        ft.commit(); 
+    
+    }
+
+    
    }
