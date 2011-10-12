@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="4dip"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="100dp" android:id="@+id/frameLayout1" android:layout_width="match_parent">
+        <com.nextgen.coverflow.CoverFlow android:id="@+id/buy_coverflow" android:layout_height="match_parent" android:layout_width="match_parent"></com.nextgen.coverflow.CoverFlow>
 
     <TextView android:id="@+id/buy_page_title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -23,5 +22,5 @@
         android:layout_weight="0"
         android:paddingBottom="4dip" android:textSize="10dp"/>
 
-</LinearLayout>
+    </FrameLayout>
 

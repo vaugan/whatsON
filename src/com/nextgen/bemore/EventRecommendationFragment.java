@@ -198,7 +198,7 @@ import android.widget.ImageView.ScaleType;
         }
     
     
-    public class ImageAdapter extends BaseAdapter {
+    class ImageAdapter extends BaseAdapter {
         int mGalleryItemBackground;
         private Context mContext;
 

@@ -57,6 +57,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_BUY_TITLE = "title";   
     public static final String KEY_BUY_DESC = "desc";   
     public static final String KEY_BUY_PRICE = "price";   
+    public static final String KEY_BUY_IMAGE = "image_url";
+    
     //keys for the view recommendations table
     public static final String KEY_VIEW_REC_1 = "view_rec_1";   
     public static final String KEY_VIEW_REC_2 = "view_rec_2";   
@@ -243,7 +245,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
      */
     public Cursor fetchBuyRecommendation(long rowId) throws SQLException {
         Integer buyRecRowId=0;
-        Integer buyRowId=0;
+        Integer buyRowId1=0;
+        Integer buyRowId2=0;
+        Integer buyRowId3=0;
+        Integer buyRowId4=0;
+        Integer buyRowId5=0;
+        Integer buyRowId6=0;
+        Integer buyRowId7=0;
+        Integer buyRowId8=0;
+        Integer buyRowId9=0;
+        Integer buyRowId10=0;
+        
         
         /*get cursor to the event in the event table*/
         Cursor mCursor =
@@ -256,11 +268,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
             //make sure the cursor is not empty, then get the buy rec id. Then get cursor to the buy recommendations for the event.
             if (mCursor.getCount() > 0) {
-                buyRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
+                buyRecRowId= mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
                 
                 mCursor =
                     myDataBase.query(true, BUY_REC_TABLE, new String[] {KEY_ROWID,
-                            KEY_BUY_REC_1}, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
+                            KEY_BUY_REC_1, KEY_BUY_REC_2, KEY_BUY_REC_3, KEY_BUY_REC_4, KEY_BUY_REC_5,
+                            KEY_BUY_REC_6, KEY_BUY_REC_7, KEY_BUY_REC_8, KEY_BUY_REC_9, KEY_BUY_REC_10,
+                            }, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
                             null, null, null, null);              
             }
 
@@ -268,12 +282,36 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             
             //make sure the cursor to the buy recommendations is not empty, then get the 1st buy recommendation
             if (mCursor.getCount() > 0) {
-                buyRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
-                
-               mCursor =
+                buyRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
+                buyRowId2 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_2));
+                buyRowId3 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_3));
+                buyRowId4 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_4));
+                buyRowId5 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_5));
+                buyRowId6 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_6));
+                buyRowId7 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_7));
+                buyRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_8));
+                buyRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_9));
+                buyRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_10));
+ 
+                mCursor =
                     myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
-                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE}, KEY_ROWID + "='"+Integer.toString(buyRowId)+"'", null,
-                            null, null, null, null);              
+                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE}, 
+                            KEY_ROWID + "='"+buyRowId1+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId2+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId3+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId4+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId5+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId6+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId7+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId8+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId9+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId10+"'",
+                            null,null, null, null, null);              
+
+//               mCursor =
+//                    myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
+//                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE}, KEY_ROWID + "='"+Integer.toString(buyRowId)+"'", null,
+//                            null, null, null, null);              
             }            
 
             mCursor.moveToFirst();
