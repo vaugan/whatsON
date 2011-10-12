@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class EventListFragmentPagerAdapter extends FragmentPagerAdapter {
-	protected static final String[] CONTENT = new String[] { "Movies", "Series", "Sport", "Documentary", "Youth"};
+	protected static final String[] EVENT_CATEGORIES = new String[] { "Movies", "Series", "Sport", "Documentary", "Lifestyle"};
 	
-	private int mCount = CONTENT.length;
+	private int mCount = EVENT_CATEGORIES.length;
 
 	public EventListFragmentPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -15,7 +15,7 @@ public class EventListFragmentPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		return EventListFragment.newInstance(CONTENT[position % CONTENT.length]);
+		return EventListFragment.newInstance(EVENT_CATEGORIES[position % EVENT_CATEGORIES.length]);
 	}
 
 	@Override

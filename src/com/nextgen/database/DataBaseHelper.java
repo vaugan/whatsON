@@ -13,10 +13,12 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
+    private static final String TAG = "DataBaseHelper";
 
     //The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/com.nextgen.bemore/databases/";
@@ -29,9 +31,11 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
+    public static final String KEY_CATEGORY = "category";
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_YOUTUBE_VIDEO_ID = "video_url";
     public static final String KEY_IMAGE_POSTER = "image_poster";
     public static final String KEY_IMAGE_BANNER = "image_banner";
     
@@ -40,12 +44,30 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_VIEW_REC_ID = "ev_rec_id";   
     //Keys for buy recommendations table
     public static final String KEY_BUY_REC_1 = "buy_rec_1";   
+    public static final String KEY_BUY_REC_2 = "buy_rec_2";   
+    public static final String KEY_BUY_REC_3 = "buy_rec_3";   
+    public static final String KEY_BUY_REC_4 = "buy_rec_4";   
+    public static final String KEY_BUY_REC_5 = "buy_rec_5";   
+    public static final String KEY_BUY_REC_6 = "buy_rec_6";   
+    public static final String KEY_BUY_REC_7 = "buy_rec_7";   
+    public static final String KEY_BUY_REC_8 = "buy_rec_8";   
+    public static final String KEY_BUY_REC_9 = "buy_rec_9";   
+    public static final String KEY_BUY_REC_10 = "buy_rec_10";   
     //keys for buy table
     public static final String KEY_BUY_TITLE = "title";   
     public static final String KEY_BUY_DESC = "desc";   
     public static final String KEY_BUY_PRICE = "price";   
     //keys for the view recommendations table
     public static final String KEY_VIEW_REC_1 = "view_rec_1";   
+    public static final String KEY_VIEW_REC_2 = "view_rec_2";   
+    public static final String KEY_VIEW_REC_3 = "view_rec_3";   
+    public static final String KEY_VIEW_REC_4 = "view_rec_4";   
+    public static final String KEY_VIEW_REC_5 = "view_rec_5";   
+    public static final String KEY_VIEW_REC_6 = "view_rec_6";   
+    public static final String KEY_VIEW_REC_7 = "view_rec_7";   
+    public static final String KEY_VIEW_REC_8 = "view_rec_8";   
+    public static final String KEY_VIEW_REC_9 = "view_rec_9";   
+    public static final String KEY_VIEW_REC_10 = "view_rec_10";   
 
     private SQLiteDatabase myDataBase; 
 
@@ -181,9 +203,18 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public Cursor fetchAllEvents() {
 
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
+                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
     }
-    
+
+    // Add your public helper methods to access and get content from the database.
+    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+    // to you to create adapters for your views.
+ public Cursor fetchEventsByCategory(String Category) {
+
+     return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
+             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
+ }
+
     /**
      * Return a Cursor positioned at the event that matches the given rowId
      * 
@@ -195,7 +226,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         Cursor mCursor =
             myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
                     null, null, null, null);
         
         mCursor.moveToFirst();
@@ -261,7 +292,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
      */
     public Cursor fetchViewRecommendation(long rowId) throws SQLException {
         Integer viewRecRowId=0;
-        Integer eventRowId=0;
+        Integer eventRowId1=0;
+        Integer eventRowId2=0;
+        Integer eventRowId3=0;
         
         /*get cursor to the event in the event table along with the view rec column*/
         Cursor mCursor =
@@ -278,20 +311,30 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 
                 mCursor =
                     myDataBase.query(true, VIEW_REC_TABLE, new String[] {KEY_ROWID,
-                            KEY_VIEW_REC_1}, KEY_ROWID + "='"+Integer.toString(viewRecRowId)+"'", null,
-                            null, null, null, null);              
+                            KEY_VIEW_REC_1, KEY_VIEW_REC_2, KEY_VIEW_REC_3, KEY_VIEW_REC_4, KEY_VIEW_REC_5,
+                            KEY_VIEW_REC_6, KEY_VIEW_REC_6, KEY_VIEW_REC_7, KEY_VIEW_REC_8, KEY_VIEW_REC_9,KEY_VIEW_REC_10,
+                            }, KEY_ROWID + "='"+Integer.toString(viewRecRowId)+"'", 
+                            null,null, null, null, null);              
             }
 
             mCursor.moveToFirst();
             
             //make sure the cursor to the view recommendations is not empty, then get the 1st view recommendation
             if (mCursor.getCount() > 0) {
-                eventRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
+                eventRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
+                eventRowId2 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_2));
+                eventRowId3 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_3));
                 
+                String rows =Integer.toString(eventRowId1)+","+Integer.toString(eventRowId2)+","+Integer.toString(eventRowId3);
+                Log.w(TAG, "rows string="+rows);
+
                mCursor =
                     myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Integer.toString(eventRowId)+"'", null,
-                            null, null, null, null);              
+                            KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, 
+                            KEY_ROWID + "='"+eventRowId1+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId2+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId3+"'",
+                            null,null, null, null, null);              
             }            
 
             mCursor.moveToFirst();

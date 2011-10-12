@@ -25,7 +25,11 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -38,10 +42,12 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class EventRecommendationFragment extends Fragment {
+    public class EventRecommendationFragment extends Fragment implements OnItemClickListener {
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
+        Cursor event = null;          
+        
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -71,73 +77,124 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
 
-//            CoverFlow coverFlow;
+          View v = inflater.inflate(R.layout.recommended_layout, container, false);
+          ImageView jpgView=null;
+//        //Get cursor to db using id
+              mEventDbHelper = new DataBaseHelper(this.getActivity());
+              mEventDbHelper.openDataBase();          
+              mRowId = getArguments().getLong("id", 0);
+              
+              if (mRowId != null) {
+                  //get cursor to 1st recommendation for this event
+                  event = mEventDbHelper.fetchViewRecommendation(mRowId);        
+                  
+//                  if (event.getCount() > 0)
+//                  {
+//                      jpgView = (ImageView)v.findViewById(R.id.view_rec_image);
+//                      String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+//                      String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+//                      BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+//                      jpgView.setImageDrawable(d);
+//                  }
+//                  else
+//                  {
+//                      Log.w(TAG, "event Cursor is empty!!!!");
+//                  }  
+             }
+             else
+             {
+                 Log.w(TAG, "mRowId=null!!!!");
+             }         
+                      
+            CoverFlow coverFlow;
 //            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
-//            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
-//
-//            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
-//            
+            coverFlow = (CoverFlow) v.findViewById(R.id.view_rec_coverflow);
+            coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
+
+            ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
+
+//            if (jpgView != null) {
+//            coverImageAdapter.mImages[0]=jpgView;
+//            coverImageAdapter.mImages[1]=jpgView;
+//            coverImageAdapter.mImages[2]=jpgView;
+//            coverImageAdapter.mImages[3]=jpgView;
+//            coverImageAdapter.mImages[4]=jpgView;
+//            coverImageAdapter.mImages[5]=jpgView;
+//            coverImageAdapter.mImages[6]=jpgView;
+//            coverImageAdapter.mImages[7]=jpgView;
+//            coverImageAdapter.mImages[8]=jpgView;
+//            coverImageAdapter.mImages[9]=jpgView;
+//            coverImageAdapter.mImages[10]=jpgView;
 //            //coverImageAdapter.createReflectedImages();
-//            
-//            coverFlow.setAdapter(coverImageAdapter);
-//            
-//            coverFlow.setSpacing(-25);
-//            coverFlow.setSelection(4, true);
-//            coverFlow.setAnimationDuration(1000);
-//            
+//            }           
+            
+            coverFlow.setAdapter(coverImageAdapter);
+            
+            coverFlow.setSpacing(-25);
+            int selection = event.getCount()/2;
+            coverFlow.setSelection(/*4*/selection, true);
+            coverFlow.setAnimationDuration(1000);
+            
+
+
+//            coverFlow.setOnItemSelectedListener(this);
+            coverFlow.setOnItemClickListener(this);
+
+            
+            return v;            
 //            return coverFlow;
             
-            Cursor event = null;
-            View v = inflater.inflate(R.layout.recommended_layout, container, false);
-
-            //Get cursor to db using id
-            mEventDbHelper = new DataBaseHelper(this.getActivity());
-            mEventDbHelper.openDataBase();
-
-            mRowId = getArguments().getLong("id", 0);
-            
-            if (mRowId != null) {
-                //get cursor to 1st recommendation for this event
-                event = mEventDbHelper.fetchViewRecommendation(mRowId);
-                
-//                startManagingCursor(event);
-                
-                //make sure the cursor is not empty, then display the 1st recommended event
-                if (event.getCount() > 0) {
-                View tv = v.findViewById(R.id.view_rec_date);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
-
-                tv = v.findViewById(R.id.view_rec_event_name);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
-
-                tv = v.findViewById(R.id.view_rec_short_desc);
-                ((TextView)tv).setText(event.getString(
-                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
-                
-                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
-                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-                jpgView.setImageDrawable(d);                
-                }
-                else
-                {
-                    Log.w(TAG, "event Cursor is empty!!!!");
-                }
-            }
-
-            
-            event.close();
-            mEventDbHelper.close();
-            
-
-            
-            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
-            
-            
-            return v;                
+//            Cursor event = null;
+//            View v = inflater.inflate(R.layout.recommended_layout, container, false);
+//
+//            //Get cursor to db using id
+//            mEventDbHelper = new DataBaseHelper(this.getActivity());
+//            mEventDbHelper.openDataBase();
+//
+//            mRowId = getArguments().getLong("id", 0);
+//            
+//            if (mRowId != null) {
+//                //get cursor to 1st recommendation for this event
+//                event = mEventDbHelper.fetchViewRecommendation(mRowId);
+//                
+////                startManagingCursor(event);
+//                
+//                //make sure the cursor is not empty, then display the 1st recommended event
+//                if (event.getCount() > 0) {
+//                View tv = v.findViewById(R.id.view_rec_date);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
+//
+//                tv = v.findViewById(R.id.view_rec_event_name);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+//
+//                tv = v.findViewById(R.id.view_rec_short_desc);
+//                ((TextView)tv).setText(event.getString(
+//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+//                
+////                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
+////                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+////                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+////                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+////                jpgView.setImageDrawable(d);                
+//                }
+//                else
+//                {
+//                    Log.w(TAG, "event Cursor is empty!!!!");
+//                }
+//            }
+//
+//            
+//            event.close();
+//            mEventDbHelper.close();
+//            
+//
+//            
+//            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
+//            
+//            
+//            return v;                
         }
     
     
@@ -226,7 +283,7 @@ import android.widget.ImageView.ScaleType;
      }
 
         public int getCount() {
-            return mImageIds.length;
+            return event.getCount();
         }
 
         public Object getItem(int position) {
@@ -239,18 +296,35 @@ import android.widget.ImageView.ScaleType;
 
         public View getView(int position, View convertView, ViewGroup parent) {
 
-         //Use this code if you want to load from resources
             ImageView i = new ImageView(mContext);
-            i.setImageResource(mImageIds[position]);
-            i.setLayoutParams(new CoverFlow.LayoutParams(130, 130));
-            i.setScaleType(ImageView.ScaleType.CENTER_INSIDE); 
             
-            //Make sure we set anti-aliasing otherwise we get jaggies
-            BitmapDrawable drawable = (BitmapDrawable) i.getDrawable();
-            drawable.setAntiAlias(true);
+
+            if (event.getCount() > 0)
+            {
+                event.moveToPosition(position);
+
+                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                i.setImageDrawable(d);
+            }
+            else
+            {
+                Log.w(TAG, "event Cursor is empty!!!!");
+            }              
             return i;
+//         //Use this code if you want to load from resources
+//            ImageView i = new ImageView(mContext);
+//            i.setImageResource(mImageIds[position]);
+//            i.setLayoutParams(new CoverFlow.LayoutParams(130, 130));
+//            i.setScaleType(ImageView.ScaleType.CENTER_INSIDE); 
+//            
+//            //Make sure we set anti-aliasing otherwise we get jaggies
+//            BitmapDrawable drawable = (BitmapDrawable) i.getDrawable();
+//            drawable.setAntiAlias(true);
+//            return i;
          
-         //return mImages[position];
+//         return mImages[position];
         }
       /** Returns the size (0.0f to 1.0f) of the views 
          * depending on the 'offset' to the center. */ 
@@ -260,4 +334,32 @@ import android.widget.ImageView.ScaleType;
          } 
 
     }
+    
+    public void onItemClick(AdapterView parent, View v, int position, long id) {
+        
+        
+        //position is item having focus
+        // If we are not currently showing a fragment for the new
+        // position, we need to create and install a new one.
+        Long selectedRowId;
+        event.moveToPosition(position);
+        selectedRowId = event.getLong(event.getColumnIndexOrThrow(DataBaseHelper.KEY_ROWID));
+        
+        EventDetailsFragment df = EventDetailsFragment.newInstance(selectedRowId);
+
+        // Execute a transaction, replacing any existing fragment
+        // with this one inside the frame.
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.details_fragment, df);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+        BuyRecommendationFragment bf = BuyRecommendationFragment.newInstance(selectedRowId);
+        ft.replace(R.id.buy_fragment, bf);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+          
+        ft.commit(); 
+    
+    }
+
+    
    }
