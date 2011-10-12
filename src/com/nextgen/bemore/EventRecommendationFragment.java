@@ -272,7 +272,7 @@ import android.widget.ImageView.ScaleType;
      }
 
         public int getCount() {
-            return mImageIds.length;
+            return event.getCount();
         }
 
         public Object getItem(int position) {
@@ -286,9 +286,12 @@ import android.widget.ImageView.ScaleType;
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ImageView i = new ImageView(mContext);
+            
 
             if (event.getCount() > 0)
             {
+                event.moveToPosition(position);
+
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
                 String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
                 BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
