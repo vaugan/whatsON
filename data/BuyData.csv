@@ -1,31 +1,32 @@
 _id,title,desc,price,image_url,store_name,web_url
-1,DVD,Series,150,,kalahari.net,
-2,DVD,Sport,150,,kalahari.net,
-3,DVD,Movie,150,,kalahari.net,
-4,DVD,Documentary,150,,kalahari.net,
-5,DVD,Music Video,150,,kalahari.net,
-6,Book,Harry Potter 1,129,,kalahari.net,
-7,Book,Harry Potter 2,129,,kalahari.net,
-8,Book,Harry Potter 3,129,,kalahari.net,
-9,Book,Harry Potter 4,129,,kalahari.net,
-10,Book,Harry Potter 5,129,,kalahari.net,
-11,Album,Beyonce 1,99,,Omusic,
-12,Album,Beyonce 2,99,,Omusic,
-13,Album,Beyonce 3,99,,Omusic,
-14,Album,Beyonce 4,99,,Omusic,
-15,Album,Beyonce 5,99,,Omusic,
-16,Album,Eminem 1,99,,Omusic,
-17,Album,Eminem 2,99,,Omusic,
-18,Album,Eminem 3,99,,Omusic,
-19,Album,Eminem 4,99,,Omusic,
-20,Album,Eminem 5,99,,Omusic,
-21, Rent Movie,The Godfather 1,25,,BoxOffice,
-22, Rent Movie,The Godfather 2,25,,BoxOffice,
-23, Rent Movie,The Godfather 3,25,,BoxOffice,
-24, Rent Movie,The Godfather 4,25,,BoxOffice,
-25, Rent Movie,The Godfather 5,25,,BoxOffice,
-26, Rent Movie,The Godfather 6,25,,BoxOffice,
-27, Rent Movie,The Godfather 7,25,,BoxOffice,
-28, Rent Movie,The Godfather 8,25,,BoxOffice,
-29, Rent Movie,The Godfather 9,25,,BoxOffice,
-30, Rent Movie,The Godfather 10,25,,BoxOffice,
+1,DVD,Terminator Salvation (Blu-Ray),R139.95,dvd01.jpg,kalahari.net,http://www.kalahari.com/bluray/Terminator-Salvation-Blu-Ray/33094/35012998.aspx
+2,DVD,Star Wars - Complete Box Set (Blu-Ray),R749.95,dvd02.jpg,kalahari.net,http://www.kalahari.com/bluray/Star-Wars-Complete-Box-Set-Blu-Ray/33094/41751242.aspx
+3,DVD,Eat Pray Love (Blu-Ray),R176.95,dvd03.jpg,kalahari.net,http://www.kalahari.com/bluray/Eat-Pray-Love/33094/39096290.aspx
+4,DVD,The Dark Knight (Blu-Ray),R176.95,dvd04.jpg,kalahari.net,http://www.kalahari.com/bluray/The-Dark-Knight-Blu-Ray/33094/33624651.aspx
+5,DVD,National Geographic - Amazing Planet,R307.95,dvd05.jpg,kalahari.net,http://www.kalahari.com/bluray/-National-Geographic-Amazing-Planet/33094/34869702.aspx#
+6,DVD,Jamie Oliver - Jamie At Home - Series 1,R117.95,dvd06.jpg,kalahari.net,http://www.kalahari.com/dvd/Jamie-Oliver-Jamie-At-Home-Series-1-Complete/2/32769977.aspx
+7,DVD,Jamie Oliver - Jamie's Kitchen,R82.95,dvd07.jpg,kalahari.net,http://www.kalahari.com/dvd/Jamie-Oliver-Jamies-Kitchen/2/28246453.aspx
+8,DVD,March Of The Penguins,R139.95,dvd08.jpg,kalahari.net,http://www.kalahari.com/bluray/March-Of-The-Penguins/33094/32766767.aspx
+9,DVD,House M.D.,R202.95,dvd09.jpg,kalahari.net,http://www.kalahari.com/bluray/House-M-D-The-Complete-Fourth-Season-4-Discs/33094/33177079.aspx
+10,DVD,Desperate Housewives Season 7,R336.95,dvd10.jpg,kalahari.net,http://www.kalahari.com/dvd/Desperate-Housewives/2/42021866.aspx
+11,Book,150 Years of South African rugby,R189.95,book01.jpg,kalahari.net,http://www.kalahari.com/books/150-Years-of-South-African-rugby/632/41592854.aspx
+12,Book,The Springboks and the Holy Grail,R129.95,book02.jpg,kalahari.net,http://www.kalahari.com/books/The-Springboks-and-the-Holy-Grail/632/41070647.aspx
+13,Book,To the point: Herschelle Gibbs,R180.95,book03.jpg,kalahari.net,http://www.kalahari.com/books/To-the-point/632/38335167.aspx
+14,Book,Slow death: Memoirs of a Cricket Umpire,R180.95,book04.jpg,kalahari.net,http://www.kalahari.com/books/Slow-death-Memoirs-of-a-Cricket-Umpire/632/36060784.aspx
+15,Book,Manchester United,R85.95,book05.jpg,kalahari.net,http://www.kalahari.com/books/Manchester-United/632/33932307.aspx
+16,Book,Gerrard: My Autobiography,R189.95,book06.jpg,kalahari.net,http://www.kalahari.com/books/Gerrard-My-Autobiography/632/30397978.aspx
+17,Book,Tiger Woods: How I play golf,R276.95,book07.jpg,kalahari.net,http://www.kalahari.com/books/Tiger-Woods/632/27878362.aspx
+18,Book,In Black and White,R180.95,book08.jpg,kalahari.net,http://www.kalahari.com/books/In-Black-and-White/632/32370594.aspx
+19,Book,Lewis Hamilton: My Story,R 124.95,book09.jpg,kalahari.net,http://www.kalahari.com/books/Lewis-Hamilton/632/32577811.aspx
+20,Book,Shane Warne: Portrait of a Flawed Genius,R85.95,book10.jpg,kalahari.net,http://www.kalahari.com/books/Shane-Warne-Portrait-of-a-Flawed-Genius/632/32472278.aspx
+21,Book,"Eat, Pray, Love",R89.00,book11.jpg,kalahari.net,http://www.kalahari.com/books/Eat-Pray-Love/632/36259085.aspx
+22,Book,Conversations with Myself,R261.95,book12.jpg,kalahari.net,http://www.kalahari.com/books/Conversations-with-Myself/632/36686460.aspx
+23,Book,Steve Jobs: The Exclusive Biography,R230.95,book13.jpg,kalahari.net,http://www.kalahari.com/books/Steve-Jobs-The-Exclusive-Biography/632/41965676.aspx
+24,Book,The World According to Clarkson,R93.95,book14.jpg,kalahari.net,http://www.kalahari.com/books/The-World-According-to-Clarkson/632/28107385.aspx
+25,Book,The Ultimate Hitchhiker's Guide to the Galaxy,R190.95,book15.jpg,kalahari.net,http://www.kalahari.com/books/The-Ultimate-Hitchhikers-Guide-to-the-Galaxy/632/21409442.aspx
+26,Album,Beyonce - 4,99,album01.jpg,Omusic,http://omusic.dstv.com/12052671/Beyonce/Album/4
+27,Album,Torches - Foster The People,99,album02.jpg,Omusic,http://omusic.dstv.com/12008856/Foster_The_People/Album/Torches
+28,Album,Maroon 5 - Moves Like Jagger,99,album03.jpg,Omusic,http://omusic.dstv.com/12534302/Maroon_5_feat_Christina_Aguilera/Album/Moves_Like_Jagger
+29,Album,Medina - Welcome To Medina,99,album04.jpg,Omusic,http://omusic.dstv.com/9166249/Medina/Album/Welcome_To_Medina
+30,Album,Coldplay - Every Teardrop Is A Waterfall,99,album05.jpg,Omusic,http://omusic.dstv.com/11951538/Coldplay/song/Every_Teardrop_Is_A_Waterfall
+31,Album,Roger Sanchez - Release Yourself,99,album06.jpg,Omusic,http://omusic.dstv.com/12763931/Roger_Sanchez/Album/Release_Yourself

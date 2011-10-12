@@ -295,6 +295,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         Integer eventRowId1=0;
         Integer eventRowId2=0;
         Integer eventRowId3=0;
+        Integer eventRowId4=0;
+        Integer eventRowId5=0;
+        Integer eventRowId6=0;
+        Integer eventRowId7=0;
+        Integer eventRowId8=0;
+        Integer eventRowId9=0;
+        Integer eventRowId10=0;
         
         /*get cursor to the event in the event table along with the view rec column*/
         Cursor mCursor =
@@ -324,16 +331,27 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 eventRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
                 eventRowId2 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_2));
                 eventRowId3 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_3));
+                eventRowId4 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_4));
+                eventRowId5 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_5));
+                eventRowId6 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_6));
+                eventRowId7 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_7));
+                eventRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_8));
+                eventRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_9));
+                eventRowId10 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_10));
                 
-                String rows =Integer.toString(eventRowId1)+","+Integer.toString(eventRowId2)+","+Integer.toString(eventRowId3);
-                Log.w(TAG, "rows string="+rows);
-
                mCursor =
                     myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
                             KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, 
                             KEY_ROWID + "='"+eventRowId1+"'" + " or "+
                             KEY_ROWID + "='"+eventRowId2+"'" + " or "+
-                            KEY_ROWID + "='"+eventRowId3+"'",
+                            KEY_ROWID + "='"+eventRowId3+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId4+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId5+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId6+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId7+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId8+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId9+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId10+"'",
                             null,null, null, null, null);              
             }            
 
