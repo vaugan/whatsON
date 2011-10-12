@@ -84,18 +84,18 @@ import android.widget.ImageView.ScaleType;
                   //get cursor to 1st recommendation for this event
                   event = mEventDbHelper.fetchViewRecommendation(mRowId);        
                   
-                  if (event.getCount() > 0)
-                  {
-                      jpgView = (ImageView)v.findViewById(R.id.view_rec_image);
-                      String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-                      String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-                      BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-                      jpgView.setImageDrawable(d);
-                  }
-                  else
-                  {
-                      Log.w(TAG, "event Cursor is empty!!!!");
-                  }  
+//                  if (event.getCount() > 0)
+//                  {
+//                      jpgView = (ImageView)v.findViewById(R.id.view_rec_image);
+//                      String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+//                      String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+//                      BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+//                      jpgView.setImageDrawable(d);
+//                  }
+//                  else
+//                  {
+//                      Log.w(TAG, "event Cursor is empty!!!!");
+//                  }  
              }
              else
              {
@@ -127,7 +127,8 @@ import android.widget.ImageView.ScaleType;
             coverFlow.setAdapter(coverImageAdapter);
             
             coverFlow.setSpacing(-25);
-            coverFlow.setSelection(4, true);
+            int selection = event.getCount()/2;
+            coverFlow.setSelection(/*4*/selection, true);
             coverFlow.setAnimationDuration(1000);
 
             return v;            
