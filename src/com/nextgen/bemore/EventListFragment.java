@@ -102,6 +102,7 @@ import android.widget.TextView;
 
         @Override
         public void onResume() {
+            super.onResume();
             showDetails(mCurCheckPosition, getFirstEventOfCurrentPage());   
         }
 
