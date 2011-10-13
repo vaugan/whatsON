@@ -77,67 +77,28 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
 
-          View v = inflater.inflate(R.layout.recommended_layout, container, false);
-          ImageView jpgView=null;
-//        //Get cursor to db using id
+              View v = inflater.inflate(R.layout.recommended_layout, container, false);
+              ImageView jpgView=null;
+              
+              //Get cursor to db using id
               mEventDbHelper = new DataBaseHelper(this.getActivity());
               mEventDbHelper.openDataBase();          
               mRowId = getArguments().getLong("id", 0);
               
               if (mRowId != null) {
-                  //get cursor to 1st recommendation for this event
-                  event = mEventDbHelper.fetchViewRecommendation(mRowId);        
-                  
-//                  if (event.getCount() > 0)
-//                  {
-//                      jpgView = (ImageView)v.findViewById(R.id.view_rec_image);
-//                      String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-//                      String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-//                      BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-//                      jpgView.setImageDrawable(d);
-//                  }
-//                  else
-//                  {
-//                      Log.w(TAG, "event Cursor is empty!!!!");
-//                  }  
-             }
-             else
-             {
-                 Log.w(TAG, "mRowId=null!!!!");
-             }         
+                  //get cursor to view recommendations for this event
+                  event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
+             }   
                       
             CoverFlow coverFlow;
-//            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
             coverFlow = (CoverFlow) v.findViewById(R.id.view_rec_coverflow);
             coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
-
             ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
-
-//            if (jpgView != null) {
-//            coverImageAdapter.mImages[0]=jpgView;
-//            coverImageAdapter.mImages[1]=jpgView;
-//            coverImageAdapter.mImages[2]=jpgView;
-//            coverImageAdapter.mImages[3]=jpgView;
-//            coverImageAdapter.mImages[4]=jpgView;
-//            coverImageAdapter.mImages[5]=jpgView;
-//            coverImageAdapter.mImages[6]=jpgView;
-//            coverImageAdapter.mImages[7]=jpgView;
-//            coverImageAdapter.mImages[8]=jpgView;
-//            coverImageAdapter.mImages[9]=jpgView;
-//            coverImageAdapter.mImages[10]=jpgView;
-//            //coverImageAdapter.createReflectedImages();
-//            }           
-            
             coverFlow.setAdapter(coverImageAdapter);
-            
             coverFlow.setSpacing(-25);
             int selection = event.getCount()/2;
             coverFlow.setSelection(/*4*/selection, true);
             coverFlow.setAnimationDuration(1000);
-            
-
-
-//            coverFlow.setOnItemSelectedListener(this);
             coverFlow.setOnItemClickListener(this);
 
             
