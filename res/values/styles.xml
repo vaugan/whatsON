@@ -21,7 +21,7 @@
     </style>
 
     <style name="CustomTitlePageIndicator">
-        <item name="android:background">#FFDDDDDD</item>
+        <item name="android:background">#FF000000</item>
         <item name="footerColor">#FFEE3333</item>
         <item name="footerLineHeight">2dp</item>
         <item name="footerIndicatorStyle">none</item>
