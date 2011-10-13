@@ -317,6 +317,13 @@ import android.widget.ImageView.ScaleType;
             
             //TODO: have to extract the url of the selected buy item and launch the webactivity
             
+            String itemUrl;
+            cursorBuyData.moveToPosition(position);
+            itemUrl = cursorBuyData.getString(cursorBuyData.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_WEB_URL));
+          Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+          i.putExtra("buy_item_url",itemUrl);
+          startActivity(i);             
+            
 
         }
 
