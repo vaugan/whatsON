@@ -276,7 +276,26 @@ import android.widget.ImageView.ScaleType;
 
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
                 String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+               
+                Bitmap bitmap = BitmapFactory.decodeFile(myJpgPath);
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+                int newWidth = 86;
+                int newHeight = 127;
+                
+                // calculate the scale - in this case = 0.4f
+                float scaleWidth = ((float) newWidth) / width;
+                float scaleHeight = ((float) newHeight) / height;
+                
+                // createa matrix for the manipulation
+                Matrix matrix = new Matrix();
+                // resize the bit map
+                matrix.postScale(scaleWidth, scaleHeight);
+                // recreate the new Bitmap
+                Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                                  width, height, matrix, true); 
+                BitmapDrawable d = new BitmapDrawable(resizedBitmap);
+                
                 i.setImageDrawable(d);
             }
             else
