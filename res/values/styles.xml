@@ -15,18 +15,18 @@
 -->
 
 <resources>
-    <style name="StyledIndicators" parent="@android:style/Theme.Light">
+    <style name="StyledIndicators" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <item name="circlePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="titlePageIndicatorStyle">@style/CustomTitlePageIndicator</item>
     </style>
 
     <style name="CustomTitlePageIndicator">
         <item name="android:background">#FF000000</item>
-        <item name="footerColor">#FFEE3333</item>
-        <item name="footerLineHeight">2dp</item>
+        <item name="footerColor">#FF6899FF</item>
+        <item name="footerLineHeight">4dp</item>
         <item name="footerIndicatorStyle">none</item>
-        <item name="textColor">#FF999999</item>
-        <item name="selectedColor">#FF000000</item>
+        <item name="textColor">#FFFFFFFF</item>
+        <item name="selectedColor">#FF6899FF</item>
         <item name="selectedBold">false</item>
     </style>
 
