@@ -58,6 +58,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_BUY_DESC = "desc";   
     public static final String KEY_BUY_PRICE = "price";   
     public static final String KEY_BUY_IMAGE = "image_url";
+    public static final String KEY_BUY_WEB_URL = "web_url";
+    
     
     //keys for the view recommendations table
     public static final String KEY_VIEW_REC_1 = "view_rec_1";   
@@ -295,7 +297,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
  
                 mCursor =
                     myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
-                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE}, 
+                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE, KEY_BUY_WEB_URL}, 
                             KEY_ROWID + "='"+buyRowId1+"'" + " or "+
                             KEY_ROWID + "='"+buyRowId2+"'" + " or "+
                             KEY_ROWID + "='"+buyRowId3+"'" + " or "+

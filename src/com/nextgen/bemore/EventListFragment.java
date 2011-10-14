@@ -11,6 +11,8 @@ import java.net.URI;
 
 import com.nextgen.database.DataBaseHelper;
 import com.nextgen.database.MySimpleCursorAdapter;
+import com.viewpagerindicator.TitlePageIndicator;
+import com.nextgen.bemore.EventListFragmentPagerAdapter;
 import android.support.v4.app.*;
 import android.support.v4.content.CursorLoader;
 import android.content.Intent;
@@ -36,7 +38,6 @@ import android.widget.TextView;
         int mCurCheckPosition = 0;
         long mCurId = 0;
         String mCurCategory=null;
-        
         int mShownCheckPosition = -1;
         private DataBaseHelper myDbHelper;         
 
@@ -46,7 +47,7 @@ import android.widget.TextView;
         }
 
         public static EventListFragment newInstance(String category) {
-            EventListFragment fragment = new EventListFragment(category);          
+            EventListFragment fragment = new EventListFragment(category);
             return fragment;
         }
         
@@ -78,7 +79,8 @@ import android.widget.TextView;
                 // In dual-pane mode, the list view highlights the selected item.
                 getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 // Make sure our UI is in the correct state.
-                showDetails(mCurCheckPosition, mCurId);
+                               
+                showDetails(mCurCheckPosition, getFirstEventOfCurrentPage());
                 
                 //TODO: Implement for portrait mode as well...
             }
@@ -97,6 +99,15 @@ import android.widget.TextView;
         public void onListItemClick(ListView l, View v, int position, long id) {
             showDetails(position, id);   
         }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            showDetails(mCurCheckPosition, getFirstEventOfCurrentPage());   
+        }
+
+
+        
         
 //        @Override
 //        protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -115,12 +126,14 @@ import android.widget.TextView;
             mCurCheckPosition = index;
             mCurId = id;
             
+            
             if (mDualPane) {
                 // We can display everything in-place with fragments, so update
                 // the list to highlight the selected item and show the data.
                 getListView().setItemChecked(index, true);
 
-                if (mShownCheckPosition != mCurCheckPosition) {
+//                if (mShownCheckPosition != mCurCheckPosition) 
+                {
                     // If we are not currently showing a fragment for the new
                     // position, we need to create and install a new one.
                     EventDetailsFragment df = EventDetailsFragment.newInstance(id);
@@ -184,5 +197,16 @@ import android.widget.TextView;
                 throw sqle;
             }
         }        
-    
+        
+        long getFirstEventOfCurrentPage()
+        {
+            //if no valid row id, get the first event in the currently viewed page.
+            TitlePageIndicator pageIndicator = (TitlePageIndicator)getActivity().findViewById(R.id.indicator);
+            int position  = pageIndicator.getCurrentPage();
+            String cat = EventListFragmentPagerAdapter.EVENT_CATEGORIES[position % EventListFragmentPagerAdapter.EVENT_CATEGORIES.length];
+            Cursor event = myDbHelper.fetchEventsByCategory(cat);
+            event.moveToFirst();
+            mCurId = event.getInt(event.getColumnIndexOrThrow(DataBaseHelper.KEY_ROWID));
+            return mCurId;
+        }
     }
