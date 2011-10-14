@@ -26,6 +26,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -42,7 +43,7 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class EventRecommendationFragment extends Fragment implements OnItemClickListener {
+    public class EventRecommendationFragment extends Fragment implements OnItemClickListener, OnItemSelectedListener {
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
@@ -66,6 +67,9 @@ import android.widget.ImageView.ScaleType;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            
+            int selection=0;
+            
             if (container == null) {
                 // We have different layouts, and in one of them this
                 // fragment's containing frame doesn't exist.  The fragment
@@ -89,6 +93,13 @@ import android.widget.ImageView.ScaleType;
                   //get cursor to view recommendations for this event
                   event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
              }   
+              
+              if (event.getCount() > 0) {
+                  selection = event.getCount()/2;
+                  event.moveToPosition(selection);
+                View tv = v.findViewById(R.id.view_rec_event_name);
+                ((TextView)tv).setText(event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+              }
                       
             CoverFlow coverFlow;
             coverFlow = (CoverFlow) v.findViewById(R.id.view_rec_coverflow);
@@ -96,11 +107,10 @@ import android.widget.ImageView.ScaleType;
             ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
             coverFlow.setAdapter(coverImageAdapter);
             coverFlow.setSpacing(-25);
-            int selection = event.getCount()/2;
             coverFlow.setSelection(/*4*/selection, true);
             coverFlow.setAnimationDuration(1000);
             coverFlow.setOnItemClickListener(this);
-
+            coverFlow.setOnItemSelectedListener(this);
             
             return v;            
 //            return coverFlow;
@@ -321,6 +331,30 @@ import android.widget.ImageView.ScaleType;
         ft.commit(); 
     
     }
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        //Get cursor to db using id
+//        mEventDbHelper = new DataBaseHelper(this.getActivity());
+//        mEventDbHelper.openDataBase();          
+//        mRowId = getArguments().getLong("id", 0);
+//        
+//        if (mRowId != null) {
+//            //get cursor to view recommendations for this event
+//            event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
+//       }   
+//        
+//        if (event.getCount() > 0) {
+//            event.moveToPosition(position);
+//          View tv = parent.findViewById(R.id.view_rec_event_name);
+//          ((TextView)tv).setText(event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+//        }
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
     
    }
