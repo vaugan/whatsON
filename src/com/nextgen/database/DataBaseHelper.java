@@ -31,6 +31,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
+    public static final String KEY_EVENT_CHANNEL = "channel";
+    public static final String KEY_EVENT_RATING = "rating";
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
@@ -207,7 +209,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public Cursor fetchAllEvents() {
 
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
+                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, null, null, null, null, null);
     }
 
     // Add your public helper methods to access and get content from the database.
@@ -216,7 +218,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
  public Cursor fetchEventsByCategory(String Category) {
 
      return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
+             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
  }
 
     /**
@@ -230,7 +232,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         Cursor mCursor =
             myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
                     null, null, null, null);
         
         mCursor.moveToFirst();
