@@ -38,4 +38,11 @@
         <item name="radius">10dp</item>
         <item name="centered">true</item>
     </style>
+    
+        
+    <style name="eventRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:minHeight">28dip</item>
+        <item name="android:maxHeight">28dip</item>
+    </style>
 </resources>

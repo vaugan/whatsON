@@ -45,4 +45,5 @@
         <item name="titlePadding">@dimen/default_title_indicator_title_padding</item>
         <item name="topPadding">@dimen/default_title_indicator_top_padding</item>
     </style>
+
 </resources>
