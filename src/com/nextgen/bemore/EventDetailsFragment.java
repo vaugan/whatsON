@@ -3,6 +3,7 @@ package com.nextgen.bemore;
 import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
+import android.text.method.ScrollingMovementMethod;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
@@ -106,6 +107,7 @@ import android.widget.TextView;
                 tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                ((TextView)tv).setMovementMethod(new ScrollingMovementMethod());
                 
                 ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
