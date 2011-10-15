@@ -12,10 +12,10 @@
     android:background="@color/DstvBlue"
 />
    
-    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:weightSum="5" android:layout_width="match_parent" android:layout_weight="0.4">
-        <FrameLayout android:id="@+id/recommended" android:layout_width="match_parent" android:layout_gravity="top" android:layout_weight="1" android:layout_height="wrap_content"></FrameLayout>
-        <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_weight="3" android:layout_height="wrap_content"></FrameLayout>
-        <FrameLayout android:layout_gravity="top" android:id="@+id/buy_fragment" android:layout_width="match_parent" android:layout_weight="1" android:layout_height="wrap_content"></FrameLayout>
+    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4" android:weightSum="10">
+        <FrameLayout android:id="@+id/recommended" android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:layout_weight="3"></FrameLayout>
+        <FrameLayout android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="4"></FrameLayout>
+        <FrameLayout android:layout_gravity="top" android:id="@+id/buy_fragment" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="3"></FrameLayout>
     </LinearLayout>
             <!--  
     <LinearLayout android:id="@+id/linearLayout1" android:layout_height="match_parent" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="0.92">

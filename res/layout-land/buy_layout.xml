@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="100dp" android:id="@+id/frameLayout1" android:layout_width="match_parent">
-        <com.nextgen.coverflow.CoverFlow android:id="@+id/buy_coverflow" android:layout_height="match_parent" android:layout_width="match_parent"></com.nextgen.coverflow.CoverFlow>
-
-    <TextView android:id="@+id/buy_page_title"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:text="You might like to buy this" android:textSize="14dp" android:textColor="@color/SteelBlue"/>
-        
-    <TextView android:id="@+id/buy_title"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="10dp"/>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/frameLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="10" android:layout_height="match_parent">
+            <TextView android:textColor="@color/SteelBlue" android:id="@+id/buy_page_title" android:text="You might like to buy this" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_height="wrap_content" android:paddingBottom="1dip" android:textSize="32dp" android:textStyle="bold"></TextView>
+            <com.nextgen.coverflow.CoverFlow android:layout_gravity="top" android:id="@+id/buy_coverflow" android:layout_width="match_parent" android:layout_weight="2.23" android:layout_height="wrap_content"></com.nextgen.coverflow.CoverFlow>
+            <TextView android:id="@+id/buy_title" android:layout_width="match_parent" android:text="Friends DVD Box set" android:textColor="@color/DstvBlue" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip"></TextView>
+            <TextView android:id="@+id/buy_price" android:layout_width="match_parent" android:text="R249.95" android:textColor="@color/DstvBlue" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip"></TextView>
+        </LinearLayout>
 
     <TextView android:id="@+id/buy_desc"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="4dip" android:textSize="10dp"/>
-        
-     <TextView android:id="@+id/buy_price"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_weight="0"
         android:paddingBottom="4dip" android:textSize="10dp"/>
