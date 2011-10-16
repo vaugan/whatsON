@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="4dip"
     android:layout_width="match_parent" android:orientation="vertical" android:layout_height="fill_parent">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_weight="0" android:weightSum="4" android:paddingLeft="10dp">
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_weight="0" android:paddingLeft="10dp" android:layout_height="fill_parent">
+    <View android:layout_width="wrap_content" android:background="@drawable/gradientline" android:layout_height="4dp"></View>
+    <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_weight="0" android:paddingLeft="10dp" android:layout_height="match_parent">
         <FrameLayout android:layout_weight="0" android:id="@+id/frameLayout1" android:layout_height="317dp" android:layout_width="214dp">
             <ImageView android:src="@drawable/series_poster03" android:id="@+id/details_event_poster" android:layout_height="fill_parent" android:layout_width="fill_parent"></ImageView>
             <ImageView android:clickable="true" android:isScrollContainer="true" android:layout_height="wrap_content" android:id="@+id/details_event_trailer" android:src="@drawable/dstv_play" android:layout_width="wrap_content" android:layout_gravity="bottom|center" android:paddingBottom="30dp"></ImageView>
@@ -29,6 +28,5 @@
             <TextView android:id="@+id/details_event_short_desc" android:paddingBottom="4dip" android:text="Bolivia and her team call upon their counterparts from This Side for help when a serial killer goes on a bloody rampage. They recruit the killer's This Side counterpart, a professor of forensic psychology, and try to transfer him to the Other Side without his knowledge to put together a profile on his other self. However, things soon go out of control when the professor realizes what's going on." android:layout_width="fill_parent" android:scrollbarStyle="insideOverlay" android:scrollbars="vertical" android:layout_height="171dp" android:textSize="24dp"></TextView>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
 

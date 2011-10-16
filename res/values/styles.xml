@@ -22,11 +22,11 @@
 
     <style name="CustomTitlePageIndicator">
         <item name="android:background">#FF000000</item>
-        <item name="footerColor">#FF6899FF</item>
+        <item name="footerColor">@color/DstvBlue</item>
         <item name="footerLineHeight">4dp</item>
         <item name="footerIndicatorStyle">none</item>
         <item name="textColor">#FFFFFFFF</item>
-        <item name="selectedColor">#FF6899FF</item>
+        <item name="selectedColor">@color/DstvBlue</item>
         <item name="selectedBold">false</item>
     </style>
 

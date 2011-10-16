@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/frameLayout1" android:layout_width="match_parent" android:visibility="visible" android:layout_height="wrap_content">
         <LinearLayout android:layout_width="match_parent" android:orientation="vertical" android:layout_height="match_parent" android:id="@+id/linearLayout1" android:weightSum="10" android:paddingLeft="10dp">
-            <TextView android:textColor="@color/SteelBlue" android:layout_width="match_parent" android:id="@+id/recommended_page_title" android:text="You might like to watch this" android:paddingBottom="4dip" android:layout_weight="0.41" android:textSize="32dp" android:textStyle="bold" android:layout_height="wrap_content"></TextView>
+            <TextView android:textColor="@color/DstvBlue" android:layout_width="match_parent" android:id="@+id/recommended_page_title" android:text="You might like to watch this" android:paddingBottom="4dip" android:layout_weight="0.41" android:textSize="32dp" android:textStyle="bold" android:layout_height="wrap_content"></TextView>
             <com.nextgen.coverflow.CoverFlow android:layout_width="match_parent" android:id="@+id/view_rec_coverflow" android:paddingLeft="100dp" android:paddingRight="100dp" android:layout_height="wrap_content" android:layout_weight="2.18"></com.nextgen.coverflow.CoverFlow>
             <TextView android:layout_width="match_parent" android:id="@+id/view_rec_event_name" android:text="Movie name here" android:paddingBottom="4dip" android:layout_gravity="center_horizontal" android:textSize="18dp" android:layout_height="wrap_content"></TextView>
         </LinearLayout>
