@@ -77,8 +77,7 @@ import android.widget.TextView;
             View v = inflater.inflate(R.layout.event_details, container, false);
 
             //Get cursor to db using id
-            mEventDbHelper = new DataBaseHelper(this.getActivity());
-            mEventDbHelper.openDataBase();
+            mEventDbHelper = MainActivity.getDatabaseHelper();
 
             mRowId = getArguments().getLong("id", 0);
             
@@ -128,10 +127,10 @@ import android.widget.TextView;
             }
             
             event.close();
-            mEventDbHelper.close();
             return v;            
         }
 
+        
         public void onClick(View arg0) {
             if (mYouTubeVideoId != null )
             {

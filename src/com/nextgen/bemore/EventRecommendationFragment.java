@@ -47,7 +47,7 @@ import android.widget.ImageView.ScaleType;
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;       
         private static final String TAG = "RecommendedFragment";
-        Cursor event = null;          
+        private int mCount=0;
         
         /**
          * Create a new instance of DetailsFragment, initialized to
@@ -85,15 +85,16 @@ import android.widget.ImageView.ScaleType;
               ImageView jpgView=null;
               
               //Get cursor to db using id
-              mEventDbHelper = new DataBaseHelper(this.getActivity());
-              mEventDbHelper.openDataBase();          
+              Cursor event = null;          
+              mEventDbHelper = MainActivity.getDatabaseHelper();
               mRowId = getArguments().getLong("id", 0);
               
               if (mRowId != null) {
                   //get cursor to view recommendations for this event
                   event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
              }   
-              
+             mCount = event.getCount();
+             
               if (event.getCount() > 0) {
                   selection = event.getCount()/2;
                   event.moveToPosition(selection);
@@ -112,60 +113,9 @@ import android.widget.ImageView.ScaleType;
             coverFlow.setOnItemClickListener(this);
             coverFlow.setOnItemSelectedListener(this);
             
+            event.close();
             return v;            
-//            return coverFlow;
-            
-//            Cursor event = null;
-//            View v = inflater.inflate(R.layout.recommended_layout, container, false);
-//
-//            //Get cursor to db using id
-//            mEventDbHelper = new DataBaseHelper(this.getActivity());
-//            mEventDbHelper.openDataBase();
-//
-//            mRowId = getArguments().getLong("id", 0);
-//            
-//            if (mRowId != null) {
-//                //get cursor to 1st recommendation for this event
-//                event = mEventDbHelper.fetchViewRecommendation(mRowId);
-//                
-////                startManagingCursor(event);
-//                
-//                //make sure the cursor is not empty, then display the 1st recommended event
-//                if (event.getCount() > 0) {
-//                View tv = v.findViewById(R.id.view_rec_date);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_DATE)));
-//
-//                tv = v.findViewById(R.id.view_rec_event_name);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
-//
-//                tv = v.findViewById(R.id.view_rec_short_desc);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
-//                
-////                ImageView jpgView = (ImageView)v.findViewById(R.id.imageView1);
-////                String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
-////                String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-////                BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
-////                jpgView.setImageDrawable(d);                
-//                }
-//                else
-//                {
-//                    Log.w(TAG, "event Cursor is empty!!!!");
-//                }
-//            }
-//
-//            
-//            event.close();
-//            mEventDbHelper.close();
-//            
-//
-//            
-//            Log.w(TAG, "SD_CARD directory="+Environment.getExternalStorageDirectory());
-//            
-//            
-//            return v;                
+
         }
     
     
@@ -254,7 +204,7 @@ import android.widget.ImageView.ScaleType;
      }
 
         public int getCount() {
-            return event.getCount();
+            return mCount;
         }
 
         public Object getItem(int position) {
@@ -269,6 +219,14 @@ import android.widget.ImageView.ScaleType;
 
             ImageView i = new ImageView(mContext);
             
+            Cursor event = null;          
+            mEventDbHelper = MainActivity.getDatabaseHelper();         
+            mRowId = getArguments().getLong("id", 0);
+            
+            if (mRowId != null) {
+                //get cursor to view recommendations for this event
+                event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
+           }   
 
             if (event.getCount() > 0)
             {
@@ -302,6 +260,8 @@ import android.widget.ImageView.ScaleType;
             {
                 Log.w(TAG, "event Cursor is empty!!!!");
             }              
+            
+            event.close();
             return i;
 //         //Use this code if you want to load from resources
 //            ImageView i = new ImageView(mContext);
@@ -332,6 +292,16 @@ import android.widget.ImageView.ScaleType;
         // If we are not currently showing a fragment for the new
         // position, we need to create and install a new one.
         Long selectedRowId;
+        
+        Cursor event = null;          
+        mEventDbHelper = MainActivity.getDatabaseHelper();     
+        mRowId = getArguments().getLong("id", 0);
+        
+        if (mRowId != null) {
+            //get cursor to view recommendations for this event
+            event = mEventDbHelper.fetchViewRecommendation(mRowId);                         
+       }   
+        
         event.moveToPosition(position);
         selectedRowId = event.getLong(event.getColumnIndexOrThrow(DataBaseHelper.KEY_ROWID));
         
@@ -349,6 +319,7 @@ import android.widget.ImageView.ScaleType;
           
         ft.commit(); 
     
+        event.close();
     }
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {

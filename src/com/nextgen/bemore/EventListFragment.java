@@ -55,9 +55,7 @@ import android.widget.TextView;
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
-            //Open Database
-            openDatabase();
-            
+          
             // Populate list with data from the db.
             fillData();
 
@@ -132,7 +130,7 @@ import android.widget.TextView;
                 // the list to highlight the selected item and show the data.
                 getListView().setItemChecked(index, true);
 
-//                if (mShownCheckPosition != mCurCheckPosition) 
+                if (mShownCheckPosition != mCurCheckPosition) 
                 {
                     // If we are not currently showing a fragment for the new
                     // position, we need to create and install a new one.
@@ -167,8 +165,10 @@ import android.widget.TextView;
         }
         
         private void fillData() {
+          
+            myDbHelper = MainActivity.getDatabaseHelper();
             Cursor eventsCursor = myDbHelper.fetchEventsByCategory(mCurCategory);
-
+            eventsCursor.moveToFirst();
             // Create an array to specify the fields we want to display in the list (only TITLE)
             
             String[] from = new String[]{DataBaseHelper.KEY_EVENT_NAME, DataBaseHelper.KEY_DATE, DataBaseHelper.KEY_IMAGE_BANNER};
@@ -181,32 +181,22 @@ import android.widget.TextView;
             MySimpleCursorAdapter events = 
                 new MySimpleCursorAdapter(this.getActivity(),R.layout.event_row, eventsCursor, from, to);
             setListAdapter(events);
+            
+//            eventsCursor.close();
         }        
 
-        private void openDatabase() {
-            myDbHelper = new DataBaseHelper(this.getActivity().getApplicationContext());
-            try {
-                myDbHelper.createDataBase();
-            } catch (IOException ioe) {
-                throw new Error("Unable to create database");
-            }
-
-            try {
-                myDbHelper.openDataBase();
-            }catch(SQLException sqle){
-                throw sqle;
-            }
-        }        
         
         long getFirstEventOfCurrentPage()
         {
             //if no valid row id, get the first event in the currently viewed page.
+            myDbHelper = MainActivity.getDatabaseHelper();
             TitlePageIndicator pageIndicator = (TitlePageIndicator)getActivity().findViewById(R.id.indicator);
             int position  = pageIndicator.getCurrentPage();
             String cat = EventListFragmentPagerAdapter.EVENT_CATEGORIES[position % EventListFragmentPagerAdapter.EVENT_CATEGORIES.length];
             Cursor event = myDbHelper.fetchEventsByCategory(cat);
             event.moveToFirst();
             mCurId = event.getInt(event.getColumnIndexOrThrow(DataBaseHelper.KEY_ROWID));
+            event.close();
             return mCurId;
         }
     }

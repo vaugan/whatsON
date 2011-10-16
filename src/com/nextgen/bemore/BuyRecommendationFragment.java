@@ -46,7 +46,8 @@ import android.widget.ImageView.ScaleType;
         private Long mRowId;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "BuyFragment";
-        Cursor cursorBuyData = null;   
+        int mCount=0;
+        
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -78,15 +79,16 @@ import android.widget.ImageView.ScaleType;
             View v = inflater.inflate(R.layout.buy_layout, container, false);
             ImageView jpgView=null;
 //          //Get cursor to db using id
-                mEventDbHelper = new DataBaseHelper(this.getActivity());
-                mEventDbHelper.openDataBase();          
+                Cursor cursorBuyData = null;   
+                mEventDbHelper = MainActivity.getDatabaseHelper();
                 mRowId = getArguments().getLong("id", 0);
                 
                 if (mRowId != null) {
                     //get cursor to 1st recommendation for this event
                     cursorBuyData = mEventDbHelper.fetchBuyRecommendation(mRowId);        
                 }     
-                        
+                mCount =  cursorBuyData.getCount();
+                
               CoverFlow coverFlow;
 //              coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
               coverFlow = (CoverFlow) v.findViewById(R.id.buy_coverflow);
@@ -106,71 +108,9 @@ import android.widget.ImageView.ScaleType;
 //              coverFlow.setOnItemSelectedListener(this);
               coverFlow.setOnItemClickListener(this);
                 
-              
+              cursorBuyData.close();
               return v;       
-              
-//            ScrollView scroller = new ScrollView(getActivity());
-//            TextView text = new TextView(getActivity());
-//            int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-//                    4, getActivity().getResources().getDisplayMetrics());
-//            text.setPadding(padding, padding, padding, padding);
-//            scroller.addView(text);
-//            text.setText(EventData.DIALOGUE[getArguments().getInt("index", 0)]);
-//            return scroller;
-            
-//            Cursor event = null;
-//            View v = inflater.inflate(R.layout.buy_layout, container, false);
-//
-//            //Get cursor to db using id
-//            mEventDbHelper = new DataBaseHelper(this.getActivity());
-//            mEventDbHelper.openDataBase();
-//
-//            mRowId = getArguments().getLong("id", 0);
-//            
-//            if (mRowId != null) {
-//                //get cursor to 1st recommendation for this event
-//                event = mEventDbHelper.fetchBuyRecommendation(mRowId);
-//                
-////                startManagingCursor(event);
-//                
-//                //make sure the cursor is not empty
-//                if (event.getCount() > 0) {
-//                View tv = v.findViewById(R.id.buy_title);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_TITLE)));
-//                tv.setOnClickListener(this);
-//
-//                tv = v.findViewById(R.id.buy_desc);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_DESC)));
-//                tv.setOnClickListener(this);
-//
-//                tv = v.findViewById(R.id.buy_price);
-//                ((TextView)tv).setText(event.getString(
-//                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_PRICE)));    
-//                tv.setOnClickListener(this);
-//                }
-//                else
-//                {
-//                    Log.w(TAG, "event Cursor is empty!!!!");
-//                }
-//            }
-//            else
-//            {
-//                View tv = v.findViewById(R.id.buy_title);
-//                ((TextView)tv).setText("Test buy title");
-//    
-//                tv = v.findViewById(R.id.buy_desc);
-//                ((TextView)tv).setText("Test buy desc");
-//    
-//                tv = v.findViewById(R.id.buy_price);
-//                ((TextView)tv).setText("Test buy price");
-//            }
-//
-//            event.close();
-//            mEventDbHelper.close();
-//            
-//            return v;            
+                     
         }
 
         
@@ -260,7 +200,7 @@ import android.widget.ImageView.ScaleType;
          }
 
             public int getCount() {
-                return cursorBuyData.getCount();
+                return mCount;
             }
 
             public Object getItem(int position) {
@@ -275,32 +215,41 @@ import android.widget.ImageView.ScaleType;
 
                 ImageView i = new ImageView(mContext);
                 
+                Cursor cursorBuyData = null;   
+                mEventDbHelper = MainActivity.getDatabaseHelper();          
+                mRowId = getArguments().getLong("id", 0);
+                
+                if (mRowId != null) {
+                    //get cursor to 1st recommendation for this event
+                    cursorBuyData = mEventDbHelper.fetchBuyRecommendation(mRowId);        
+                }                     
 
                 if (cursorBuyData.getCount() > 0)
                 {
                     cursorBuyData.moveToPosition(position);
 
                     String imageName = cursorBuyData.getString(cursorBuyData.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_IMAGE));
+
                     String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
-                Bitmap bitmap = BitmapFactory.decodeFile(myJpgPath);
-                int width = bitmap.getWidth();
-                int height = bitmap.getHeight();
-                int newWidth = 86;
-                int newHeight = 127;
-                
-                // calculate the scale - in this case = 0.4f
-                float scaleWidth = ((float) newWidth) / width;
-                float scaleHeight = ((float) newHeight) / height;
-                
-                // createa matrix for the manipulation
-                Matrix matrix = new Matrix();
-                // resize the bit map
-                matrix.postScale(scaleWidth, scaleHeight);
-                // recreate the new Bitmap
-                Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                                  width, height, matrix, true); 
-                BitmapDrawable d = new BitmapDrawable(resizedBitmap);
-                    i.setImageDrawable(d);
+                    Bitmap bitmap = BitmapFactory.decodeFile(myJpgPath);
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    int newWidth = 86;
+                    int newHeight = 127;
+                    
+                    // calculate the scale - in this case = 0.4f
+                    float scaleWidth = ((float) newWidth) / width;
+                    float scaleHeight = ((float) newHeight) / height;
+                    
+                    // createa matrix for the manipulation
+                    Matrix matrix = new Matrix();
+                    // resize the bit map
+                    matrix.postScale(scaleWidth, scaleHeight);
+                    // recreate the new Bitmap
+                    Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                                      width, height, matrix, true); 
+                    BitmapDrawable d = new BitmapDrawable(resizedBitmap);
+                        i.setImageDrawable(d);
                     
                     
                 }               
@@ -308,6 +257,8 @@ import android.widget.ImageView.ScaleType;
                 {
                     Log.w(TAG, "event Cursor is empty!!!!");
                 }              
+                
+                cursorBuyData.close();
                 return i;
 //             //Use this code if you want to load from resources
 //                ImageView i = new ImageView(mContext);
@@ -337,13 +288,23 @@ import android.widget.ImageView.ScaleType;
             //TODO: have to extract the url of the selected buy item and launch the webactivity
             
             String itemUrl;
+            Cursor cursorBuyData = null;   
+            mEventDbHelper = MainActivity.getDatabaseHelper();      
+            mRowId = getArguments().getLong("id", 0);
+            
+            if (mRowId != null) {
+                //get cursor to 1st recommendation for this event
+                cursorBuyData = mEventDbHelper.fetchBuyRecommendation(mRowId);        
+            }                     
+            
             cursorBuyData.moveToPosition(position);
             itemUrl = cursorBuyData.getString(cursorBuyData.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_WEB_URL));
           Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+          
+          cursorBuyData.close();
+
           i.putExtra("buy_item_url",itemUrl);
           startActivity(i);             
-            
-
         }
 
         public void onClick(View arg0) {
