@@ -3,6 +3,7 @@ package com.nextgen.bemore;
 import com.nextgen.database.DataBaseHelper;
 
 import android.support.v4.app.*;
+import android.text.method.ScrollingMovementMethod;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -75,8 +77,7 @@ import android.widget.TextView;
             View v = inflater.inflate(R.layout.event_details, container, false);
 
             //Get cursor to db using id
-            mEventDbHelper = new DataBaseHelper(this.getActivity());
-            mEventDbHelper.openDataBase();
+            mEventDbHelper = MainActivity.getDatabaseHelper();
 
             mRowId = getArguments().getLong("id", 0);
             
@@ -93,11 +94,19 @@ import android.widget.TextView;
                 tv = v.findViewById(R.id.details_event_name);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
-//                tv.setOnClickListener(this);
+
+                tv = v.findViewById(R.id.details_event_channel);
+                ((TextView)tv).setText(event.getString(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_CHANNEL)));
+
+                RatingBar rb = (RatingBar)v.findViewById(R.id.ratingBar1);
+                rb.setRating(event.getInt(
+                        event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_RATING)));
 
                 tv = v.findViewById(R.id.details_event_short_desc);
                 ((TextView)tv).setText(event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
+                ((TextView)tv).setMovementMethod(new ScrollingMovementMethod());
                 
                 ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
@@ -118,10 +127,10 @@ import android.widget.TextView;
             }
             
             event.close();
-            mEventDbHelper.close();
             return v;            
         }
 
+        
         public void onClick(View arg0) {
             if (mYouTubeVideoId != null )
             {

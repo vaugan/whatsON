@@ -15,18 +15,18 @@
 -->
 
 <resources>
-    <style name="StyledIndicators" parent="@android:style/Theme.Light">
+    <style name="StyledIndicators" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <item name="circlePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="titlePageIndicatorStyle">@style/CustomTitlePageIndicator</item>
     </style>
 
     <style name="CustomTitlePageIndicator">
-        <item name="android:background">#FFDDDDDD</item>
-        <item name="footerColor">#FFEE3333</item>
-        <item name="footerLineHeight">2dp</item>
+        <item name="android:background">#FF000000</item>
+        <item name="footerColor">@color/DstvBlue</item>
+        <item name="footerLineHeight">4dp</item>
         <item name="footerIndicatorStyle">none</item>
-        <item name="textColor">#FF999999</item>
-        <item name="selectedColor">#FF000000</item>
+        <item name="textColor">#FFFFFFFF</item>
+        <item name="selectedColor">@color/DstvBlue</item>
         <item name="selectedBold">false</item>
     </style>
 
@@ -37,5 +37,12 @@
         <item name="strokeWidth">2dp</item>
         <item name="radius">10dp</item>
         <item name="centered">true</item>
+    </style>
+    
+        
+    <style name="eventRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:minHeight">28dip</item>
+        <item name="android:maxHeight">28dip</item>
     </style>
 </resources>

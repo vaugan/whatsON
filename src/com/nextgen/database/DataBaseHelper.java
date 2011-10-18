@@ -31,6 +31,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //keys for events table
     public static final String KEY_ROWID = "_id";
     public static final String KEY_EVENT_NAME = "name";
+    public static final String KEY_EVENT_CHANNEL = "channel";
+    public static final String KEY_EVENT_RATING = "rating";
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_GENRE = "genre";
     public static final String KEY_DATE = "date";
@@ -57,6 +59,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_BUY_TITLE = "title";   
     public static final String KEY_BUY_DESC = "desc";   
     public static final String KEY_BUY_PRICE = "price";   
+    public static final String KEY_BUY_IMAGE = "image_url";
+    public static final String KEY_BUY_WEB_URL = "web_url";
+    
+    
     //keys for the view recommendations table
     public static final String KEY_VIEW_REC_1 = "view_rec_1";   
     public static final String KEY_VIEW_REC_2 = "view_rec_2";   
@@ -203,7 +209,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public Cursor fetchAllEvents() {
 
         return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, null, null, null, null, null);
+                KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, null, null, null, null, null);
     }
 
     // Add your public helper methods to access and get content from the database.
@@ -212,7 +218,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
  public Cursor fetchEventsByCategory(String Category) {
 
      return myDataBase.query(EVENTS_TABLE, new String[] {KEY_ROWID, KEY_EVENT_NAME,
-             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
+             KEY_GENRE, KEY_DATE, KEY_TIME,KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_IMAGE_BANNER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, KEY_CATEGORY + " like '" + Category+"'", null, null, null, null);
  }
 
     /**
@@ -226,7 +232,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         Cursor mCursor =
             myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
-                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
+                    KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_YOUTUBE_VIDEO_ID, KEY_IMAGE_POSTER, KEY_EVENT_CHANNEL, KEY_EVENT_RATING}, KEY_ROWID + "='"+Long.toString(rowId)+"'", null,
                     null, null, null, null);
         
         mCursor.moveToFirst();
@@ -243,7 +249,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
      */
     public Cursor fetchBuyRecommendation(long rowId) throws SQLException {
         Integer buyRecRowId=0;
-        Integer buyRowId=0;
+        Integer buyRowId1=0;
+        Integer buyRowId2=0;
+        Integer buyRowId3=0;
+        Integer buyRowId4=0;
+        Integer buyRowId5=0;
+        Integer buyRowId6=0;
+        Integer buyRowId7=0;
+        Integer buyRowId8=0;
+        Integer buyRowId9=0;
+        Integer buyRowId10=0;
+        
         
         /*get cursor to the event in the event table*/
         Cursor mCursor =
@@ -256,11 +272,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
             //make sure the cursor is not empty, then get the buy rec id. Then get cursor to the buy recommendations for the event.
             if (mCursor.getCount() > 0) {
-                buyRecRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
+                buyRecRowId= mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_ID));
                 
                 mCursor =
                     myDataBase.query(true, BUY_REC_TABLE, new String[] {KEY_ROWID,
-                            KEY_BUY_REC_1}, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
+                            KEY_BUY_REC_1, KEY_BUY_REC_2, KEY_BUY_REC_3, KEY_BUY_REC_4, KEY_BUY_REC_5,
+                            KEY_BUY_REC_6, KEY_BUY_REC_7, KEY_BUY_REC_8, KEY_BUY_REC_9, KEY_BUY_REC_10,
+                            }, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
                             null, null, null, null);              
             }
 
@@ -268,12 +286,36 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             
             //make sure the cursor to the buy recommendations is not empty, then get the 1st buy recommendation
             if (mCursor.getCount() > 0) {
-                buyRowId = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
-                
-               mCursor =
+                buyRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_1));
+                buyRowId2 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_2));
+                buyRowId3 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_3));
+                buyRowId4 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_4));
+                buyRowId5 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_5));
+                buyRowId6 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_6));
+                buyRowId7 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_7));
+                buyRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_8));
+                buyRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_9));
+                buyRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_10));
+ 
+                mCursor =
                     myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
-                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE}, KEY_ROWID + "='"+Integer.toString(buyRowId)+"'", null,
-                            null, null, null, null);              
+                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE, KEY_BUY_WEB_URL}, 
+                            KEY_ROWID + "='"+buyRowId1+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId2+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId3+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId4+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId5+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId6+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId7+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId8+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId9+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId10+"'",
+                            null,null, null, null, null);              
+
+//               mCursor =
+//                    myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
+//                            KEY_BUY_TITLE, KEY_BUY_DESC, KEY_BUY_PRICE,KEY_BUY_IMAGE}, KEY_ROWID + "='"+Integer.toString(buyRowId)+"'", null,
+//                            null, null, null, null);              
             }            
 
             mCursor.moveToFirst();
@@ -295,6 +337,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         Integer eventRowId1=0;
         Integer eventRowId2=0;
         Integer eventRowId3=0;
+        Integer eventRowId4=0;
+        Integer eventRowId5=0;
+        Integer eventRowId6=0;
+        Integer eventRowId7=0;
+        Integer eventRowId8=0;
+        Integer eventRowId9=0;
+        Integer eventRowId10=0;
         
         /*get cursor to the event in the event table along with the view rec column*/
         Cursor mCursor =
@@ -324,16 +373,27 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 eventRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_1));
                 eventRowId2 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_2));
                 eventRowId3 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_3));
+                eventRowId4 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_4));
+                eventRowId5 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_5));
+                eventRowId6 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_6));
+                eventRowId7 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_7));
+                eventRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_8));
+                eventRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_9));
+                eventRowId10 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_10));
                 
-                String rows =Integer.toString(eventRowId1)+","+Integer.toString(eventRowId2)+","+Integer.toString(eventRowId3);
-                Log.w(TAG, "rows string="+rows);
-
                mCursor =
                     myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
                             KEY_DATE, KEY_EVENT_NAME, KEY_SHORT_DESC, KEY_IMAGE_POSTER}, 
                             KEY_ROWID + "='"+eventRowId1+"'" + " or "+
                             KEY_ROWID + "='"+eventRowId2+"'" + " or "+
-                            KEY_ROWID + "='"+eventRowId3+"'",
+                            KEY_ROWID + "='"+eventRowId3+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId4+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId5+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId6+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId7+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId8+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId9+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId10+"'",
                             null,null, null, null, null);              
             }            
 

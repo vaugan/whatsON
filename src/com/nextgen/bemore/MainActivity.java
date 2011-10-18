@@ -17,6 +17,9 @@
 package com.nextgen.bemore;
 
 //import com.nextgen.bemore.apis.R;
+import java.io.IOException;
+
+import com.nextgen.database.DataBaseHelper;
 import com.viewpagerindicator.R;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
@@ -27,6 +30,7 @@ import android.support.v4.app.*;
 import android.support.v4.view.ViewPager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -46,12 +50,16 @@ public class MainActivity extends FragmentActivity  {
 
     EventListFragmentPagerAdapter mAdapter;
     ViewPager mPager;
+    private static DataBaseHelper myDbHelper;         
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       setContentView(R.layout.main_layout);
         
+      //Open Database
+      openDatabase();
+
         mAdapter = new EventListFragmentAdapterTitleProvider(getSupportFragmentManager());
         
         mPager = (ViewPager)findViewById(R.id.pager);
@@ -62,5 +70,28 @@ public class MainActivity extends FragmentActivity  {
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         
         
+    }
+
+    protected void onDestroy(Bundle savedInstanceState) {
+        myDbHelper.close();
+    }
+    private void openDatabase() {
+        myDbHelper = new DataBaseHelper(this.getApplicationContext());
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+
+        try {
+            myDbHelper.openDataBase();
+        }catch(SQLException sqle){
+            throw sqle;
+        }
+    }        
+
+    public static DataBaseHelper getDatabaseHelper()
+    {
+        return myDbHelper;
     }
 }
