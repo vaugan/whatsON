@@ -19,6 +19,10 @@ package com.nextgen.bemore;
 //import com.nextgen.bemore.apis.R;
 import java.io.IOException;
 
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
 import com.nextgen.database.DataBaseHelper;
 import com.viewpagerindicator.R;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -51,6 +55,7 @@ public class MainActivity extends FragmentActivity  {
     EventListFragmentPagerAdapter mAdapter;
     ViewPager mPager;
     private static DataBaseHelper myDbHelper;         
+    Facebook facebook = new Facebook("299979046695005");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +74,24 @@ public class MainActivity extends FragmentActivity  {
         indicator.setViewPager(mPager);
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         
-        
+        facebook.authorize(this, new DialogListener() {
+            public void onComplete(Bundle values) {}
+
+            public void onFacebookError(FacebookError error) {}
+
+            public void onError(DialogError e) {}
+
+            public void onCancel() {}
+        });        
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        facebook.authorizeCallback(requestCode, resultCode, data);
+    }
+    
     protected void onDestroy(Bundle savedInstanceState) {
         myDbHelper.close();
     }
