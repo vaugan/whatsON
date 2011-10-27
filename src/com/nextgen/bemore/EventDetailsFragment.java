@@ -1,9 +1,15 @@
 package com.nextgen.bemore;
 
+
+import com.facebook.android.FacebookError;
+
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.facebook.BaseRequestListener;
+import com.nextgen.facebook.Utility;
 
 import android.support.v4.app.*;
 import android.text.method.ScrollingMovementMethod;
+import android.app.Application;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
     /**
@@ -134,13 +141,42 @@ import android.widget.TextView;
         public void onClick(View arg0) {
             if (mYouTubeVideoId != null )
             {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
-                intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
-                startActivity(intent); 
+                
+                Bundle params = new Bundle();
+                params.putString("fields", "name, picture, location");
+                Utility.mAsyncRunner.request("me/friends", params, new FriendsRequestListener());
+                
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
+//                intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
+//                startActivity(intent); 
             }
             else
             {
                 //display some dialog indicating there's no trailer
             }
-        }          
+        }     
+        
+        /*
+         * callback after friends are fetched via me/friends or fql query.
+         */
+        public class FriendsRequestListener extends BaseRequestListener {
+
+            public void onComplete(final String response, final Object state) {
+                
+                Log.w(TAG, "Got Facebook Response!!! :-) "+response);
+
+
+                
+//                dialog.dismiss();
+//                Intent myIntent = new Intent(getActivity().getApplicationContext(),FriendsList.class);
+//                myIntent.putExtra("API_RESPONSE", response);
+//                myIntent.putExtra("METHOD", graph_or_fql);
+//                startActivity(myIntent);
+            }
+            
+            public void onFacebookError(FacebookError error) {
+//                dialog.dismiss();
+                Toast.makeText(getActivity().getApplicationContext(), "Facebook Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }

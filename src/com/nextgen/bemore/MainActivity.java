@@ -19,11 +19,13 @@ package com.nextgen.bemore;
 //import com.nextgen.bemore.apis.R;
 import java.io.IOException;
 
+import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.facebook.Utility;
 import com.viewpagerindicator.R;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
@@ -33,6 +35,7 @@ import android.app.Activity;
 import android.support.v4.app.*;
 import android.support.v4.view.ViewPager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.SQLException;
 import android.os.Bundle;
@@ -52,10 +55,12 @@ import android.widget.TextView;
  */
 public class MainActivity extends FragmentActivity  {
 
-    EventListFragmentPagerAdapter mAdapter;
+    public static final String APP_ID = "299979046695005";
+   EventListFragmentPagerAdapter mAdapter;
     ViewPager mPager;
     private static DataBaseHelper myDbHelper;         
-    Facebook facebook = new Facebook("299979046695005");
+    String FILENAME = "AndroidSSO_data";
+    private SharedPreferences mPrefs;    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +79,51 @@ public class MainActivity extends FragmentActivity  {
         indicator.setViewPager(mPager);
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         
-        facebook.authorize(this, new DialogListener() {
-            public void onComplete(Bundle values) {}
+        
+        //Create the Facebook Object using the app id.
+        Utility.mFacebook = new Facebook(APP_ID);
+        //Instantiate the asynrunner object for asynchronous api calls.
+        Utility.mAsyncRunner = new AsyncFacebookRunner(Utility.mFacebook);
 
-            public void onFacebookError(FacebookError error) {}
-
-            public void onError(DialogError e) {}
-
-            public void onCancel() {}
-        });        
+        /*
+         * Get existing access_token if any
+         */
+        mPrefs = getPreferences(MODE_PRIVATE);
+        String access_token = mPrefs.getString("access_token", null);
+        long expires = mPrefs.getLong("access_expires", 0);
+        if(access_token != null) {
+            Utility.mFacebook.setAccessToken(access_token);
+        }
+        if(expires != 0) {
+            Utility.mFacebook.setAccessExpires(expires);
+        }
+        
+        /*
+         * Only call authorize if the access_token has expired.
+         */
+        if(!Utility.mFacebook.isSessionValid()) {
+            Utility.mFacebook.authorize(this, new String[] { "user_likes", "offline_access", "friends_likes", "friends_interests"}, new DialogListener() {
+                    public void onComplete(Bundle values) {
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putString("access_token", Utility.mFacebook.getAccessToken());
+                        editor.putLong("access_expires", Utility.mFacebook.getAccessExpires());
+                        editor.commit();
+                    }
+    
+                public void onFacebookError(FacebookError error) {}
+    
+                public void onError(DialogError e) {}
+    
+                public void onCancel() {}
+            });        
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        facebook.authorizeCallback(requestCode, resultCode, data);
+        Utility.mFacebook.authorizeCallback(requestCode, resultCode, data);
     }
     
     protected void onDestroy(Bundle savedInstanceState) {
