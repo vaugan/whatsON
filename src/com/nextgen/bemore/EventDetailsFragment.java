@@ -1,6 +1,10 @@
 package com.nextgen.bemore;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.facebook.android.FacebookError;
 
 import com.nextgen.database.DataBaseHelper;
@@ -42,6 +46,13 @@ import android.widget.Toast;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "DetailsFragment";
         String mYouTubeVideoId = null;
+        protected static JSONArray jsonFriendsArray;
+        protected static JSONArray jsonMoviesArray;
+        static  long friendsMoviesLikes[];
+        static int movieCounter=0;
+        static int totalFriends=0;
+        static int remainingFriends=0;
+        TextView friendsTv;
         
         
         public static EventDetailsFragment newInstance(Long id) {
@@ -115,6 +126,8 @@ import android.widget.Toast;
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
                 ((TextView)tv).setMovementMethod(new ScrollingMovementMethod());
                 
+                friendsTv= (TextView)v.findViewById(R.id.friendsRemaining);
+                
                 ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
                 String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
@@ -143,7 +156,7 @@ import android.widget.Toast;
             {
                 
                 Bundle params = new Bundle();
-                params.putString("fields", "name, picture, location");
+                params.putString("fields", "name, id, picture, location");
                 Utility.mAsyncRunner.request("me/friends", params, new FriendsRequestListener());
                 
 //                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
@@ -162,21 +175,127 @@ import android.widget.Toast;
         public class FriendsRequestListener extends BaseRequestListener {
 
             public void onComplete(final String response, final Object state) {
-                
+                long friendId=0;
                 Log.w(TAG, "Got Facebook Response!!! :-) "+response);
 
+                //Request the list of movies for each friend
+                try {
+               
+                    jsonFriendsArray = new JSONObject(response).getJSONArray("data");
+                    
+                    totalFriends = jsonFriendsArray.length();
+                    remainingFriends=totalFriends;
+                    
+                    for (int i=0;i<1/*totalFriends*/;i++)
+                    {
+                     
+                        friendId = jsonFriendsArray.getJSONObject(i).getLong("id");
+                        Bundle params = new Bundle();
+                        params.putString("fields", "name, id");
+                        Utility.mAsyncRunner.request(friendId+"/movies", params, new MoviesRequestRequestListener());
+                    }  
+
+                } catch (JSONException e) {
+                    Log.w(TAG, "JSONException!!!  "+e);
+                    return;
+                }
 
                 
-//                dialog.dismiss();
-//                Intent myIntent = new Intent(getActivity().getApplicationContext(),FriendsList.class);
-//                myIntent.putExtra("API_RESPONSE", response);
-//                myIntent.putExtra("METHOD", graph_or_fql);
-//                startActivity(myIntent);
             }
-            
+                
             public void onFacebookError(FacebookError error) {
 //                dialog.dismiss();
                 Toast.makeText(getActivity().getApplicationContext(), "Facebook Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+        
+        
+        /*
+         * callback after friends are fetched via me/friends or fql query.
+         */
+        public class MoviesRequestRequestListener extends BaseRequestListener{
+
+            public void onComplete(final String response, final Object state) {
+                
+               remainingFriends--;
+                Log.w(TAG, "Got Movies Response!!! Friends remaining = "+remainingFriends);
+                
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        friendsTv.setText(Integer.toString(remainingFriends));
+
+                   }
+               });
+
+                try {
+                    JSONArray jsonTempArray = new JSONObject(response).getJSONArray("data");
+
+                    //process this friend's movie list
+                    if (jsonTempArray.length() > 0)
+                    {
+                        
+//                        jsonMoviesArray = concatArray(jsonMoviesArray,jsonTempArray);
+                        
+                        for (int i=0;i<jsonTempArray.length();i++)
+                        {
+                            long movieId = jsonTempArray.getJSONObject(i).getLong("id");
+                            String movieName = jsonTempArray.getJSONObject(i).getString("name");
+//                            friendsMoviesLikes[movieCounter++] = movieId;
+//                            friendsMoviesLikes[movieCounter][1] = movieCounter++;
+                        }
+                    }
+
+                    //Request next friend's movie list
+                    int position = totalFriends-remainingFriends;
+                    if (position<50 && position >=0)
+                    {
+                        long friendId = jsonFriendsArray.getJSONObject(totalFriends-remainingFriends).getLong("id");
+                        Bundle params = new Bundle();
+                        params.putString("fields", "name, id");
+                        Utility.mAsyncRunner.request(friendId+"/movies", params, new MoviesRequestRequestListener());
+                    }
+                    else
+                    {
+                        Log.w(TAG, "All friends processed :-):::"+position);
+                    }
+                } catch (JSONException e) {
+                    Log.w(TAG, "JSONException!!!  "+e);
+                    return;
+                }
+
+            }
+            private void runOnUiThread(Runnable runnable) {
+                // TODO Auto-generated method stub
+                
+            }
+            public void onFacebookError(FacebookError error) {
+//              dialog.dismiss();
+              Toast.makeText(getActivity().getApplicationContext(), "Facebook Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+          }
+
+      }
+
+        private JSONArray concatArray(JSONArray arr1, JSONArray arr2)
+        throws JSONException {
+            JSONArray result = new JSONArray();
+            for (int i = 0; i < arr1.length(); i++) {
+                result.put(arr1.get(i));
+            }
+            for (int i = 0; i < arr2.length(); i++) {
+                result.put(arr2.get(i));
+            }
+            return result;
+        }
+//        private JSONArray concatArray(JSONArray... arrs)
+//        throws JSONException {
+//            JSONArray result = new JSONArray();
+//            for (JSONArray arr : arrs) {
+//                for (int i = 0; i < arr.length(); i++) {
+//                    result.put(arr.get(i));
+//                }
+//            }
+//            return result;
+//        }
+        
     }

@@ -15,6 +15,7 @@
                     <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content">
                         <RatingBar style="@style/eventRatingBar" android:id="@+id/ratingBar1" android:layout_width="wrap_content" android:layout_gravity="left" android:numStars="10" android:rating="7" android:layout_height="wrap_content"></RatingBar>
                         <ImageView android:src="@drawable/facebook_like_button" android:layout_width="wrap_content" android:id="@+id/imageView1" android:layout_gravity="right" android:layout_height="wrap_content" android:paddingLeft="20dp"></ImageView>
+                        <TextView android:layout_width="wrap_content" android:text="0" android:layout_gravity="right" android:textStyle="bold" android:layout_height="wrap_content" android:paddingBottom="4dip" android:id="@+id/friendsRemaining" android:textSize="20dp" android:textColor="@color/Black" android:background="@drawable/round_edges"></TextView>
                     </LinearLayout>
                     <LinearLayout android:id="@+id/linearLayout7" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:weightSum="1">
                         <LinearLayout android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="wrap_content" android:layout_weight="0.2">
