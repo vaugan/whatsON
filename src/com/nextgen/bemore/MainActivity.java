@@ -25,6 +25,7 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.facebook.FriendsGetMovies;
 import com.nextgen.facebook.Utility;
 import com.viewpagerindicator.R;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -61,6 +62,7 @@ public class MainActivity extends FragmentActivity  {
     private static DataBaseHelper myDbHelper;         
     String FILENAME = "AndroidSSO_data";
     private SharedPreferences mPrefs;    
+    public static FriendsGetMovies fgm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class MainActivity extends FragmentActivity  {
         indicator.setViewPager(mPager);
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         
-        
+        fgm = new FriendsGetMovies();
         //Create the Facebook Object using the app id.
         Utility.mFacebook = new Facebook(APP_ID);
         //Instantiate the asynrunner object for asynchronous api calls.

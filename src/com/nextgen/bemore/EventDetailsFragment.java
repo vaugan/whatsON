@@ -9,6 +9,7 @@ import com.facebook.android.FacebookError;
 
 import com.nextgen.database.DataBaseHelper;
 import com.nextgen.facebook.BaseRequestListener;
+import com.nextgen.facebook.FriendsGetMovies;
 import com.nextgen.facebook.Utility;
 
 import android.support.v4.app.*;
@@ -46,12 +47,6 @@ import android.widget.Toast;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "DetailsFragment";
         String mYouTubeVideoId = null;
-        protected static JSONArray jsonFriendsArray;
-        protected static JSONArray jsonMoviesArray;
-        static  long friendsMoviesLikes[];
-        static int movieCounter=0;
-        static int totalFriends=0;
-        static int remainingFriends=0;
         TextView friendsTv;
         
         
@@ -155,9 +150,7 @@ import android.widget.Toast;
             if (mYouTubeVideoId != null )
             {
                 
-                Bundle params = new Bundle();
-                params.putString("fields", "name, id, picture, location");
-                Utility.mAsyncRunner.request("me/friends", params, new FriendsRequestListener());
+                MainActivity.fgm.RequestFriendList();
                 
 //                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
 //                intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
@@ -169,133 +162,5 @@ import android.widget.Toast;
             }
         }     
         
-        /*
-         * callback after friends are fetched via me/friends or fql query.
-         */
-        public class FriendsRequestListener extends BaseRequestListener {
-
-            public void onComplete(final String response, final Object state) {
-                long friendId=0;
-                Log.w(TAG, "Got Facebook Response!!! :-) "+response);
-
-                //Request the list of movies for each friend
-                try {
-               
-                    jsonFriendsArray = new JSONObject(response).getJSONArray("data");
-                    
-                    totalFriends = jsonFriendsArray.length();
-                    remainingFriends=totalFriends;
-                    
-                    for (int i=0;i<1/*totalFriends*/;i++)
-                    {
-                     
-                        friendId = jsonFriendsArray.getJSONObject(i).getLong("id");
-                        Bundle params = new Bundle();
-                        params.putString("fields", "name, id");
-                        Utility.mAsyncRunner.request(friendId+"/movies", params, new MoviesRequestRequestListener());
-                    }  
-
-                } catch (JSONException e) {
-                    Log.w(TAG, "JSONException!!!  "+e);
-                    return;
-                }
-
-                
-            }
-                
-            public void onFacebookError(FacebookError error) {
-//                dialog.dismiss();
-                Toast.makeText(getActivity().getApplicationContext(), "Facebook Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        
-        
-        /*
-         * callback after friends are fetched via me/friends or fql query.
-         */
-        public class MoviesRequestRequestListener extends BaseRequestListener{
-
-            public void onComplete(final String response, final Object state) {
-                
-               remainingFriends--;
-                Log.w(TAG, "Got Movies Response!!! Friends remaining = "+remainingFriends);
-                
-                runOnUiThread(new Runnable() {
-                    public void run() {
-
-                        friendsTv.setText(Integer.toString(remainingFriends));
-
-                   }
-               });
-
-                try {
-                    JSONArray jsonTempArray = new JSONObject(response).getJSONArray("data");
-
-                    //process this friend's movie list
-                    if (jsonTempArray.length() > 0)
-                    {
-                        
-//                        jsonMoviesArray = concatArray(jsonMoviesArray,jsonTempArray);
-                        
-                        for (int i=0;i<jsonTempArray.length();i++)
-                        {
-                            long movieId = jsonTempArray.getJSONObject(i).getLong("id");
-                            String movieName = jsonTempArray.getJSONObject(i).getString("name");
-//                            friendsMoviesLikes[movieCounter++] = movieId;
-//                            friendsMoviesLikes[movieCounter][1] = movieCounter++;
-                        }
-                    }
-
-                    //Request next friend's movie list
-                    int position = totalFriends-remainingFriends;
-                    if (position<50 && position >=0)
-                    {
-                        long friendId = jsonFriendsArray.getJSONObject(totalFriends-remainingFriends).getLong("id");
-                        Bundle params = new Bundle();
-                        params.putString("fields", "name, id");
-                        Utility.mAsyncRunner.request(friendId+"/movies", params, new MoviesRequestRequestListener());
-                    }
-                    else
-                    {
-                        Log.w(TAG, "All friends processed :-):::"+position);
-                    }
-                } catch (JSONException e) {
-                    Log.w(TAG, "JSONException!!!  "+e);
-                    return;
-                }
-
-            }
-            private void runOnUiThread(Runnable runnable) {
-                // TODO Auto-generated method stub
-                
-            }
-            public void onFacebookError(FacebookError error) {
-//              dialog.dismiss();
-              Toast.makeText(getActivity().getApplicationContext(), "Facebook Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-          }
-
-      }
-
-        private JSONArray concatArray(JSONArray arr1, JSONArray arr2)
-        throws JSONException {
-            JSONArray result = new JSONArray();
-            for (int i = 0; i < arr1.length(); i++) {
-                result.put(arr1.get(i));
-            }
-            for (int i = 0; i < arr2.length(); i++) {
-                result.put(arr2.get(i));
-            }
-            return result;
-        }
-//        private JSONArray concatArray(JSONArray... arrs)
-//        throws JSONException {
-//            JSONArray result = new JSONArray();
-//            for (JSONArray arr : arrs) {
-//                for (int i = 0; i < arr.length(); i++) {
-//                    result.put(arr.get(i));
-//                }
-//            }
-//            return result;
-//        }
-        
+   
     }
