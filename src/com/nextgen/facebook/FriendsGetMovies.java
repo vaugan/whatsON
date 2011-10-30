@@ -14,6 +14,7 @@ public class FriendsGetMovies {
     private static final String TAG = "FriendsGetMovies";
     protected static JSONArray jsonFriendsArray;
     protected static JSONArray jsonMoviesArray;
+    protected static JSONArray jsonMovieDetailsArray;
     static  long friendsMoviesLikes[];
     static int movieCounter=0;
     static int totalFriends=0;
@@ -74,7 +75,7 @@ public class FriendsGetMovies {
     public class MoviesRequestRequestListener extends BaseRequestListener{
 
         public void onComplete(final String response, final Object state) {
-            
+            long movieId=0; 
            remainingFriends--;
             Log.w(TAG, "Got Movies Response!!! Friends remaining = "+remainingFriends);
             
@@ -93,11 +94,11 @@ public class FriendsGetMovies {
                 if (jsonTempArray.length() > 0)
                 {
                     
-//                    jsonMoviesArray = concatArray(jsonMoviesArray,jsonTempArray);
+                    jsonMoviesArray = concatArray(jsonMoviesArray,jsonTempArray);
                     
                     for (int i=0;i<jsonTempArray.length();i++)
                     {
-                        long movieId = jsonTempArray.getJSONObject(i).getLong("id");
+                        movieId = jsonTempArray.getJSONObject(i).getLong("id");
                         String movieName = jsonTempArray.getJSONObject(i).getString("name");
 //                        friendsMoviesLikes[movieCounter++] = movieId;
 //                        friendsMoviesLikes[movieCounter][1] = movieCounter++;
@@ -116,6 +117,11 @@ public class FriendsGetMovies {
                 else
                 {
                     Log.w(TAG, "All friends processed :-):::"+position);
+                    
+                    /*Request the movie details*/
+                    Bundle params = new Bundle();
+                    params.putString("fields", "name, picture, link");
+                    Utility.mAsyncRunner.request(Long.toString(movieId), params, new MovieDetailsRequestListener());
                 }
             } catch (JSONException e) {
                 Log.w(TAG, "JSONException!!!  "+e);
@@ -134,14 +140,62 @@ public class FriendsGetMovies {
 
   }
 
+
+    /*
+     * callback after friends are fetched via me/friends or fql query.
+     */
+    public class MovieDetailsRequestListener extends BaseRequestListener{
+
+        public void onComplete(final String response, final Object state) {
+            Log.w(TAG, "Got Movie Details Response!!!");
+            
+
+            try {
+                JSONObject jsonTempObject = new JSONObject(response);
+
+                //process this friend's movie list
+                if (jsonTempObject.length() > 0)
+                {
+                    
+//                    jsonMovieDetailsArray = concatArray(jsonMovieDetailsArray,jsonTempObject);
+                    
+                        String pictureUrl = jsonTempObject.getString("picture");
+                        String movieName = jsonTempObject.getString("name");
+                        String movieLink = jsonTempObject.getString("link");
+                        
+                        Log.w(TAG, "movieName="+movieName);
+                        Log.w(TAG, "pictureUrl="+pictureUrl);
+                        Log.w(TAG, "movieLink="+movieLink);
+                }
+            } catch (JSONException e) {
+                Log.w(TAG, "JSONException!!!  "+e);
+                return;
+            }
+
+        }
+        private void runOnUiThread(Runnable runnable) {
+            // TODO Auto-generated method stub
+            
+        }
+        public void onFacebookError(FacebookError error) {
+//          dialog.dismiss();
+            Log.w(TAG, "Facebook Error: "+error.getMessage());
+      }
+
+  }
+    
     private JSONArray concatArray(JSONArray arr1, JSONArray arr2)
     throws JSONException {
         JSONArray result = new JSONArray();
-        for (int i = 0; i < arr1.length(); i++) {
-            result.put(arr1.get(i));
+        if (arr1 != null) {
+            for (int i = 0; i < arr1.length(); i++) {
+                result.put(arr1.get(i));
+            }
         }
-        for (int i = 0; i < arr2.length(); i++) {
-            result.put(arr2.get(i));
+        if (arr2 != null) {
+            for (int i = 0; i < arr2.length(); i++) {
+                result.put(arr2.get(i));
+            }
         }
         return result;
     }
