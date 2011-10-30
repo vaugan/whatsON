@@ -3,7 +3,10 @@
     	<View  android:layout_width="wrap_content"  android:background="@drawable/gradientline"  android:layout_height="4dp"></View>
         <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="10" android:layout_height="match_parent" android:paddingLeft="10dp">
             <TextView android:textColor="@color/Black" android:layout_width="wrap_content" android:id="@+id/buy_page_title" android:text="You might like to buy this" android:paddingBottom="4dip" android:layout_weight="0.41" android:textSize="20dp" android:textStyle="bold" android:layout_height="wrap_content" android:background="@drawable/round_edges" android:layout_gravity="right"></TextView>
-            <com.nextgen.coverflow.CoverFlow android:layout_gravity="top" android:id="@+id/buy_coverflow" android:layout_width="match_parent" android:layout_weight="2.23" android:layout_height="wrap_content"></com.nextgen.coverflow.CoverFlow>
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="0.41">
+                <com.nextgen.coverflow.CoverFlow android:layout_width="match_parent" android:id="@+id/buy_coverflow" android:layout_height="wrap_content" android:layout_gravity="top" android:layout_weight="2.23"></com.nextgen.coverflow.CoverFlow>
+                <com.nextgen.coverflow.CoverFlow android:layout_width="match_parent" android:id="@+id/fb_friend_likes_coverflow" android:layout_height="wrap_content" android:layout_gravity="top" android:layout_weight="2.23"></com.nextgen.coverflow.CoverFlow>
+            </LinearLayout>
             <TextView android:id="@+id/buy_title" android:layout_width="match_parent" android:text="Friends DVD Box set" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip" android:textStyle="bold" android:textColor="@color/White" android:visibility="invisible"></TextView>
             <TextView android:id="@+id/buy_price" android:layout_width="match_parent" android:text="R249.95" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip" android:textStyle="bold" android:textColor="@color/Gold" android:visibility="invisible"></TextView>
         </LinearLayout>

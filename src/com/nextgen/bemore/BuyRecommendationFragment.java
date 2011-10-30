@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import com.nextgen.bemore.EventRecommendationFragment.ImageAdapter;
 import com.nextgen.coverflow.CoverFlow;
 import com.nextgen.database.DataBaseHelper;
+import com.nextgen.facebook.FriendsGetMovies;
+import com.nextgen.facebook.FriendsMoviesImageAdapter;
+
 import android.support.v4.app.*;
 import android.content.Context;
 import android.content.Intent;
@@ -93,21 +96,27 @@ import android.widget.ImageView.ScaleType;
 //              coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
               coverFlow = (CoverFlow) v.findViewById(R.id.buy_coverflow);
               coverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
-
               ImageAdapter coverImageAdapter =  new ImageAdapter(this.getActivity().getApplicationContext());
-              
               coverFlow.setAdapter(coverImageAdapter);
-              
               coverFlow.setSpacing(-25);
               int selection = cursorBuyData.getCount()/2;
               coverFlow.setSelection(/*4*/selection, true);
               coverFlow.setAnimationDuration(1000);
-              
-
-
-//              coverFlow.setOnItemSelectedListener(this);
               coverFlow.setOnItemClickListener(this);
                 
+
+              CoverFlow facebookFriendsCoverFlow;
+//            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
+              facebookFriendsCoverFlow = (CoverFlow) v.findViewById(R.id.fb_friend_likes_coverflow);
+              facebookFriendsCoverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
+              FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
+            facebookFriendsCoverFlow.setAdapter(facebookFriendsImageAdapter);
+            facebookFriendsCoverFlow.setSpacing(-25);
+            facebookFriendsCoverFlow.setSelection(10, true);
+            facebookFriendsCoverFlow.setAnimationDuration(1000);
+//            facebookFriendsCoverFlow.setOnItemClickListener(this);
+              
+              
               cursorBuyData.close();
               return v;       
                      

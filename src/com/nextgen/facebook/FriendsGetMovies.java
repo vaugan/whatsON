@@ -17,7 +17,7 @@ public class FriendsGetMovies {
     protected static JSONArray jsonMovieDetailsArray;
     protected static JSONArray jsonMoviesDedupedArray;
 //    protected MovieDetails[] myMoviesList = new MovieDetails[20];
-    protected MovieDetails[] myMoviesList;
+    public static MovieDetails[] myMoviesList;
     static int movieCounter=0;
     static int totalFriends=0;
     static int totalMovies=0;
@@ -179,7 +179,7 @@ public class FriendsGetMovies {
             }
 
             //Request next movie details
-            if (detailsMoviesCtr++ < totalMovies)
+            if (++detailsMoviesCtr < 20 /*totalMovies*/)
             {
                Bundle params = new Bundle();
                params.putString("fields", "name, picture, link, category, plot_outline");
