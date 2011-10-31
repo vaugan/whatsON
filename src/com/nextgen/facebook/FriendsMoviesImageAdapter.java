@@ -146,15 +146,15 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
             if (bitmap == null)
             {
                 Resources res = mContext.getResources();
-                bitmap = BitmapFactory.decodeResource(res,R.drawable.image1);
+                bitmap = BitmapFactory.decodeResource(res,R.drawable.fb_default);
             }
             
-            if (FriendsGetMovies.myMoviesList  != null)
+            if (FriendsGetMovies.myTop20Movies  != null)
             {
                 //newUrl = new URL(FriendsGetMovies.myMoviesList [position].pictureUrl);
-                if (FriendsGetMovies.myMoviesList [position].pictureUrl != null)
+                if (FriendsGetMovies.myTop20Movies [position].pictureUrl != null)
                 {
-                    new RetreiveImageTask().execute(FriendsGetMovies.myMoviesList [position].pictureUrl);
+                    new RetreiveImageTask().execute(FriendsGetMovies.myTop20Movies [position].pictureUrl);
                 }
             }
             

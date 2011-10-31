@@ -18,6 +18,7 @@ public class FriendsGetMovies {
     protected static JSONArray jsonMoviesDedupedArray;
 //    protected MovieDetails[] myMoviesList = new MovieDetails[20];
     public static MovieDetails[] myMoviesList;
+    public static MovieDetails[] myTop20Movies;
     static int movieCounter=0;
     static int totalFriends=0;
     static int totalMovies=0;
@@ -116,13 +117,11 @@ public class FriendsGetMovies {
                     Log.w(TAG, "All friends processed :-):::"+position);
                     
                     addMoviesToArray();
+                    FillTop20Movies();
+                    RequesMovieDetails();
                     
-                    
-//                    MoviesAddToArray();
                     Log.w(TAG, "Movies sorted! ");
                     
-//                    /*Request the movie details*/
-                    RequesMovieDetails();
                 }
             } catch (JSONException e) {
                 Log.w(TAG, "JSONException!!!  "+e);
@@ -159,16 +158,14 @@ public class FriendsGetMovies {
                 //populate these details into myMoviesList
                 if (jsonTempObject.length() > 0)
                 {
-                    for(int i=0;i<myMoviesList.length;i++)
+                    for(int i=0;i<myTop20Movies.length;i++)
                     {
-                        if ((myMoviesList[i].id == id) && (category.equals("Movie")))
+                        if ((myTop20Movies[i].id == id) && (category.equals("Movie")))
                         {
-                            myMoviesList[i].pictureUrl = jsonTempObject.getString("picture");
-                            myMoviesList[i].descr=jsonTempObject.getString("plot_outline");
-                            myMoviesList[i].category=category;
-                            Log.w(TAG, "myMoviesList["+i+"].pictureUrl"+myMoviesList[i].pictureUrl);
-                            Log.w(TAG, "myMoviesList["+i+"].descr"+myMoviesList[i].descr);
-                            Log.w(TAG, "myMoviesList["+i+"].category"+myMoviesList[i].category);
+                            myTop20Movies[i].pictureUrl = jsonTempObject.getString("picture");
+                            myTop20Movies[i].category=category;
+                            Log.w(TAG, "myTop20Movies["+i+"].pictureUrl"+myTop20Movies[i].pictureUrl);
+                            Log.w(TAG, "myTop20Movies["+i+"].category="+myTop20Movies[i].category+" Likes="+myTop20Movies[i].likes);
                             break;
                         }
                     }
@@ -179,18 +176,19 @@ public class FriendsGetMovies {
             }
 
             //Request next movie details
-            if (++detailsMoviesCtr < 20 /*totalMovies*/)
+            if (++detailsMoviesCtr <20)
             {
                Bundle params = new Bundle();
-               params.putString("fields", "name, picture, link, category, plot_outline");
-               Utility.mAsyncRunner.request(Long.toString(myMoviesList[detailsMoviesCtr].id), params, new MovieDetailsRequestListener());
+               params.putString("fields", "name, picture, link, category");
+               Utility.mAsyncRunner.request(Long.toString(myTop20Movies[detailsMoviesCtr].id), params, new MovieDetailsRequestListener());
             }
             else
             {
-                Log.w(TAG, "All movies' details retrieved OK");
+                Log.w(TAG, "All Top20 movies' details retrieved OK");
             }
 
         }
+        
         private void runOnUiThread(Runnable runnable) {
             // TODO Auto-generated method stub
             
@@ -290,15 +288,42 @@ public class FriendsGetMovies {
     
     private void RequesMovieDetails()
     {
-//        for(int i=0;i<myMoviesList.length;i++)
-        {
- //request first movie details
+
+
             Bundle params = new Bundle();
-              params.putString("fields", "name, picture, link, category, plot_outline");
-              Utility.mAsyncRunner.request(Long.toString(myMoviesList[0].id), params, new MovieDetailsRequestListener());
-        }
+              params.putString("fields", "name, picture, link, category");
+              Utility.mAsyncRunner.request(Long.toString(myTop20Movies[0].id), params, new MovieDetailsRequestListener());
+  
     }
 
+    private void FillTop20Movies() {
+        
+        myTop20Movies = new MovieDetails[20];
+        
+                for (int j=0; j<myMoviesList.length; j++)
+                {
+                    for (int i=j+1; i<myMoviesList.length; i++)
+                    if (myMoviesList[j].likes<myMoviesList[i].likes){
+                        MovieDetails temp=myMoviesList[i];
+                                        myMoviesList[i]=myMoviesList[j];
+                                        myMoviesList[j]=temp;
+                    }
+                }
+                
+                Log.w(TAG, "myMoviesList Sorted by descending likes::");
+                for (int i=0; i<myMoviesList.length; i++) 
+                {
+                    Log.w(TAG, "myMoviesList["+i+"] name = "+myMoviesList[i].name+" Likes= "+myMoviesList[i].likes);
+                }
+
+                Log.w(TAG, "FillTop20Movies:");
+                for (int i=0;i<20;i++)
+                {
+                        myTop20Movies[i] = myMoviesList[i];
+                        Log.w(TAG, "myTop20Movies["+i+"] name = "+myTop20Movies[i].name+" Likes= "+myTop20Movies[i].likes);
+                }
+
+    }
     
 //    private JSONArray concatArray(JSONArray... arrs)
 //    throws JSONException {
