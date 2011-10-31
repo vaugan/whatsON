@@ -273,6 +273,24 @@ public class ImageDownloader {
                 bitmap = null;
             }
 
+                            //Resize the bitmap
+                            int width = bitmap.getWidth();
+                            int height = bitmap.getHeight();
+                            int newWidth = 43;
+                            int newHeight = 63;
+                            
+                            // calculate the scale - in this case = 0.4f
+                            float scaleWidth = ((float) newWidth) / width;
+                            float scaleHeight = ((float) newHeight) / height;
+                            
+                            // createa matrix for the manipulation
+                            Matrix matrix = new Matrix();
+                            // resize the bit map
+                            matrix.postScale(scaleWidth, scaleHeight);
+                            // recreate the new Bitmap
+                            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                                              width, height, matrix, true); 
+
             addBitmapToCache(url, bitmap);
 
             if (imageViewReference != null) {
@@ -282,22 +300,6 @@ public class ImageDownloader {
                 // Or if we don't use any bitmap to task association (NO_DOWNLOADED_DRAWABLE mode)
                 if ((this == bitmapDownloaderTask) || (mode != Mode.CORRECT)) {
                     
-                    int width = bitmap.getWidth();
-                    int height = bitmap.getHeight();
-                    int newWidth = 86;
-                    int newHeight = 127;
-                    
-                    // calculate the scale - in this case = 0.4f
-                    float scaleWidth = ((float) newWidth) / width;
-                    float scaleHeight = ((float) newHeight) / height;
-                    
-                    // createa matrix for the manipulation
-                    Matrix matrix = new Matrix();
-                    // resize the bit map
-                    matrix.postScale(scaleWidth, scaleHeight);
-                    // recreate the new Bitmap
-                    Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                                      width, height, matrix, true); 
                     BitmapDrawable d = new BitmapDrawable(resizedBitmap);
                     imageView.setImageDrawable(d);
                     

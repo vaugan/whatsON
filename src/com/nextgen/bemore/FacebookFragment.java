@@ -45,7 +45,7 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class FacebookFragment extends Fragment implements OnItemClickListener{
+    public class FacebookFragment extends ListFragment implements OnItemClickListener{
 
         private static final String TAG = "FacebookFragment";
         int mCount=0;
@@ -79,16 +79,18 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
             View v = inflater.inflate(R.layout.facebook_likes_layout, container, false);
+            FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
+            setListAdapter(facebookFriendsImageAdapter);
 
-              CoverFlow facebookFriendsCoverFlow;
-//            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
-              facebookFriendsCoverFlow = (CoverFlow) v.findViewById(R.id.fb_friend_likes_coverflow);
-              FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
-            facebookFriendsCoverFlow.setAdapter(facebookFriendsImageAdapter);
-            facebookFriendsCoverFlow.setSpacing(-25);
-            facebookFriendsCoverFlow.setSelection(10, true);
-            facebookFriendsCoverFlow.setAnimationDuration(1000);
-//            facebookFriendsCoverFlow.setOnItemClickListener(this);
+//              CoverFlow facebookFriendsCoverFlow;
+////            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
+//              facebookFriendsCoverFlow = (CoverFlow) v.findViewById(R.id.fb_friend_likes_coverflow);
+//              FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
+//            facebookFriendsCoverFlow.setAdapter(facebookFriendsImageAdapter);
+//            facebookFriendsCoverFlow.setSpacing(-25);
+//            facebookFriendsCoverFlow.setSelection(10, true);
+//            facebookFriendsCoverFlow.setAnimationDuration(1000);
+////            facebookFriendsCoverFlow.setOnItemClickListener(this);
 
               return v;       
                      

@@ -13,14 +13,14 @@
     android:background="@color/DstvBlue"
 />
  -->   
-    <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4" android:weightSum="10">
-        <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/details_fragment" android:layout_weight="6"></FrameLayout>
-        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_weight="4">
-            <LinearLayout android:layout_width="match_parent" android:layout_weight="3" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="fill_parent">
-                <FrameLayout android:layout_width="match_parent" android:layout_weight="3" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/buy_fragment"></FrameLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_weight="3" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/recommended"></FrameLayout>
+    <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4" android:weightSum="10" android:layout_height="match_parent">
+        <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_weight="6" android:layout_height="match_parent"></FrameLayout>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout4" android:layout_weight="4" android:weightSum="1" android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="match_parent" android:weightSum="1" android:layout_weight="0.5">
+                <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/buy_fragment" android:layout_weight="0.5"></FrameLayout>
+                <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/recommended" android:layout_weight="0.5"></FrameLayout>
             </LinearLayout>
-            <FrameLayout android:layout_width="match_parent" android:layout_weight="3" android:layout_gravity="top" android:id="@+id/facebook_fragment" android:layout_height="fill_parent"></FrameLayout>
+            <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/facebook_fragment" android:layout_height="wrap_content" android:layout_weight="0.5"></FrameLayout>
         </LinearLayout>
     </LinearLayout>
             <!--  
