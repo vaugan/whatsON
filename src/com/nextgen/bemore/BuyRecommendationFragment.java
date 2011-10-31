@@ -103,20 +103,7 @@ import android.widget.ImageView.ScaleType;
               coverFlow.setSelection(/*4*/selection, true);
               coverFlow.setAnimationDuration(1000);
               coverFlow.setOnItemClickListener(this);
-                
 
-              CoverFlow facebookFriendsCoverFlow;
-//            coverFlow = new CoverFlow(this.getActivity().getApplicationContext());
-              facebookFriendsCoverFlow = (CoverFlow) v.findViewById(R.id.fb_friend_likes_coverflow);
-              facebookFriendsCoverFlow.setAdapter(new ImageAdapter(this.getActivity().getApplicationContext()));
-              FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
-            facebookFriendsCoverFlow.setAdapter(facebookFriendsImageAdapter);
-            facebookFriendsCoverFlow.setSpacing(-25);
-            facebookFriendsCoverFlow.setSelection(10, true);
-            facebookFriendsCoverFlow.setAnimationDuration(1000);
-//            facebookFriendsCoverFlow.setOnItemClickListener(this);
-              
-              
               cursorBuyData.close();
               return v;       
                      

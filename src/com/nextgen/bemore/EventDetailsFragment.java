@@ -132,6 +132,9 @@ import android.widget.Toast;
                 ImageView trailer = (ImageView)v.findViewById(R.id.details_event_trailer);
                 trailer.setOnClickListener(this);
                 
+                ImageView like = (ImageView)v.findViewById(R.id.imageView1);
+                like.setOnClickListener(this);
+                
                  mYouTubeVideoId = event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_YOUTUBE_VIDEO_ID));
                 }
@@ -147,20 +150,18 @@ import android.widget.Toast;
 
         
         public void onClick(View arg0) {
-            if (mYouTubeVideoId != null )
+            Log.w(TAG, "View="+arg0.getId());
+            if (arg0.getId() == R.id.details_event_trailer) 
             {
-                
-                MainActivity.fgm.RequestFriendList();
-                
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
-//                intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
-//                startActivity(intent); 
-            }
-            else
+                   Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+mYouTubeVideoId)); 
+                   intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
+                   startActivity(intent); 
+            } 
+            else if (arg0.getId() == R.id.imageView1)
             {
-                //display some dialog indicating there's no trailer
+             MainActivity.fgm.RequestFriendList();
             }
-        }     
+        }
         
    
     }

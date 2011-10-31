@@ -149,7 +149,11 @@ import android.widget.TextView;
                     BuyRecommendationFragment bf = BuyRecommendationFragment.newInstance(id);
                     ft.replace(R.id.buy_fragment, bf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-              
+
+                    FacebookFragment ff = FacebookFragment.newInstance(id);
+                    ft.replace(R.id.facebook_fragment, ff);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
                     mShownCheckPosition = index;                  
                     ft.commit(); 
                 }

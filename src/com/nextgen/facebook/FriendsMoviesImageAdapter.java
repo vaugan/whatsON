@@ -3,11 +3,19 @@ package com.nextgen.facebook;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
+
 import android.support.v4.app.*;
 import android.app.Application;
 import android.content.Context;
@@ -16,6 +24,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -24,6 +33,9 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -32,11 +44,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-
 import com.nextgen.bemore.MainActivity;
 import com.nextgen.bemore.R;
 import com.nextgen.coverflow.CoverFlow;
 import com.nextgen.database.DataBaseHelper;
+
 
 public class FriendsMoviesImageAdapter extends BaseAdapter {
         int mGalleryItemBackground;
@@ -45,7 +57,8 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
         private static final int MAX_FRIENDS_MOVIES_DISPLAYED=20;
         private static final int IO_BUFFER_SIZE = 4 * 1024;
         Bitmap bitmap = null;
-       
+        private final ImageDownloader imageDownloader = new ImageDownloader();
+        
         private Integer[] mImageIds = {
                 R.drawable.image1,
                 R.drawable.image2,
@@ -154,32 +167,27 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
                 //newUrl = new URL(FriendsGetMovies.myMoviesList [position].pictureUrl);
                 if (FriendsGetMovies.myTop20Movies [position].pictureUrl != null)
                 {
-                    new RetreiveImageTask().execute(FriendsGetMovies.myTop20Movies [position].pictureUrl);
+                    imageDownloader.download(FriendsGetMovies.myTop20Movies [position].pictureUrl, (ImageView) i);
                 }
             }
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            int newWidth = 86;
+            int newHeight = 127;
             
-
-                
-                int width = bitmap.getWidth();
-                int height = bitmap.getHeight();
-                int newWidth = 86;
-                int newHeight = 127;
-                
-                // calculate the scale - in this case = 0.4f
-                float scaleWidth = ((float) newWidth) / width;
-                float scaleHeight = ((float) newHeight) / height;
-                
-                // createa matrix for the manipulation
-                Matrix matrix = new Matrix();
-                // resize the bit map
-                matrix.postScale(scaleWidth, scaleHeight);
-                // recreate the new Bitmap
-                Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                                  width, height, matrix, true); 
-                BitmapDrawable d = new BitmapDrawable(resizedBitmap);
-                    i.setImageDrawable(d);
+            // calculate the scale - in this case = 0.4f
+            float scaleWidth = ((float) newWidth) / width;
+            float scaleHeight = ((float) newHeight) / height;
             
-
+            // createa matrix for the manipulation
+            Matrix matrix = new Matrix();
+            // resize the bit map
+            matrix.postScale(scaleWidth, scaleHeight);
+            // recreate the new Bitmap
+            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                              width, height, matrix, true); 
+            BitmapDrawable d = new BitmapDrawable(resizedBitmap);
+            i.setImageDrawable(d);
             return i;
 
         }
@@ -190,40 +198,44 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
              return Math.max(0, 1.0f / (float)Math.pow(2, Math.abs(offset))); 
          } 
 
-         Bitmap downloadFile(String fileUrl){
-               URL myFileUrl =null;          
-               Bitmap bmImg = null;
-               try {
-                    myFileUrl= new URL(fileUrl);
-               } catch (MalformedURLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-               }
-               try {
-                    HttpURLConnection conn= (HttpURLConnection)myFileUrl.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream is = conn.getInputStream();
-                    
-                    bmImg = BitmapFactory.decodeStream(is);
-               } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-               }
-               return bmImg;
-          }
+//         Bitmap downloadFile(String fileUrl){
+//               URL myFileUrl =null;          
+//               Bitmap bmImg = null;
+//               try {
+//                    myFileUrl= new URL(fileUrl);
+//               } catch (MalformedURLException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//               }
+//               try {
+//                    HttpURLConnection conn= (HttpURLConnection)myFileUrl.openConnection();
+//                    conn.setDoInput(true);
+//                    conn.connect();
+//                    InputStream is = conn.getInputStream();
+//                    
+//                    bmImg = BitmapFactory.decodeStream(is);
+//               } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//               }
+//               return bmImg;
+//          }
       
-         class RetreiveImageTask extends AsyncTask<String, Void, Bitmap> {
+//         class RetreiveImageTask extends AsyncTask<String, Void, Bitmap> {
+//
+//             private Exception exception;
+//
+//             protected Bitmap doInBackground(String... url) {
+//                 return downloadFile(url[0]);
+//             }
+//
+//             protected void onPostExecute(Bitmap bmp) {
+//                 bitmap = bmp;
+//             }
+//
+//          }
+         
 
-             private Exception exception;
 
-             protected Bitmap doInBackground(String... url) {
-                 return downloadFile(url[0]);
-             }
-
-             protected void onPostExecute(Bitmap bmp) {
-                 bitmap = bmp;
-             }
-
-          }
 }
+
