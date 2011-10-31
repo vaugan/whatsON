@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/frameLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">    
-    	<View  android:layout_width="wrap_content"  android:background="@drawable/gradientline"  android:layout_height="4dp" android:layout_gravity="top"></View>
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="10" android:layout_height="match_parent" android:paddingLeft="10dp">
-            <TextView android:textColor="@color/Black" android:layout_width="wrap_content" android:paddingBottom="4dip" android:layout_weight="0.41" android:textSize="20dp" android:textStyle="bold" android:layout_height="wrap_content" android:background="@drawable/round_edges" android:layout_gravity="right" android:text="Your friends like this" android:id="@+id/fb_page_title"></TextView>
-            <ListView android:layout_width="match_parent" android:layout_weight="0.41" android:id="@android:id/list" android:layout_height="match_parent"></ListView>
-            <TextView android:layout_width="match_parent" android:text="Friends DVD Box set" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip" android:textStyle="bold" android:textColor="@color/White" android:visibility="invisible" android:id="@+id/fb_movie_title"></TextView>
-            <TextView android:layout_width="match_parent" android:text="R249.95" android:layout_gravity="left" android:textSize="24dp" android:layout_height="wrap_content" android:paddingBottom="1dip" android:textStyle="bold" android:textColor="@color/Gold" android:visibility="invisible" android:id="@+id/fb_num_likes"></TextView>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/frameLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <View android:layout_height="4dp" android:layout_width="wrap_content" android:layout_gravity="top" android:background="@drawable/gradientline"></View>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_height="match_parent">
+            <View android:paddingLeft="10dp" android:layout_width="4dp" android:background="@drawable/gradientline_vertical" android:layout_height="fill_parent"></View>
+            <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:id="@+id/linearLayout2" android:layout_height="match_parent">
+                <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:weightSum="10" android:orientation="vertical" android:paddingLeft="10dp" android:id="@+id/linearLayout1">
+                    <TextView android:textStyle="bold" android:layout_height="wrap_content" android:id="@+id/fb_page_title" android:background="@drawable/round_edges" android:layout_width="wrap_content" android:textColor="@color/Black" android:layout_weight="0.41" android:textSize="20dp" android:layout_gravity="right" android:paddingTop="4dp" android:text="Your facebook friends like this"></TextView>
+                    <ListView android:layout_height="match_parent" android:layout_width="match_parent" android:id="@android:id/list" android:layout_weight="0.41"></ListView>
+                    <TextView android:textStyle="bold" android:layout_height="wrap_content" android:visibility="invisible" android:text="Friends DVD Box set" android:id="@+id/fb_movie_title" android:layout_width="match_parent" android:textColor="@color/White" android:layout_weight="0.41" android:textSize="24dp" android:layout_gravity="left" android:paddingBottom="1dip"></TextView>
+                    <TextView android:textStyle="bold" android:layout_height="wrap_content" android:visibility="invisible" android:text="R249.95" android:id="@+id/fb_num_likes" android:layout_width="match_parent" android:textColor="@color/Gold" android:layout_weight="0.41" android:textSize="24dp" android:layout_gravity="left" android:paddingBottom="1dip"></TextView>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </FrameLayout>

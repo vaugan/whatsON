@@ -163,8 +163,10 @@ public class FriendsGetMovies {
                         if ((myTop20Movies[i].id == id) && (category.equals("Movie")))
                         {
                             myTop20Movies[i].pictureUrl = jsonTempObject.getString("picture");
+                            myTop20Movies[i].link = jsonTempObject.getString("link");
                             myTop20Movies[i].category=category;
                             Log.w(TAG, "myTop20Movies["+i+"].pictureUrl"+myTop20Movies[i].pictureUrl);
+                            Log.w(TAG, "myTop20Movies["+i+"].link"+myTop20Movies[i].link);
                             Log.w(TAG, "myTop20Movies["+i+"].category="+myTop20Movies[i].category+" Likes="+myTop20Movies[i].likes);
                             break;
                         }
@@ -336,6 +338,10 @@ public class FriendsGetMovies {
 //        return result;
 //    }
 
+    public static String getMovieUrl(int position)
+    {
+        return myTop20Movies[position].link;
+    }
     
     class MovieDetails{
     long id;

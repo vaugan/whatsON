@@ -35,6 +35,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
@@ -99,6 +100,7 @@ import android.widget.ImageView.ScaleType;
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             
             //TODO: have to extract the url of the selected buy item and launch the webactivity
+
             
       
         }
@@ -106,6 +108,18 @@ import android.widget.ImageView.ScaleType;
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
             
+        }
+        
+        @Override
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            String itemUrl;
+
+            itemUrl = FriendsGetMovies.getMovieUrl(position);
+          Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+
+          i.putExtra("buy_item_url",itemUrl);
+          startActivity(i);    
+
         }
 
 //        public void onClick(View v) {
