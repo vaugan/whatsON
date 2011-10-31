@@ -39,10 +39,12 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 import com.nextgen.bemore.MainActivity;
 import com.nextgen.bemore.R;
@@ -56,6 +58,8 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
         private static final String TAG  = "FriendsMoviesImageAdapter";
         private static final int MAX_FRIENDS_MOVIES_DISPLAYED=20;
         private static final int IO_BUFFER_SIZE = 4 * 1024;
+        private static LayoutInflater inflater=null;
+
         Bitmap bitmap = null;
         private final ImageDownloader imageDownloader = new ImageDownloader();
         
@@ -76,6 +80,8 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
         public FriendsMoviesImageAdapter(Context c) {
          mContext = c;
          
+         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      
          mImages = new ImageView[MAX_FRIENDS_MOVIES_DISPLAYED];
         }
         
@@ -152,7 +158,20 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
 
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            ImageView i = new ImageView(mContext);
+            View vi=convertView;
+            if(convertView==null)
+                vi = inflater.inflate(R.layout.fb_list_item, null);
+//
+//            TextView text=(TextView)vi.findViewById(R.id.text);
+//            ImageView image=(ImageView)vi.findViewById(R.id.image);
+//            text.setText("item "+position);
+//            imageLoader.DisplayImage(data[position], activity, image);
+//            return vi;
+            
+            TextView tvMovieName=(TextView)vi.findViewById(R.id.fb_list_item_movie_name);
+            TextView tvMovieLikes=(TextView)vi.findViewById(R.id.fb_list_item_movie_likes);
+            
+            ImageView i = (ImageView)vi.findViewById(R.id.fb_list_item_image);//new ImageView(mContext);
                    
             URL newUrl;
             
@@ -164,6 +183,9 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
             
             if (FriendsGetMovies.myTop20Movies  != null)
             {
+                tvMovieName.setText(FriendsGetMovies.myTop20Movies [position].name);
+                tvMovieLikes.setText(Integer.toString(FriendsGetMovies.myTop20Movies [position].likes));
+
                 //newUrl = new URL(FriendsGetMovies.myMoviesList [position].pictureUrl);
                 if (FriendsGetMovies.myTop20Movies [position].pictureUrl != null)
                 {
@@ -188,7 +210,8 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
                               width, height, matrix, true); 
             BitmapDrawable d = new BitmapDrawable(resizedBitmap);
             i.setImageDrawable(d);
-            return i;
+            
+            return vi;
 
         }
       /** Returns the size (0.0f to 1.0f) of the views 

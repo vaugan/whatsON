@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+  <ImageView
+  	  android:layout_width="50dip"
+	  android:layout_height="50dip"  android:scaleType="centerCrop" android:id="@+id/fb_list_item_image"/>
+  <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/linearLayout1" android:orientation="vertical">
+      <TextView android:layout_marginLeft="10dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="left|center_vertical" android:textSize="20dip" android:id="@+id/fb_list_item_movie_name" android:text="The Matrix"></TextView>
+      <TextView android:layout_marginLeft="10dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="left|center_vertical" android:textSize="20dip" android:id="@+id/fb_list_item_movie_likes" android:text="50 likes"></TextView>
+  </LinearLayout>
+</LinearLayout>
