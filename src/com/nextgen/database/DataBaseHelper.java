@@ -55,6 +55,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_BUY_REC_8 = "buy_rec_8";   
     public static final String KEY_BUY_REC_9 = "buy_rec_9";   
     public static final String KEY_BUY_REC_10 = "buy_rec_10";   
+    public static final String KEY_BUY_REC_11 = "buy_rec_11";   
+    public static final String KEY_BUY_REC_12 = "buy_rec_12";   
+    public static final String KEY_BUY_REC_13 = "buy_rec_13";   
+    public static final String KEY_BUY_REC_14 = "buy_rec_14";   
+    public static final String KEY_BUY_REC_15 = "buy_rec_15";   
+    public static final String KEY_BUY_REC_16 = "buy_rec_16";   
+    public static final String KEY_BUY_REC_17 = "buy_rec_17";   
+    public static final String KEY_BUY_REC_18 = "buy_rec_18";   
+    public static final String KEY_BUY_REC_19 = "buy_rec_19";   
+    public static final String KEY_BUY_REC_20 = "buy_rec_20";   
     //keys for buy table
     public static final String KEY_BUY_TITLE = "title";   
     public static final String KEY_BUY_DESC = "desc";   
@@ -74,6 +84,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String KEY_VIEW_REC_8 = "view_rec_8";   
     public static final String KEY_VIEW_REC_9 = "view_rec_9";   
     public static final String KEY_VIEW_REC_10 = "view_rec_10";   
+    public static final String KEY_VIEW_REC_11 = "view_rec_11";   
+    public static final String KEY_VIEW_REC_12 = "view_rec_12";   
+    public static final String KEY_VIEW_REC_13 = "view_rec_13";   
+    public static final String KEY_VIEW_REC_14 = "view_rec_14";   
+    public static final String KEY_VIEW_REC_15 = "view_rec_15";   
+    public static final String KEY_VIEW_REC_16 = "view_rec_16";   
+    public static final String KEY_VIEW_REC_17 = "view_rec_17";   
+    public static final String KEY_VIEW_REC_18 = "view_rec_18";   
+    public static final String KEY_VIEW_REC_19 = "view_rec_19";   
+    public static final String KEY_VIEW_REC_20 = "view_rec_20";   
 
     private SQLiteDatabase myDataBase; 
 
@@ -259,6 +279,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         Integer buyRowId8=0;
         Integer buyRowId9=0;
         Integer buyRowId10=0;
+        Integer buyRowId11=0;
+        Integer buyRowId12=0;
+        Integer buyRowId13=0;
+        Integer buyRowId14=0;
+        Integer buyRowId15=0;
+        Integer buyRowId16=0;
+        Integer buyRowId17=0;
+        Integer buyRowId18=0;
+        Integer buyRowId19=0;
+        Integer buyRowId20=0;
         
         
         /*get cursor to the event in the event table*/
@@ -278,6 +308,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                     myDataBase.query(true, BUY_REC_TABLE, new String[] {KEY_ROWID,
                             KEY_BUY_REC_1, KEY_BUY_REC_2, KEY_BUY_REC_3, KEY_BUY_REC_4, KEY_BUY_REC_5,
                             KEY_BUY_REC_6, KEY_BUY_REC_7, KEY_BUY_REC_8, KEY_BUY_REC_9, KEY_BUY_REC_10,
+                            KEY_BUY_REC_11, KEY_BUY_REC_12, KEY_BUY_REC_13, KEY_BUY_REC_14, KEY_BUY_REC_15,
+                            KEY_BUY_REC_16, KEY_BUY_REC_17, KEY_BUY_REC_18, KEY_BUY_REC_19, KEY_BUY_REC_20,
                             }, KEY_ROWID + "='"+Integer.toString(buyRecRowId)+"'", null,
                             null, null, null, null);              
             }
@@ -295,7 +327,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 buyRowId7 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_7));
                 buyRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_8));
                 buyRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_9));
-                buyRowId1 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_10));
+                buyRowId10 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_10));
+                buyRowId11 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_11));
+                buyRowId12 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_12));
+                buyRowId13 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_13));
+                buyRowId14 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_14));
+                buyRowId15 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_15));
+                buyRowId16 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_16));
+                buyRowId17 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_17));
+                buyRowId18 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_18));
+                buyRowId19 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_19));
+                buyRowId20 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_BUY_REC_20));
  
                 mCursor =
                     myDataBase.query(true, BUY_TABLE, new String[] {KEY_ROWID,
@@ -309,7 +351,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                             KEY_ROWID + "='"+buyRowId7+"'" + " or "+
                             KEY_ROWID + "='"+buyRowId8+"'" + " or "+
                             KEY_ROWID + "='"+buyRowId9+"'" + " or "+
-                            KEY_ROWID + "='"+buyRowId10+"'",
+                            KEY_ROWID + "='"+buyRowId10+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId11+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId12+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId13+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId14+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId15+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId16+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId17+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId18+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId19+"'" + " or "+
+                            KEY_ROWID + "='"+buyRowId20+"'",
                             null,null, null, null, null);              
 
 //               mCursor =
@@ -344,6 +396,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         Integer eventRowId8=0;
         Integer eventRowId9=0;
         Integer eventRowId10=0;
+        Integer eventRowId11=0;
+        Integer eventRowId12=0;
+        Integer eventRowId13=0;
+        Integer eventRowId14=0;
+        Integer eventRowId15=0;
+        Integer eventRowId16=0;
+        Integer eventRowId17=0;
+        Integer eventRowId18=0;
+        Integer eventRowId19=0;
+        Integer eventRowId20=0;
         
         /*get cursor to the event in the event table along with the view rec column*/
         Cursor mCursor =
@@ -361,7 +423,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 mCursor =
                     myDataBase.query(true, VIEW_REC_TABLE, new String[] {KEY_ROWID,
                             KEY_VIEW_REC_1, KEY_VIEW_REC_2, KEY_VIEW_REC_3, KEY_VIEW_REC_4, KEY_VIEW_REC_5,
-                            KEY_VIEW_REC_6, KEY_VIEW_REC_6, KEY_VIEW_REC_7, KEY_VIEW_REC_8, KEY_VIEW_REC_9,KEY_VIEW_REC_10,
+                            KEY_VIEW_REC_6, KEY_VIEW_REC_7, KEY_VIEW_REC_8, KEY_VIEW_REC_9,KEY_VIEW_REC_10,
+                            KEY_VIEW_REC_11, KEY_VIEW_REC_12, KEY_VIEW_REC_13, KEY_VIEW_REC_14, KEY_VIEW_REC_15,
+                            KEY_VIEW_REC_16, KEY_VIEW_REC_17, KEY_VIEW_REC_18, KEY_VIEW_REC_19, KEY_VIEW_REC_20,
                             }, KEY_ROWID + "='"+Integer.toString(viewRecRowId)+"'", 
                             null,null, null, null, null);              
             }
@@ -380,6 +444,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 eventRowId8 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_8));
                 eventRowId9 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_9));
                 eventRowId10 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_10));
+                eventRowId11 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_11));
+                eventRowId12 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_12));
+                eventRowId13 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_13));
+                eventRowId14 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_14));
+                eventRowId15 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_15));
+                eventRowId16 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_16));
+                eventRowId17 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_17));
+                eventRowId18 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_18));
+                eventRowId19 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_19));
+                eventRowId20 = mCursor.getInt(mCursor.getColumnIndexOrThrow(DataBaseHelper.KEY_VIEW_REC_20));
                 
                mCursor =
                     myDataBase.query(true, EVENTS_TABLE, new String[] {KEY_ROWID,
@@ -393,7 +467,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                             KEY_ROWID + "='"+eventRowId7+"'" + " or "+
                             KEY_ROWID + "='"+eventRowId8+"'" + " or "+
                             KEY_ROWID + "='"+eventRowId9+"'" + " or "+
-                            KEY_ROWID + "='"+eventRowId10+"'",
+                            KEY_ROWID + "='"+eventRowId10+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId11+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId12+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId13+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId14+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId15+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId16+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId17+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId18+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId19+"'" + " or "+
+                            KEY_ROWID + "='"+eventRowId20+"'",
                             null,null, null, null, null);              
             }            
 
