@@ -23,6 +23,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.nextgen.bemore.R;
+
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -269,29 +272,35 @@ public class ImageDownloader {
          */
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+            Bitmap resizedBitmap = null;
+            
             if (isCancelled()) {
                 bitmap = null;
+
             }
 
-                            //Resize the bitmap
-                            int width = bitmap.getWidth();
-                            int height = bitmap.getHeight();
-                            int newWidth = 43;
-                            int newHeight = 63;
-                            
-                            // calculate the scale - in this case = 0.4f
-                            float scaleWidth = ((float) newWidth) / width;
-                            float scaleHeight = ((float) newHeight) / height;
-                            
-                            // createa matrix for the manipulation
-                            Matrix matrix = new Matrix();
-                            // resize the bit map
-                            matrix.postScale(scaleWidth, scaleHeight);
-                            // recreate the new Bitmap
-                            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                                              width, height, matrix, true); 
-
-            addBitmapToCache(url, bitmap);
+            if (bitmap != null)
+            {
+                    //Resize the bitmap
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    int newWidth = 43;
+                    int newHeight = 63;
+                    
+                    // calculate the scale - in this case = 0.4f
+                    float scaleWidth = ((float) newWidth) / width;
+                    float scaleHeight = ((float) newHeight) / height;
+                    
+                    // createa matrix for the manipulation
+                    Matrix matrix = new Matrix();
+                    // resize the bit map
+                    matrix.postScale(scaleWidth, scaleHeight);
+                    // recreate the new Bitmap
+                    resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+                                      width, height, matrix, true); 
+            }
+            
+            addBitmapToCache(url, resizedBitmap);
 
             if (imageViewReference != null) {
                 ImageView imageView = imageViewReference.get();
@@ -344,8 +353,8 @@ public class ImageDownloader {
      * Garbage Collector.
      */
     
-    private static final int HARD_CACHE_CAPACITY = 10;
-    private static final int DELAY_BEFORE_PURGE = 10 * 1000; // in milliseconds
+    private static final int HARD_CACHE_CAPACITY = 40;
+    private static final int DELAY_BEFORE_PURGE = 30 * 1000; // in milliseconds
 
     // Hard cache, with a fixed maximum capacity and a life duration
     private final HashMap<String, Bitmap> sHardBitmapCache =
@@ -369,7 +378,7 @@ public class ImageDownloader {
 
     private final Runnable purger = new Runnable() {
         public void run() {
-            clearCache();
+//            clearCache();
         }
     };
 

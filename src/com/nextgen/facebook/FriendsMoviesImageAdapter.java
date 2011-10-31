@@ -175,11 +175,11 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
                    
             URL newUrl;
             
-            if (bitmap == null)
-            {
-                Resources res = mContext.getResources();
-                bitmap = BitmapFactory.decodeResource(res,R.drawable.fb_default);
-            }
+//            if (bitmap == null)
+//            {
+//                Resources res = mContext.getResources();
+//                bitmap = BitmapFactory.decodeResource(res,R.drawable.fb_default);
+//            }
             
             if (FriendsGetMovies.myTop20Movies  != null)
             {
@@ -192,24 +192,24 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
                     imageDownloader.download(FriendsGetMovies.myTop20Movies [position].pictureUrl, (ImageView) i);
                 }
             }
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
-            int newWidth = 86;
-            int newHeight = 127;
-            
-            // calculate the scale - in this case = 0.4f
-            float scaleWidth = ((float) newWidth) / width;
-            float scaleHeight = ((float) newHeight) / height;
-            
-            // createa matrix for the manipulation
-            Matrix matrix = new Matrix();
-            // resize the bit map
-            matrix.postScale(scaleWidth, scaleHeight);
-            // recreate the new Bitmap
-            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
-                              width, height, matrix, true); 
-            BitmapDrawable d = new BitmapDrawable(resizedBitmap);
-            i.setImageDrawable(d);
+//            int width = bitmap.getWidth();
+//            int height = bitmap.getHeight();
+//            int newWidth = 86;
+//            int newHeight = 127;
+//            
+//            // calculate the scale - in this case = 0.4f
+//            float scaleWidth = ((float) newWidth) / width;
+//            float scaleHeight = ((float) newHeight) / height;
+//            
+//            // createa matrix for the manipulation
+//            Matrix matrix = new Matrix();
+//            // resize the bit map
+//            matrix.postScale(scaleWidth, scaleHeight);
+//            // recreate the new Bitmap
+//            Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, 
+//                              width, height, matrix, true); 
+//            BitmapDrawable d = new BitmapDrawable(resizedBitmap);
+//            i.setImageDrawable(d);
             
             return vi;
 
