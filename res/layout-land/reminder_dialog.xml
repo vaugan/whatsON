@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="wrap_content" android:layout_height="wrap_content">
+ 
+<!-- ImageView android:id="@+id/ImageView01"
+ android:layout_width="wrap_content" android:layout_height="wrap_content"
+ android:layout_centerHorizontal="true" /-->
+    <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_width="match_parent">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/reminder_text_descr" android:text="reminder text here"></TextView>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout2" android:layout_gravity="center_horizontal">
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Set reminder" android:id="@+id/reminder_positive_btn" android:clickable="true"></Button>
+            <Button android:layout_height="wrap_content" android:text="Cancel" android:layout_width="wrap_content" android:id="@+id/reminder_negative_btn" android:clickable="true"></Button>
+        </LinearLayout>
+    </LinearLayout>
+ 
+</RelativeLayout>

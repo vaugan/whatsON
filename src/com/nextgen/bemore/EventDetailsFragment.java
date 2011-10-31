@@ -15,6 +15,7 @@ import com.nextgen.facebook.Utility;
 import android.support.v4.app.*;
 import android.text.method.ScrollingMovementMethod;
 import android.app.Application;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,7 +26,10 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
@@ -134,7 +138,12 @@ import android.widget.Toast;
                 
                 ImageView like = (ImageView)v.findViewById(R.id.imageView1);
                 like.setOnClickListener(this);
-                
+
+                TextView tvSetReminder= (TextView)v.findViewById(R.id.details_set_reminder);
+                tvSetReminder.setOnClickListener(this);
+                TextView tvSetRecording= (TextView)v.findViewById(R.id.details_set_recording);
+                tvSetRecording.setOnClickListener(this);
+
                  mYouTubeVideoId = event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_YOUTUBE_VIDEO_ID));
                 }
@@ -161,6 +170,38 @@ import android.widget.Toast;
             {
              MainActivity.fgm.RequestFriendList();
             }
+            else if (arg0.getId() == R.id.details_set_reminder)
+            {
+                //set up dialog
+                final Dialog dialog = new Dialog(this.getActivity());
+                dialog.setContentView(R.layout.reminder_dialog);
+                dialog.setTitle("This is my custom reminder dialog box");
+                dialog.setCancelable(true);
+                //there are a lot of settings, for dialog, check them all out!
+ 
+                //set up text
+                TextView text = (TextView) dialog.findViewById(R.id.reminder_text_descr);
+                text.setText("Set Reminder");
+ 
+                //set up image view
+//                ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
+//                img.setImageResource(R.drawable.nista_logo);
+// 
+                //set up button
+                Button button = (Button) dialog.findViewById(R.id.reminder_positive_btn);
+                button.setOnClickListener(new OnClickListener() {
+
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    }
+                });
+                //now that the dialog is set up, it's time to show it    
+                dialog.show();                
+            }
+            else if (arg0.getId() == R.id.details_set_recording)
+            {
+                //launch dialog
+            }            
         }
         
    
