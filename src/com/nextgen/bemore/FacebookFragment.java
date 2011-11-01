@@ -6,6 +6,7 @@ import com.nextgen.coverflow.CoverFlow;
 import com.nextgen.database.DataBaseHelper;
 import com.nextgen.facebook.FriendsGetMovies;
 import com.nextgen.facebook.FriendsMoviesImageAdapter;
+import com.viewpagerindicator.R;
 
 import android.support.v4.app.*;
 import android.content.Context;
@@ -46,9 +47,11 @@ import android.widget.ImageView.ScaleType;
      * item.
      */
 
-    public class FacebookFragment extends ListFragment implements OnItemClickListener{
+    public class FacebookFragment extends ListFragment implements OnItemClickListener , AsyncFacebookNotifier{
 
         private static final String TAG = "FacebookFragment";
+        private static TextView pageTitle = null;
+        public static FacebookFragment f;
         int mCount=0;
         
         /**
@@ -56,7 +59,7 @@ import android.widget.ImageView.ScaleType;
          * show the text at 'index'.
          */
         public static FacebookFragment newInstance(Long id) {
-            FacebookFragment f = new FacebookFragment();
+            f = new FacebookFragment();
 
             // Supply index input as an argument.
             Bundle args = new Bundle();
@@ -93,6 +96,7 @@ import android.widget.ImageView.ScaleType;
 //            facebookFriendsCoverFlow.setAnimationDuration(1000);
 ////            facebookFriendsCoverFlow.setOnItemClickListener(this);
 
+			pageTitle =  (TextView) v.findViewById(R.id.fb_page_title);
               return v;       
                      
         }
@@ -121,6 +125,26 @@ import android.widget.ImageView.ScaleType;
                   i.putExtra("buy_item_url",itemUrl);
                   startActivity(i);    
             }
+        }
+
+        private static boolean boolVal = false;
+        public void notifyFacebookApp(boolean updating) {
+        	
+        	if (updating) {
+        		boolVal = false;
+    			FacebookFragment.f.pageTitle.setText(R.string.updateMessage);
+    		} 
+    		else {
+    			boolVal = true;
+    			Log.w(TAG, "ending by calling run");
+    			Log.w(TAG, "getActivity() = "+ getActivity().toString());
+    			if (boolVal)
+	    			getActivity().runOnUiThread(new Runnable() {
+	    				public void run() {
+	    					pageTitle.setText("Your friends like this");
+	    				}
+	    			});
+    		}
         }
 
 //        public void onClick(View v) {

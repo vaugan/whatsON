@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.android.FacebookError;
+import com.nextgen.bemore.FacebookFragment;
 
 public class FriendsGetMovies {
     private static final String TAG = "FriendsGetMovies";
@@ -35,7 +36,9 @@ public class FriendsGetMovies {
     {
         Bundle params = new Bundle();
         params.putString("fields", "name, id, picture, location");
+        Log.w("TAG_-------------------------------------", "START");
         Utility.mAsyncRunner.request("me/friends", params, new FriendsRequestListener());
+        Log.w("TAG_-------------------------------------", "END");
     }
     
     public class FriendsRequestListener extends BaseRequestListener {
@@ -73,6 +76,14 @@ public class FriendsGetMovies {
 //            dialog.dismiss();
             Log.w(TAG, "Facebook Error: "+error.getMessage());
         }
+
+		@Override
+		public void inProgress(boolean value) {
+			
+			if (value) {
+				FacebookFragment.f.notifyFacebookApp(value);
+			}
+		}
     }
     
     
@@ -137,6 +148,11 @@ public class FriendsGetMovies {
 //          dialog.dismiss();
             Log.w(TAG, "Facebook Error: "+error.getMessage());
       }
+		@Override
+		public void inProgress(boolean value) {
+			// TODO Auto-generated method stub
+			
+		}
 
   }
 
@@ -199,6 +215,16 @@ public class FriendsGetMovies {
 //          dialog.dismiss();
             Log.w(TAG, "Facebook Error: "+error.getMessage());
       }
+
+		@Override
+		public void inProgress(boolean value) {
+            Log.w(TAG, " value: "+ value + "  ,remainingFriends = "+ remainingFriends +
+            		"totalFriends-remainingFriends="+(totalFriends-remainingFriends));
+			if (!value && totalFriends-remainingFriends == 20) {
+				FacebookFragment.f.notifyFacebookApp(value);
+			}
+			
+		}
 
   }
     
