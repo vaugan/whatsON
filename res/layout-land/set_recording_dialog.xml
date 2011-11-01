@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
  android:layout_width="wrap_content" android:layout_height="wrap_content">
     <LinearLayout android:id="@+id/linearLayout3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-        <ImageView android:layout_height="158dp" android:layout_width="107dp" android:src="@drawable/image1" android:background="@drawable/background" android:id="@+id/set_recording_poster"></ImageView>
-        <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="match_parent">
+        <ImageView android:layout_height="158dp" android:layout_width="107dp" android:src="@drawable/image1" android:background="@drawable/background" android:id="@+id/set_recording_poster" android:layout_gravity="center_vertical"></ImageView>
+        <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
             <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:orientation="vertical" android:layout_weight="0.9" android:layout_width="300dp">
                 <TextView android:text="30Rock S01E05" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/DstvBlue" android:textSize="24dp" android:layout_width="wrap_content" android:textStyle="bold" android:id="@+id/set_recording_event_name"></TextView>
                 <TextView android:text="02 November 2011" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:textSize="20dp" android:layout_width="wrap_content" android:id="@+id/set_recording_date"></TextView>
