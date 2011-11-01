@@ -131,19 +131,20 @@ import android.widget.ImageView.ScaleType;
         public void notifyFacebookApp(boolean updating) {
         	
         	if (updating) {
-        		boolVal = false;
+        		boolVal = true;
     			FacebookFragment.f.pageTitle.setText(R.string.updateMessage);
     		} 
     		else {
-    			boolVal = true;
+    			
     			Log.w(TAG, "ending by calling run");
     			Log.w(TAG, "getActivity() = "+ getActivity().toString());
     			if (boolVal)
 	    			getActivity().runOnUiThread(new Runnable() {
 	    				public void run() {
-	    					pageTitle.setText("Your friends like this");
+	    					pageTitle.setText("Your facebook friends like this");
 	    				}
 	    			});
+    			boolVal = false;
     		}
         }
 
