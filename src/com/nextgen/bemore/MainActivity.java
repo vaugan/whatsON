@@ -40,6 +40,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -65,6 +66,12 @@ public class MainActivity extends FragmentActivity  {
     private SharedPreferences mPrefs;    
     public static FriendsGetMovies fgm;
 
+    private Handler mHandler = new Handler();  
+    private Runnable mWaitRunnable = new Runnable() {     
+    	public void run() {      
+            MainActivity.fgm.RequestFriendList();
+    	} }; 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +120,8 @@ public class MainActivity extends FragmentActivity  {
         if(!Utility.mFacebook.isSessionValid()) {
             Utility.mFacebook.authorize(this, new String[] { "user_likes", "offline_access", "friends_likes", "friends_interests"}, new DialogListener() {
                     public void onComplete(Bundle values) {
+                    	Log.w("MainActtivity", "OnComplete");
+                        mHandler.postDelayed(mWaitRunnable, 2000);
                         SharedPreferences.Editor editor = mPrefs.edit();
                         editor.putString("access_token", Utility.mFacebook.getAccessToken());
                         editor.putLong("access_expires", Utility.mFacebook.getAccessExpires());
@@ -125,13 +134,13 @@ public class MainActivity extends FragmentActivity  {
     
                 public void onCancel() {}
             });        
-        }
+        } else
+           mHandler.postDelayed(mWaitRunnable, 2000);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Utility.mFacebook.authorizeCallback(requestCode, resultCode, data);
     }
     

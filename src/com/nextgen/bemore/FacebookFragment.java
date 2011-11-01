@@ -132,7 +132,14 @@ import android.widget.ImageView.ScaleType;
         	
         	if (updating) {
         		boolVal = true;
-    			FacebookFragment.f.pageTitle.setText(R.string.updateMessage);
+        		getActivity().runOnUiThread(new Runnable() {
+    				public void run() {
+    					
+    	    				Log.w(TAG, "FriendsGetMovies.remainingFriends="+FriendsGetMovies.remainingFriends);
+        	    			String str = getString(R.string.updateMessage);
+    						pageTitle.setText(str + " " + (FriendsGetMovies.NUM_OF_FRIENDS - (FriendsGetMovies.totalFriends - FriendsGetMovies.remainingFriends)));
+    				}
+    			});
     		} 
     		else {
     			

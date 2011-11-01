@@ -21,12 +21,12 @@ public class FriendsGetMovies {
     public static MovieDetails[] myMoviesList;
     public static MovieDetails[] myTop20Movies;
     static int movieCounter=0;
-    static int totalFriends=0;
+    public static int totalFriends=0;
     static int totalMovies=0;
     static int detailsMoviesCtr=0;
-    static int remainingFriends=0;
+    public static int remainingFriends=0;
     public static final int MAX_MOVIES  = 200;
-    
+    public static final int NUM_OF_FRIENDS = 20;
 
     /*
      * callback after friends are fetched via me/friends or fql query.
@@ -92,7 +92,7 @@ public class FriendsGetMovies {
      */
     public class MoviesRequestRequestListener extends BaseRequestListener{
 
-        public void onComplete(final String response, final Object state) {
+		public void onComplete(final String response, final Object state) {
             long movieId=0; 
            remainingFriends--;
             Log.w(TAG, "Got Movies Response!!! Friends remaining = "+remainingFriends);
@@ -116,7 +116,7 @@ public class FriendsGetMovies {
 
                 //Request next friend's movie list
                 int position = totalFriends-remainingFriends;
-                if (position<20 && position >=0)
+                if (position< NUM_OF_FRIENDS && position >=0)
                 {
                     long friendId = jsonFriendsArray.getJSONObject(totalFriends-remainingFriends).getLong("id");
                     Bundle params = new Bundle();
@@ -150,8 +150,9 @@ public class FriendsGetMovies {
       }
 		@Override
 		public void inProgress(boolean value) {
-			// TODO Auto-generated method stub
-			
+			if (value) {
+				FacebookFragment.f.notifyFacebookApp(value);
+			}
 		}
 
   }
@@ -219,8 +220,8 @@ public class FriendsGetMovies {
 		@Override
 		public void inProgress(boolean value) {
             Log.w(TAG, " value: "+ value + "  ,remainingFriends = "+ remainingFriends +
-            		"totalFriends-remainingFriends="+(totalFriends-remainingFriends));
-			if (!value && totalFriends-remainingFriends == 20) {
+            		" totalFriends-remainingFriends="+(totalFriends-remainingFriends) + " detailsMoviesCtr= "+detailsMoviesCtr);
+			if (!value && totalFriends-remainingFriends == NUM_OF_FRIENDS && detailsMoviesCtr == (NUM_OF_FRIENDS-1)) {
 				FacebookFragment.f.notifyFacebookApp(value);
 			}
 			
