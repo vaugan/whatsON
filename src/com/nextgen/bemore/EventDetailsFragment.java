@@ -140,6 +140,8 @@ import android.widget.Toast;
                 tvSetReminder.setOnClickListener(this);
                 TextView tvSetRecording= (TextView)v.findViewById(R.id.details_set_recording);
                 tvSetRecording.setOnClickListener(this);
+                TextView tvRentNow= (TextView)v.findViewById(R.id.details_rent_now);
+                tvRentNow.setOnClickListener(this);
 
                  mYouTubeVideoId = event.getString(
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_YOUTUBE_VIDEO_ID));
