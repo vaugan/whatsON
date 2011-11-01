@@ -41,6 +41,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
@@ -59,6 +60,7 @@ import android.widget.ImageView.ScaleType;
         int mCount=0;
         private static LayoutInflater inflater=null;
         FriendsMoviesImageAdapter facebookFriendsImageAdapter;
+        ProgressBar fbProgressBar;
         
         /**
          * Create a new instance of DetailsFragment, initialized to
@@ -103,6 +105,8 @@ import android.widget.ImageView.ScaleType;
 ////            facebookFriendsCoverFlow.setOnItemClickListener(this);
 
 			pageTitle =  (TextView) v.findViewById(R.id.fb_page_title);
+			fbProgressBar = (ProgressBar) v.findViewById(R.id.progressBar1);
+			fbProgressBar.setVisibility(View.VISIBLE);
               return v;       
                      
         }
@@ -188,6 +192,7 @@ import android.widget.ImageView.ScaleType;
 	    			getActivity().runOnUiThread(new Runnable() {
 	    				public void run() {
 	    					pageTitle.setText("Your facebook friends like this");
+	    			        fbProgressBar.setVisibility(View.INVISIBLE);
 	    	                facebookFriendsImageAdapter.notifyDataSetChanged();
 	    				}
 	    			});
