@@ -142,20 +142,10 @@ import android.widget.ImageView.ScaleType;
             TextView text = (TextView) dialog.findViewById(R.id.rent_now_name);
             ImageView jpgView = (ImageView)dialog.findViewById(R.id.rent_now_poster);
             
-               text.setText(FriendsGetMovies.getMovieName(position));
-               jpgView.setImageResource(R.drawable.dstv_boxoffice_ad);
-              
+           text.setText(FriendsGetMovies.getMovieName(position));
+           jpgView.setImageResource(R.drawable.dstv_boxoffice_ad);
 
-
-            //set up text
-            
-
-
-            //set up image view
-//            ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
-//            img.setImageResource(R.drawable.nista_logo);
-//
-            //set up button
+           //set up button
             Button button = (Button) dialog.findViewById(R.id.rent_now_btn);
             Button button_cancel = (Button) dialog.findViewById(R.id.rent_now_cancel_btn);
 

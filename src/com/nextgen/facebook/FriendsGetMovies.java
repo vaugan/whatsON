@@ -367,12 +367,20 @@ public class FriendsGetMovies {
 
     public static String getMovieUrl(int position)
     {
-        return myTop20Movies[position].link;
+        if (myTop20Movies != null)
+        {
+            return myTop20Movies[position].link;
+        }
+        return "No facebook data available yet...";
     }
 
     public static String getMovieName(int position)
     {
-        return myTop20Movies[position].name;
+        if (myTop20Movies != null)
+        {
+            return myTop20Movies[position].name;
+        }
+        return "No facebook data available yet...";
     }
 
     class MovieDetails{
