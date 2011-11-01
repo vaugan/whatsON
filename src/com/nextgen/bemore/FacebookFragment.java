@@ -57,7 +57,9 @@ import android.widget.ImageView.ScaleType;
         private static TextView pageTitle = null;
         public static FacebookFragment f;
         int mCount=0;
-      
+        private static LayoutInflater inflater=null;
+        FriendsMoviesImageAdapter facebookFriendsImageAdapter;
+        
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -87,7 +89,7 @@ import android.widget.ImageView.ScaleType;
                 return null;
             }
             View v = inflater.inflate(R.layout.facebook_likes_layout, container, false);
-            FriendsMoviesImageAdapter facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
+            facebookFriendsImageAdapter =  new FriendsMoviesImageAdapter(this.getActivity().getApplicationContext());
             setListAdapter(facebookFriendsImageAdapter);
 
 //              CoverFlow facebookFriendsCoverFlow;
@@ -181,10 +183,12 @@ import android.widget.ImageView.ScaleType;
     			
     			Log.w(TAG, "ending by calling run");
     			Log.w(TAG, "getActivity() = "+ getActivity().toString());
+    			
     			if (boolVal)
 	    			getActivity().runOnUiThread(new Runnable() {
 	    				public void run() {
 	    					pageTitle.setText("Your facebook friends like this");
+	    	                facebookFriendsImageAdapter.notifyDataSetChanged();
 	    				}
 	    			});
     			boolVal = false;
