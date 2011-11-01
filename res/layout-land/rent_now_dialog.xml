@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <LinearLayout android:id="@+id/linearLayout3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+        <ImageView android:id="@+id/reminder_poster" android:layout_height="158dp" android:layout_width="107dp" android:src="@drawable/image1" android:background="@drawable/background"></ImageView>
+        <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="match_parent">
+            <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="300dp">
+                <TextView android:text="30Rock S01E05" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/DstvBlue" android:textSize="24dp" android:layout_width="wrap_content" android:textStyle="bold" android:id="@+id/rent_now_name"></TextView>
+                <TextView android:text="R25.00" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:textSize="20dp" android:layout_width="wrap_content" android:id="@+id/rent_now_price" android:textStyle="bold"></TextView>
+                <TextView android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:id="@+id/rent_now_description" android:layout_width="wrap_content" android:text="Rent this movie from Box Office and it will be available for  viewing on your decoder." android:textSize="16dp"></TextView>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="bottom">
+                <Button android:layout_height="wrap_content" android:clickable="true" android:layout_width="wrap_content" style="@style/Button" android:text="Rent from Box Office" android:id="@+id/rent_now_btn"></Button>
+                <Button android:layout_height="wrap_content" android:clickable="true" android:text="Cancel" android:layout_width="wrap_content" style="@style/Button" android:id="@+id/rent_now_cancel_btn"></Button>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+ 
+</RelativeLayout>

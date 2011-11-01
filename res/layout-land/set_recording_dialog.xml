@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <LinearLayout android:id="@+id/linearLayout3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+        <ImageView android:id="@+id/reminder_poster" android:layout_height="158dp" android:layout_width="107dp" android:src="@drawable/image1" android:background="@drawable/background"></ImageView>
+        <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="match_parent">
+            <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:orientation="vertical" android:layout_weight="0.9" android:layout_width="300dp">
+                <TextView android:text="30Rock S01E05" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/DstvBlue" android:textSize="24dp" android:layout_width="wrap_content" android:textStyle="bold" android:id="@+id/set_recording_event_name"></TextView>
+                <TextView android:text="02 November 2011" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:textSize="20dp" android:layout_width="wrap_content" android:id="@+id/set_recording_date"></TextView>
+                <TextView android:text="21h30" android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:textSize="20dp" android:layout_width="wrap_content" android:id="@+id/set_recording_time"></TextView>
+                <TextView android:text="Set recording on your decoder if it is connected to the internet." android:layout_height="wrap_content" android:paddingLeft="10dp" android:textColor="@color/White" android:textSize="16dp" android:id="@+id/set_recording_help_text" android:layout_width="wrap_content"></TextView>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="bottom" android:layout_weight="0.1">
+                <Button android:layout_height="wrap_content" android:clickable="true" android:layout_width="wrap_content" style="@style/Button" android:text="Set recording" android:id="@+id/set_recording_btn"></Button>
+                <Button android:layout_height="wrap_content" android:clickable="true" android:text="Cancel" android:layout_width="wrap_content" style="@style/Button" android:id="@+id/set_recording_cancel_btn"></Button>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+ 
+</RelativeLayout>
