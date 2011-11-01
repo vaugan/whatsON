@@ -82,6 +82,12 @@ public class MainActivity extends FragmentActivity  {
         indicator.setViewPager(mPager);
         indicator.setFooterIndicatorStyle(IndicatorStyle.Underline);
         
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        FacebookFragment ff = FacebookFragment.newInstance((long) 1);
+        ft.replace(R.id.facebook_fragment, ff);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit(); 
+        
         fgm = new FriendsGetMovies();
         //Create the Facebook Object using the app id.
         Utility.mFacebook = new Facebook(APP_ID);

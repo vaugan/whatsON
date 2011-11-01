@@ -78,11 +78,7 @@ import android.widget.TextView;
                 getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 // Make sure our UI is in the correct state.
                 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                FacebookFragment ff = FacebookFragment.newInstance(getFirstEventOfCurrentPage());
-                ft.replace(R.id.facebook_fragment, ff);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit(); 
+
                 
                 showDetails(mCurCheckPosition, getFirstEventOfCurrentPage());
                 
