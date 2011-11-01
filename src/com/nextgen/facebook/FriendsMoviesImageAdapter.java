@@ -168,6 +168,7 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
 //            imageLoader.DisplayImage(data[position], activity, image);
 //            return vi;
             
+            ImageView ivLikeIcon=(ImageView)vi.findViewById(R.id.fb_list_like_icon);
             TextView tvMovieName=(TextView)vi.findViewById(R.id.fb_list_item_movie_name);
             TextView tvMovieLikes=(TextView)vi.findViewById(R.id.fb_list_item_movie_likes);
             
@@ -185,6 +186,7 @@ public class FriendsMoviesImageAdapter extends BaseAdapter {
             {
                 tvMovieName.setText(FriendsGetMovies.myTop20Movies [position].name);
                 tvMovieLikes.setText(Integer.toString(FriendsGetMovies.myTop20Movies [position].likes));
+                ivLikeIcon.setImageResource(R.drawable.like);
 
                 //newUrl = new URL(FriendsGetMovies.myMoviesList [position].pictureUrl);
                 if (FriendsGetMovies.myTop20Movies [position].pictureUrl != null)
