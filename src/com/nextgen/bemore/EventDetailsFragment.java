@@ -51,7 +51,7 @@ import android.widget.Toast;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "DetailsFragment";
         String mYouTubeVideoId = null;
-        
+     
         
         public static EventDetailsFragment newInstance(Long id) {
             EventDetailsFragment f = new EventDetailsFragment();
@@ -156,6 +156,15 @@ import android.widget.Toast;
 
         
         public void onClick(View arg0) {
+            final Dialog dialog = new Dialog(this.getActivity(), R.style.myBackgroundStyle);
+
+            OnClickListener listener = new OnClickListener() {
+
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    }
+                };
+                
             Log.w(TAG, "View="+arg0.getId());
             if (arg0.getId() == R.id.details_event_trailer) 
             {
@@ -163,21 +172,16 @@ import android.widget.Toast;
                    intent.putExtra("VIDEO_ID", mYouTubeVideoId); 
                    startActivity(intent); 
             } 
-            else if (arg0.getId() == R.id.imageView1)
-            {
-             MainActivity.fgm.RequestFriendList();
-            }
+           
             else if (arg0.getId() == R.id.details_set_reminder)
             {
                 //set up dialog
-                final Dialog dialog = new Dialog(this.getActivity(), R.style.myBackgroundStyle);
                 dialog.setContentView(R.layout.reminder_dialog);
 //                dialog.setTitle("Set reminder on your decoder or android device");
                 dialog.setCancelable(true);
                 //there are a lot of settings, for dialog, check them all out!
-                
+
                 TextView text = (TextView) dialog.findViewById(R.id.reminder_text_descr);
-                text.setText("Set Reminder");
                 ImageView jpgView = (ImageView)dialog.findViewById(R.id.reminder_poster);
  
                 if (mRowId != null) {
@@ -205,20 +209,102 @@ import android.widget.Toast;
 // 
                 //set up button
                 Button button = (Button) dialog.findViewById(R.id.reminder_positive_btn);
-                button.setOnClickListener(new OnClickListener() {
-
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    }
-                });
+                Button button_cancel = (Button) dialog.findViewById(R.id.reminder_negative_btn);
+                
+                button.setOnClickListener(listener);
+                button_cancel.setOnClickListener(listener);
                 //now that the dialog is set up, it's time to show it    
                 dialog.show();                
             }
             else if (arg0.getId() == R.id.details_set_recording)
             {
-                //launch dialog
+                //set up dialog
+                dialog.setContentView(R.layout.set_recording_dialog);
+//                dialog.setTitle("Set reminder on your decoder or android device");
+                dialog.setCancelable(true);
+                //there are a lot of settings, for dialog, check them all out!
+
+                TextView text = (TextView) dialog.findViewById(R.id.set_recording_event_name);
+                ImageView jpgView = (ImageView)dialog.findViewById(R.id.set_recording_poster);
+ 
+                if (mRowId != null) {
+                   Cursor event = mEventDbHelper.fetchEvent(mRowId);
+                   
+                   //make sure the cursor is not empty
+                   if (event.getCount() > 0) {
+                       text.setText(event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+
+                       String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                       String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                       BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                       jpgView.setImageDrawable(d);            
+                       
+                   }
+                   event.close();
+               }
+                //set up text
+                
+
+ 
+                //set up image view
+//                ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
+//                img.setImageResource(R.drawable.nista_logo);
+// 
+                //set up button
+                Button button = (Button) dialog.findViewById(R.id.set_recording_btn);
+                Button button_cancel = (Button) dialog.findViewById(R.id.set_recording_cancel_btn);
+                
+                button.setOnClickListener(listener);
+                button_cancel.setOnClickListener(listener);
+                //now that the dialog is set up, it's time to show it    
+                dialog.show();      
+            }
+            else if (arg0.getId() == R.id.details_rent_now)
+            {
+                //set up dialog
+                dialog.setContentView(R.layout.rent_now_dialog);
+//                dialog.setTitle("Set reminder on your decoder or android device");
+                dialog.setCancelable(true);
+                //there are a lot of settings, for dialog, check them all out!
+
+                TextView text = (TextView) dialog.findViewById(R.id.rent_now_name);
+                ImageView jpgView = (ImageView)dialog.findViewById(R.id.rent_now_poster);
+ 
+                if (mRowId != null) {
+                   Cursor event = mEventDbHelper.fetchEvent(mRowId);
+                   
+                   //make sure the cursor is not empty
+                   if (event.getCount() > 0) {
+                       text.setText(event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+
+                       String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                       String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                       BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                       jpgView.setImageDrawable(d);            
+                       
+                   }
+                   event.close();
+               }
+                //set up text
+                
+
+ 
+                //set up image view
+//                ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
+//                img.setImageResource(R.drawable.nista_logo);
+// 
+                //set up button
+                Button button = (Button) dialog.findViewById(R.id.rent_now_btn);
+                Button button_cancel = (Button) dialog.findViewById(R.id.rent_now_cancel_btn);
+
+                
+                button.setOnClickListener(listener);
+                button_cancel.setOnClickListener(listener);
+                //now that the dialog is set up, it's time to show it    
+                dialog.show();      
             }            
+            
         }
         
-   
+
     }
