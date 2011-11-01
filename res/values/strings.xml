@@ -3,4 +3,6 @@
     <string name="hello">Hello World, FragmentTutorialActivity!</string>
     <string name="app_name">WhatsON</string>
     <string name="ok">OK</string>
+    <string name="updateMessage">Updating.....</string>
+    <string name="friendsLikes">Your friends like this</string>
 </resources>

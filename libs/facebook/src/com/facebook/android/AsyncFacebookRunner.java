@@ -209,7 +209,9 @@ public class AsyncFacebookRunner {
     public void request(String graphPath,
                         Bundle parameters,
                         RequestListener listener) {
+    	listener.inProgress(true);
         request(graphPath, parameters, "GET", listener, /* state */ null);
+        listener.inProgress(false);
     }
 
     /**
@@ -271,6 +273,8 @@ public class AsyncFacebookRunner {
      * request method, or null if none was passed.
      */
     public static interface RequestListener {
+    	
+    	public void inProgress(boolean value);
 
         /**
          * Called when a request completes with the given response.
