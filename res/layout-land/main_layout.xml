@@ -13,14 +13,14 @@
     android:background="@color/DstvBlue"
 />
  -->   
-    <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4" android:weightSum="10" android:layout_height="match_parent">
-        <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_height="match_parent" android:layout_weight="5"></FrameLayout>
-        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout4" android:weightSum="1" android:layout_height="match_parent" android:layout_weight="5">
-            <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="match_parent" android:weightSum="1" android:layout_weight="0.5">
+    <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_width="match_parent" android:layout_weight="0.4" android:layout_height="match_parent" android:weightSum="100">
+        <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/details_fragment" android:layout_height="match_parent" android:layout_weight="45"></FrameLayout>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout4" android:weightSum="1" android:layout_height="match_parent" android:layout_weight="55">
+            <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="match_parent" android:weightSum="1" android:layout_weight="0.5" android:paddingTop="10dp">
                 <FrameLayout android:id="@+id/recommended" android:layout_weight="0.5" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="top"></FrameLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/buy_fragment" android:layout_weight="0.5"></FrameLayout>
+                <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:layout_height="wrap_content" android:id="@+id/buy_fragment" android:layout_weight="0.5" android:layout_marginTop="10dp"></FrameLayout>
             </LinearLayout>
-            <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/facebook_fragment" android:layout_height="wrap_content" android:layout_weight="0.5"></FrameLayout>
+            <FrameLayout android:layout_width="match_parent" android:layout_gravity="top" android:id="@+id/facebook_fragment" android:layout_height="wrap_content" android:layout_weight="0.5" android:paddingTop="10dp"></FrameLayout>
         </LinearLayout>
     </LinearLayout>
             <!--  
