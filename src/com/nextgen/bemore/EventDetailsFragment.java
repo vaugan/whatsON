@@ -51,7 +51,6 @@ import android.widget.Toast;
         private DataBaseHelper mEventDbHelper;
         private static final String TAG = "DetailsFragment";
         String mYouTubeVideoId = null;
-        TextView friendsTv;
         
         
         public static EventDetailsFragment newInstance(Long id) {
@@ -125,8 +124,6 @@ import android.widget.Toast;
                         event.getColumnIndexOrThrow(DataBaseHelper.KEY_SHORT_DESC)));    
                 ((TextView)tv).setMovementMethod(new ScrollingMovementMethod());
                 
-                friendsTv= (TextView)v.findViewById(R.id.friendsRemaining);
-                
                 ImageView jpgView = (ImageView)v.findViewById(R.id.details_event_poster);
                 String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
                 String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
@@ -173,9 +170,9 @@ import android.widget.Toast;
             else if (arg0.getId() == R.id.details_set_reminder)
             {
                 //set up dialog
-                final Dialog dialog = new Dialog(this.getActivity());
+                final Dialog dialog = new Dialog(this.getActivity(), R.style.myBackgroundStyle);
                 dialog.setContentView(R.layout.reminder_dialog);
-                dialog.setTitle("This is my custom reminder dialog box");
+//                dialog.setTitle("Set reminder on your decoder or android device");
                 dialog.setCancelable(true);
                 //there are a lot of settings, for dialog, check them all out!
                 
