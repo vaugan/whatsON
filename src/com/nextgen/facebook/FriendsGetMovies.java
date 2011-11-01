@@ -369,7 +369,12 @@ public class FriendsGetMovies {
     {
         return myTop20Movies[position].link;
     }
-    
+
+    public static String getMovieName(int position)
+    {
+        return myTop20Movies[position].name;
+    }
+
     class MovieDetails{
     long id;
     int likes;

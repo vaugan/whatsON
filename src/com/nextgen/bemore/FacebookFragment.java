@@ -6,12 +6,15 @@ import com.nextgen.coverflow.CoverFlow;
 import com.nextgen.database.DataBaseHelper;
 import com.nextgen.facebook.FriendsGetMovies;
 import com.nextgen.facebook.FriendsMoviesImageAdapter;
+import com.nextgen.facebook.ImageDownloader;
 import com.viewpagerindicator.R;
 
 import android.support.v4.app.*;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
+import android.view.View.OnClickListener;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -53,7 +57,7 @@ import android.widget.ImageView.ScaleType;
         private static TextView pageTitle = null;
         public static FacebookFragment f;
         int mCount=0;
-        
+      
         /**
          * Create a new instance of DetailsFragment, initialized to
          * show the text at 'index'.
@@ -117,14 +121,56 @@ import android.widget.ImageView.ScaleType;
         @Override
         public void onListItemClick(ListView l, View v, int position, long id) {
             String itemUrl;
+            
+            final Dialog dialog = new Dialog(this.getActivity(), R.style.myBackgroundStyle);
 
-            itemUrl = FriendsGetMovies.getMovieUrl(position);
-            if (itemUrl != null)
-            {
-                  Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
-                  i.putExtra("buy_item_url",itemUrl);
-                  startActivity(i);    
-            }
+            OnClickListener listener = new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    dialog.dismiss();         
+                }
+                };
+
+            //set up dialog
+            dialog.setContentView(R.layout.rent_now_dialog);
+//            dialog.setTitle("Set reminder on your decoder or android device");
+            dialog.setCancelable(true);
+            //there are a lot of settings, for dialog, check them all out!
+
+            TextView text = (TextView) dialog.findViewById(R.id.rent_now_name);
+            ImageView jpgView = (ImageView)dialog.findViewById(R.id.rent_now_poster);
+            
+               text.setText(FriendsGetMovies.getMovieName(position));
+               jpgView.setImageResource(R.drawable.dstv_boxoffice_ad);
+              
+
+
+            //set up text
+            
+
+
+            //set up image view
+//            ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);
+//            img.setImageResource(R.drawable.nista_logo);
+//
+            //set up button
+            Button button = (Button) dialog.findViewById(R.id.rent_now_btn);
+            Button button_cancel = (Button) dialog.findViewById(R.id.rent_now_cancel_btn);
+
+            
+            button.setOnClickListener(listener);
+            button_cancel.setOnClickListener(listener);
+            //now that the dialog is set up, it's time to show it    
+            dialog.show();      
+//            itemUrl = FriendsGetMovies.getMovieUrl(position);
+//            if (itemUrl != null)
+//            {
+//                  Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+//                  i.putExtra("buy_item_url",itemUrl);
+//                  startActivity(i);    
+//            }
         }
 
         private static boolean boolVal = false;
