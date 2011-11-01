@@ -77,7 +77,13 @@ import android.widget.TextView;
                 // In dual-pane mode, the list view highlights the selected item.
                 getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 // Make sure our UI is in the correct state.
-                               
+                
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FacebookFragment ff = FacebookFragment.newInstance(getFirstEventOfCurrentPage());
+                ft.replace(R.id.facebook_fragment, ff);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit(); 
+                
                 showDetails(mCurCheckPosition, getFirstEventOfCurrentPage());
                 
                 //TODO: Implement for portrait mode as well...
@@ -150,9 +156,6 @@ import android.widget.TextView;
                     ft.replace(R.id.buy_fragment, bf);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-                    FacebookFragment ff = FacebookFragment.newInstance(id);
-                    ft.replace(R.id.facebook_fragment, ff);
-                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
                     mShownCheckPosition = index;                  
                     ft.commit(); 

@@ -115,11 +115,12 @@ import android.widget.ImageView.ScaleType;
             String itemUrl;
 
             itemUrl = FriendsGetMovies.getMovieUrl(position);
-          Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
-
-          i.putExtra("buy_item_url",itemUrl);
-          startActivity(i);    
-
+            if (itemUrl != null)
+            {
+                  Intent i = new Intent(this.getActivity().getApplicationContext(), WebviewActivity.class);
+                  i.putExtra("buy_item_url",itemUrl);
+                  startActivity(i);    
+            }
         }
 
 //        public void onClick(View v) {

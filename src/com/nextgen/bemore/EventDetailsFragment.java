@@ -178,10 +178,29 @@ import android.widget.Toast;
                 dialog.setTitle("This is my custom reminder dialog box");
                 dialog.setCancelable(true);
                 //there are a lot of settings, for dialog, check them all out!
- 
-                //set up text
+                
                 TextView text = (TextView) dialog.findViewById(R.id.reminder_text_descr);
                 text.setText("Set Reminder");
+                ImageView jpgView = (ImageView)dialog.findViewById(R.id.reminder_poster);
+ 
+                if (mRowId != null) {
+                   Cursor event = mEventDbHelper.fetchEvent(mRowId);
+                   
+                   //make sure the cursor is not empty
+                   if (event.getCount() > 0) {
+                       text.setText(event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_EVENT_NAME)));
+
+                       String imageName = event.getString(event.getColumnIndexOrThrow(DataBaseHelper.KEY_IMAGE_POSTER));
+                       String myJpgPath = Environment.getExternalStorageDirectory()+"/WhatsON_Images/"+imageName;
+                       BitmapDrawable d = new BitmapDrawable(getResources(), myJpgPath);
+                       jpgView.setImageDrawable(d);            
+                       
+                   }
+                   event.close();
+               }
+                //set up text
+                
+
  
                 //set up image view
 //                ImageView img = (ImageView) dialog.findViewById(R.id.ImageView01);

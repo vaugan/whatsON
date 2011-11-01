@@ -1,21 +1,28 @@
 package com.nextgen.bemore;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class WebviewActivity extends Activity implements OnClickListener{
     /** Called when the activity is first created. */
 	
 	WebView beMoreWebView;
+	ProgressBar progressBar;
+    private static final String TAG = "WebviewActivity";
 	
 //	Button btnBoxOffice, btnOMusic, btnKalahari;
     @Override
@@ -23,7 +30,6 @@ public class WebviewActivity extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
     
-         
 //        btnBoxOffice =(Button) findViewById(R.id.btnBoxOffice);
 //        btnOMusic = (Button) findViewById(R.id.btnOMusic);
 //        btnKalahari = (Button) findViewById(R.id.btnKalhari);
@@ -39,7 +45,8 @@ public class WebviewActivity extends Activity implements OnClickListener{
         if(extras !=null) {
           item_url = extras.getString("buy_item_url");
         }
-
+//        progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+//        progressBar.setVisibility(View.VISIBLE);
         beMoreWebView =  (WebView) findViewById(R.id.webview);
         beMoreWebView.getSettings().setJavaScriptEnabled(true);
         beMoreWebView.loadUrl(item_url);   // to load the webview with default url;
@@ -76,8 +83,9 @@ public class WebviewActivity extends Activity implements OnClickListener{
 //			break;
 //		
 //		}
-	
 	beMoreWebView.setWebViewClient(new BeMoreWebviewClient());
+	
+	
 	}
 	
 	@Override
@@ -92,11 +100,22 @@ public class WebviewActivity extends Activity implements OnClickListener{
 	}
 	
 	private class BeMoreWebviewClient extends WebViewClient {
-	    @Override
+        @Override
 	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
 	        view.loadUrl(url);
+ // //            progressBar.setVisibility(View.VISIBLE);
 	        return true;
 	    }
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            Log.w(TAG, "Finished loading URL: " +url);
+//            progressBar.setVisibility(View.INVISIBLE);
+        }
+        
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            Log.e(TAG, "Error: " + description);
+            Toast.makeText(WebviewActivity.this, "Error loading page " + description, Toast.LENGTH_SHORT).show();
+        }       
 	}  
 }
 
